@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">UPlace</string>
+    <string name="Dia_horario_local">Dia-Horario-Local</string>
+    <string name="nome">Nome</string>
+    <string name="faltas">Faltas</string>
+    <string name="adicionar_materia">Adicionar Materia</string>
+    <string name="remover_materia">Remover Materia</string>
+    <string name="professor">Professor</string>
+    <string name="carga_horaria">Carga horaria </string>
+    <string name="erro_vazio">Campo vazio</string>
+    <string name="erro_carga_horaria">Deve ser numero inteiro</string>
+    <string name="leitor_QR">Leitor QR</string>
+    <string name="lista_materias">Lista matérias</string>
+    <string name="valor_QR">Nenhum QR detectado</string>
+    <string name="login">Login:</string>
+    <string name="senha">Senha</string>
+    <string name="cadastro">Cadastre-se</string>
+    <string name="entrar">Login</string>
+    <string name="erro_email">Email deve ser do tipo id.uff.br</string>
+    <string name="erro_senha">Senha deve ter entre 6 e 12 caracteres</string>
+    <string name="editar_perfil">Editar perfil</string>
+    <string name="logout">Logout</string>
+    <string name="lista_amigos">Lista de amigos</string>
+</resources>
+
