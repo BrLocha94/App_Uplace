@@ -252,6 +252,12 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("ID_USUARIO", user.getID());
             startActivity(intent);
         }
+        else if(item.getItemId() == R.id.menu_pessoas_proximas){
+            //Vai para a tela de pessoas proximas
+            Intent intent = new Intent(MainActivity.this, Usuarios_proximos.class);
+            intent.putExtra("ID_USUARIO", user.getID());
+            startActivity(intent);
+        }
         else if (item.getItemId() == R.id.menu_logout){
 
             //Vai para a tela de remover materias

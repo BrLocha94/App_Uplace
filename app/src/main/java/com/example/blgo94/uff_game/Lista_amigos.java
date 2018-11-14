@@ -64,7 +64,6 @@ public class Lista_amigos extends AppCompatActivity {
         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
             ids_amigos.add(snapshot.getValue().toString());
         }
-        Log.d(TAG, "talkei "+ ids_amigos.size());
     }
 
     public void get_ids_amigos(){
