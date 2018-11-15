@@ -1,5 +1,6 @@
 package com.example.blgo94.uff_game;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,8 +9,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,7 +32,8 @@ public class View_materia extends AppCompatActivity {
 
     //Botao
     public Button add_falta;
-    public Button add_falta_mesmo;
+    public Button add_prova_mesmo;
+    public Button add_prova;
 
     //Materia recebida pelo intent
     private Materia materia;
@@ -36,6 +41,8 @@ public class View_materia extends AppCompatActivity {
 
     //Database usado
     DatabaseReference data;
+
+    ArrayList<Prova> provas;
 
     //Parametros de exibição da matéria
     protected TextView nome_materia;
@@ -45,9 +52,9 @@ public class View_materia extends AppCompatActivity {
     protected TextView faltas_obtidas;
 
     //Edittexts para editar a falta
-    protected EditText falta_data;
-    protected EditText falta_motivo;
-    protected EditText falta_perdida;
+    protected EditText prova_data;
+    protected EditText prova_materia;
+    protected EditText prova_nota;
 
     public int layout = 0;
 
@@ -65,9 +72,9 @@ public class View_materia extends AppCompatActivity {
         faltas_permitidas = (TextView) findViewById(R.id.view_faltas_permitidas);
         faltas_obtidas = (TextView) findViewById(R.id.view_faltas_obtidas);
 
-        falta_data = (EditText) findViewById(R.id.falta_data);
-        falta_motivo = (EditText) findViewById(R.id.falta_motivo);
-        falta_perdida = (EditText) findViewById(R.id.falta_perdida);
+        prova_data = (EditText) findViewById(R.id.falta_data);
+        prova_materia = (EditText) findViewById(R.id.falta_motivo);
+        prova_nota = (EditText) findViewById(R.id.falta_perdida);
 
         set_view_materias();
 
@@ -85,57 +92,101 @@ public class View_materia extends AppCompatActivity {
         add_falta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                adiciona_falta();
+            }
+        });
+
+        add_prova = (Button) findViewById(R.id.botao_add_prova);
+
+        add_prova.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 troca_UI();
             }
         });
     }
 
-    public void set_editar_falta(){
+    public void adiciona_falta(){
+        ArrayList<String> faltas = materia.getFaltas();
+        if(faltas == null){
+            faltas = new ArrayList<String>();
+        }
+        faltas.add(get_data_atual());
+        materia.setFaltas(faltas);
 
-        falta_data = (EditText) findViewById(R.id.falta_data);
-        falta_motivo = (EditText) findViewById(R.id.falta_motivo);
-        falta_perdida = (EditText) findViewById(R.id.falta_perdida);
+        atualiza_database_faltas();
 
-        falta_data.setText(get_data_atual());
-        falta_motivo.setText("CAGUEI");
-        falta_perdida.setText("Não ligo");
+        finish();
+    }
 
-        add_falta_mesmo = (Button) findViewById(R.id.botao_add_falta_mesmo);
+    public void set_editar_prova(){
 
-        add_falta_mesmo.setOnClickListener(new View.OnClickListener() {
+        prova_data = (EditText) findViewById(R.id.falta_data);
+        prova_materia = (EditText) findViewById(R.id.falta_motivo);
+        prova_nota = (EditText) findViewById(R.id.falta_perdida);
+
+        prova_data.setText(get_data_atual());
+        prova_materia.setText("CAGUEI");
+        prova_nota.setText("0.0");
+
+        add_prova_mesmo = (Button) findViewById(R.id.botao_add_falta_mesmo);
+
+        add_prova_mesmo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String fdata = falta_data.getText().toString();
-                String fmotivo = falta_motivo.getText().toString();
-                String fperdida = falta_perdida.getText().toString();
+                Prova prova = new Prova(id, prova_materia.getText().toString(),
+                        get_data_atual(), prova_nota.getText().toString());
 
-                //Falta falta = new Falta(fdata, fmotivo, fperdida);
+                data = FirebaseDatabase.getInstance().getReference("provas").child(id);
+
+                atualiza_database_provas(prova);
+
                 /*
-                ArrayList<Falta> faltas = materia.getFaltas();
-                if(faltas == null){
-                    faltas = new ArrayList<Falta>();
+                if(materia.getQuant_provas() == 0){
+                    provas = new ArrayList<Prova>();
+                    provas.add(prova);
+                    data.setValue(provas);
+                    Toast.makeText(View_materia.this, "PROVA ADICIONADA", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
-                faltas.add(falta);
-                materia.setFaltas(faltas);
+                else{
+                    atualiza_database_provas(prova);
+                }
                 */
-
-                ArrayList<String> faltas = materia.getFaltas();
-                if(faltas == null){
-                    faltas = new ArrayList<String>();
-                }
-                faltas.add(fdata);
-                materia.setFaltas(faltas);
-
-                atualiza_database();
-
-                finish();
             }
         });
 
     }
 
-    public void atualiza_database(){
+    public void atualiza_database_provas(final Prova prova){
+        data = FirebaseDatabase.getInstance().getReference("provas").child(id);
+
+        data.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                provas = new ArrayList<Prova>();
+                set_array_provas(dataSnapshot);
+                provas.add(prova);
+                data.setValue(provas);
+                Toast.makeText(View_materia.this, "PROVA ADICIONADA", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void set_array_provas(DataSnapshot dataSnapshot){
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            provas.add(snapshot.getValue(Prova.class));
+        }
+    }
+
+    public void atualiza_database_faltas(){
         data = FirebaseDatabase.getInstance().getReference("materias").child(id);
 
         data.child(materia.getNome()).child("faltas").setValue(materia.getFaltas());
@@ -152,7 +203,7 @@ public class View_materia extends AppCompatActivity {
         if(layout == 0){
             setContentView(R.layout.editar_falta);
             layout = 1;
-            set_editar_falta();
+            set_editar_prova();
         }
         else if(layout == 1){
             setContentView(R.layout.view_materia);

@@ -263,6 +263,12 @@ public class Lista_materias extends AppCompatActivity {
             intent.putExtra("ID_USUARIO",id);
             startActivity(intent);
         }
+        else if(item.getItemId() == R.id.menu_lista_provas){
+            //Vai para a activity de lista de provas
+            Intent intent = new Intent(Lista_materias.this, Lista_provas.class);
+            intent.putExtra("ID_USUARIO", id);
+            startActivity(intent);
+        }
         else if (item.getItemId() == R.id.menu_rem){
 
             //Vai para a Activity de remover materias

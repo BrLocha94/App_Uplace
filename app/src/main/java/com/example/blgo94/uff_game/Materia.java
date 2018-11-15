@@ -12,7 +12,6 @@ public class Materia implements Parcelable {
     private ArrayList<String> dias;
     private ArrayList<String> horarios ;
     private ArrayList<String> locais;
-    private int total_dias;
     private int carga_horaria;
     //private ArrayList<Falta> faltas;
     private ArrayList<String> faltas;
@@ -132,6 +131,7 @@ public class Materia implements Parcelable {
     public void setCarga_horaria(int carga_horaria) {
         this.carga_horaria = carga_horaria;
     }
+
 
     public ArrayList<String> getFaltas() {
         return faltas;

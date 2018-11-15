@@ -45,7 +45,7 @@
         <activity android:name=".Perfil" />
         <activity android:name=".Criar_evento" />
         <activity android:name=".Usuarios_proximos" />
-
+        <activity android:name=".Lista_provas"></activity>
     </application>
 
 </manifest>

@@ -154,7 +154,7 @@ public class Adicionar_materia extends AppCompatActivity {
 
             materia.add_dia("QUA");
             materia.add_local(local_quarta.getText().toString());
-            materia.add_horario(horario_quinta.getText().toString());
+            materia.add_horario(horario_quarta.getText().toString());
 
         }
         if(quinta.isChecked()){

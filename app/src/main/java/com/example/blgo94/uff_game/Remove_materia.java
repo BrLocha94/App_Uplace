@@ -110,7 +110,7 @@ public class Remove_materia extends AppCompatActivity {
                 });
 
                 //if response is negative nothing is being done
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -134,5 +134,5 @@ public class Remove_materia extends AppCompatActivity {
     public void setChave(String chave) {
         this.chave = chave;
     }
-    
+
 }
