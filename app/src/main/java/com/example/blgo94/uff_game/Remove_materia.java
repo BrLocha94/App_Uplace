@@ -1,7 +1,9 @@
 package com.example.blgo94.uff_game;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +27,8 @@ public class Remove_materia extends AppCompatActivity {
     //Lista
     public ListView lista;
     public TextView nome_remove;
+
+    public String chave;
 
     //Id usado como chave
     private String id;
@@ -88,9 +92,36 @@ public class Remove_materia extends AppCompatActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String chave = (String) parent.getItemAtPosition(position);
-                remove_materia(chave);
+                setChave((String) parent.getItemAtPosition(position));
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Remove_materia.this);
+                builder.setTitle("Deseja excluir a matéria " + chave +"?");
+
+                //if the response is positive in the alert
+                builder.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        //removing the item
+                        remove_materia(chave);
+
+                        finish();
+                    }
+                });
+
+                //if response is negative nothing is being done
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+                //creating and displaying the alert dialog
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
+
         });
     }
 
@@ -100,4 +131,8 @@ public class Remove_materia extends AppCompatActivity {
         finish();
     }
 
+    public void setChave(String chave) {
+        this.chave = chave;
+    }
+    
 }

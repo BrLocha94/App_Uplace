@@ -121,21 +121,30 @@ public class Lista_materias extends AppCompatActivity {
         for(int j = 0; j < array_materias.size(); j++) {
             ArrayList<String> aux = array_materias.get(j).getDias();
             for (int k = 0; k < aux.size(); k++) {
-                if(aux.get(k).equals(DIAS[k])){
-                    switch (k){
-                        case 0: array_seg.add(array_materias.get(j).getNome());
+                for(int w = 0; w < 6; w++) {
+                    if (aux.get(k).equals(DIAS[w])) {
+                        switch (w) {
+                            case 0:
+                                array_seg.add(array_materias.get(j).getNome());
                                 break;
-                        case 1: array_ter.add(array_materias.get(j).getNome());
+                            case 1:
+                                array_ter.add(array_materias.get(j).getNome());
                                 break;
-                        case 2: array_qua.add(array_materias.get(j).getNome());
+                            case 2:
+                                array_qua.add(array_materias.get(j).getNome());
                                 break;
-                        case 3: array_qui.add(array_materias.get(j).getNome());
+                            case 3:
+                                array_qui.add(array_materias.get(j).getNome());
                                 break;
-                        case 4: array_sex.add(array_materias.get(j).getNome());
+                            case 4:
+                                array_sex.add(array_materias.get(j).getNome());
                                 break;
-                        case 5: array_sab.add(array_materias.get(j).getNome());
+                            case 5:
+                                array_sab.add(array_materias.get(j).getNome());
                                 break;
-                        default: break;
+                            default:
+                                break;
+                        }
                     }
                 }
             }

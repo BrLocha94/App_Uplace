@@ -14,7 +14,8 @@ public class Materia implements Parcelable {
     private ArrayList<String> locais;
     private int total_dias;
     private int carga_horaria;
-    private ArrayList<Falta> faltas;
+    //private ArrayList<Falta> faltas;
+    private ArrayList<String> faltas;
 
     //DataSnapshot
     public Materia(){
@@ -29,7 +30,8 @@ public class Materia implements Parcelable {
         this.horarios = new ArrayList<String>();
         this.locais = new ArrayList<String>();
         this.carga_horaria = carga_horaria;
-        this.faltas = new ArrayList<Falta>();
+        //this.faltas = new ArrayList<Falta>();
+        this.faltas = new ArrayList<String>();
     }
 
     //Construtor Parcel
@@ -131,11 +133,11 @@ public class Materia implements Parcelable {
         this.carga_horaria = carga_horaria;
     }
 
-    public ArrayList<Falta> getFaltas() {
+    public ArrayList<String> getFaltas() {
         return faltas;
     }
 
-    public void setFaltas(ArrayList<Falta> faltas) {
+    public void setFaltas(ArrayList<String> faltas) {
         this.faltas = faltas;
     }
 
@@ -180,29 +182,24 @@ public class Materia implements Parcelable {
         return this.faltas.size();
     }
 
-    public boolean checa_dia(String dia){
-        for(int j = 0; j < dias.size(); j++){
-            if(dias.get(j).equals(dia)){
-                return true;
-            }
-        }
-        return false;
+    public void add_falta(String falta){
+        this.faltas.add(falta);
     }
 
-    /*
+
     public String toString(){
 
         String msg = new String();
 
         for(int i = 0; i < dias.size(); i++){
 
-            msg = msg + dias.get(i) + " - " + horarios.get(i) + " - " + local.get(i);
+            msg = msg + dias.get(i) + " - " + horarios.get(i) + " - " + locais.get(i);
 
             msg = msg + "\n";
         }
 
         return msg;
     }
-    */
+
 
 }

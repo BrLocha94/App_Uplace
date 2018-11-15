@@ -110,13 +110,21 @@ public class View_materia extends AppCompatActivity {
                 String fmotivo = falta_motivo.getText().toString();
                 String fperdida = falta_perdida.getText().toString();
 
-                Falta falta = new Falta(fdata, fmotivo, fperdida);
-
+                //Falta falta = new Falta(fdata, fmotivo, fperdida);
+                /*
                 ArrayList<Falta> faltas = materia.getFaltas();
                 if(faltas == null){
                     faltas = new ArrayList<Falta>();
                 }
                 faltas.add(falta);
+                materia.setFaltas(faltas);
+                */
+
+                ArrayList<String> faltas = materia.getFaltas();
+                if(faltas == null){
+                    faltas = new ArrayList<String>();
+                }
+                faltas.add(fdata);
                 materia.setFaltas(faltas);
 
                 atualiza_database();
