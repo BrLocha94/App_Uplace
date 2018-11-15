@@ -22,5 +22,6 @@
     <string name="logout">Logout</string>
     <string name="lista_amigos">Lista de amigos</string>
     <string name="pessoas_proximas">Usuarios proximos</string>
+    <string name="cria_evento">Criar evento</string>
 </resources>
 

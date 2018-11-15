@@ -252,6 +252,13 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("ID_USUARIO", user.getID());
             startActivity(intent);
         }
+        else if(item.getItemId() == R.id.menu_cria_evento){
+            //Vai para a criação de eventos
+            Intent intent = new Intent(MainActivity.this, Criar_evento.class);
+            intent.putExtra("ID_USUARIO", user.getID());
+            intent.putExtra("nome_usuario", user.getUser_name());
+            startActivity(intent);
+        }
         else if(item.getItemId() == R.id.menu_pessoas_proximas){
             //Vai para a tela de pessoas proximas
             Intent intent = new Intent(MainActivity.this, Usuarios_proximos.class);

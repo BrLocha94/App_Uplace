@@ -13,6 +13,11 @@
         />
 
     <item
+        android:id="@+id/menu_cria_evento"
+        android:title="@string/cria_evento"
+        />
+
+    <item
         android:id="@+id/menu_pessoas_proximas"
         android:title="@string/pessoas_proximas"
         />
