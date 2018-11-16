@@ -7,7 +7,7 @@
     tools:context=".Perfil">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/perfil_badge2"
         android:layout_width="80dp"
         android:layout_height="91dp"
         android:layout_marginStart="8dp"
@@ -23,7 +23,7 @@
         tools:srcCompat="@tools:sample/avatars[1]" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/perfil_badge3"
         android:layout_width="80dp"
         android:layout_height="91dp"
         android:layout_marginStart="8dp"
@@ -40,7 +40,7 @@
         tools:srcCompat="@tools:sample/avatars[1]" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/perfil_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -57,25 +57,27 @@
         tools:srcCompat="@tools:sample/avatars[0]" />
 
     <TextView
-        android:id="@+id/textView13"
-        android:layout_width="92dp"
+        android:id="@+id/perfil_texto"
+        android:layout_width="143dp"
         android:layout_height="43dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="TextView"
+        android:layout_marginBottom="68dp"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:text="@string/nome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.523" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.823" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/perfil_badge1"
         android:layout_width="80dp"
         android:layout_height="91dp"
         android:layout_marginStart="8dp"
@@ -90,4 +92,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars[1]" />
+
+    <Button
+        android:id="@+id/perfil_botao_addamigo"
+        android:layout_width="172dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.876" />
 </android.support.constraint.ConstraintLayout>

@@ -56,6 +56,9 @@ public class Lista_amigos extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                //VAI PARA A VISÃO DO PERFIL
+                //PASSA O INT CASO = 0
+
             }
         });
     }

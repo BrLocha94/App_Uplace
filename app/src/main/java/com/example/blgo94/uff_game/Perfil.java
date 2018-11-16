@@ -3,7 +3,10 @@ package com.example.blgo94.uff_game;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -28,9 +31,15 @@ public class Perfil extends AppCompatActivity {
     ImageView bagde_1;
     ImageView badge_2;
     ImageView badge_3;
-
+    TextView texto_nome;
 
     private Usuario user;
+
+    //botao teste
+    private Button add_amigo;
+
+    //Caso 0 = perfil próprio ou amigo, Caso 1 = desconhecido
+    private int caso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +48,31 @@ public class Perfil extends AppCompatActivity {
 
         user = (Usuario) getIntent().getParcelableExtra("objeto");
 
+        caso = Integer.parseInt((String) getIntent().getStringExtra("caso"));
+
         carrega_imagens(user.getProfilePic(), user.getIdBadge1(), user.getIdBadge2(),
                 user.getIdBadge3());
+
+        texto_nome = (TextView) findViewById(R.id.perfil_texto);
+        texto_nome.setText(user.getUser_name());
+
+        add_amigo = (Button) findViewById(R.id.perfil_botao_addamigo);
+
+        if(caso == 0){
+            add_amigo.setVisibility(View.GONE);
+        }
+        else{
+            add_amigo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    requisita_add_amigo();
+                }
+            });
+        }
+
+    }
+
+    private void requisita_add_amigo(){
 
     }
 
