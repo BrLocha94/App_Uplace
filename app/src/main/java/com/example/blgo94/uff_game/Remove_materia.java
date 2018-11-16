@@ -35,6 +35,7 @@ public class Remove_materia extends AppCompatActivity {
 
     //Database usado
     DatabaseReference data;
+    DatabaseReference data2;
 
     private ArrayList<String> ids_materia;
 
@@ -127,6 +128,8 @@ public class Remove_materia extends AppCompatActivity {
 
     public void remove_materia(String chave){
         data.child(chave).removeValue();
+        data2 = FirebaseDatabase.getInstance().getReference("provas");
+        data2.child(id).child(chave).removeValue();
         Toast.makeText(getApplicationContext(),"MATERIA " + chave + " REMOVIDA", Toast.LENGTH_LONG).show();
         finish();
     }

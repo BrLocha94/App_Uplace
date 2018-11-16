@@ -138,8 +138,6 @@ public class View_materia extends AppCompatActivity {
                 Prova prova = new Prova(id, prova_materia.getText().toString(),
                         get_data_atual(), prova_nota.getText().toString());
 
-                data = FirebaseDatabase.getInstance().getReference("provas").child(id);
-
                 atualiza_database_provas(prova);
 
                 /*
@@ -160,7 +158,7 @@ public class View_materia extends AppCompatActivity {
     }
 
     public void atualiza_database_provas(final Prova prova){
-        data = FirebaseDatabase.getInstance().getReference("provas").child(id);
+        data = FirebaseDatabase.getInstance().getReference("provas").child(id).child(materia.getNome());
 
         data.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
