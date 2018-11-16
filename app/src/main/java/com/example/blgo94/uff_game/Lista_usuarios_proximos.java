@@ -119,10 +119,12 @@ public class Lista_usuarios_proximos extends AppCompatActivity {
     private void preenche_array(DataSnapshot dataSnapshot){
         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
             loc_proximo = snapshot.getValue(Localizacao.class);
-            if(distance(Double.parseDouble(loc_usuario.getLocalizacoes().get(0)), Double.parseDouble(loc_usuario.getLocalizacoes().get(1)),
-                    Double.parseDouble(loc_proximo.getLocalizacoes().get(0)), Double.parseDouble(loc_proximo.getLocalizacoes().get(1)))
-                    <= raio){
-                ids_proximos.add(loc_proximo.getId());
+            if(!loc_proximo.getId().equals(loc_usuario.getId())) {
+                if (distance(Double.parseDouble(loc_usuario.getLocalizacoes().get(0)), Double.parseDouble(loc_usuario.getLocalizacoes().get(1)),
+                        Double.parseDouble(loc_proximo.getLocalizacoes().get(0)), Double.parseDouble(loc_proximo.getLocalizacoes().get(1)))
+                        <= raio) {
+                    ids_proximos.add(loc_proximo.getId());
+                }
             }
         }
     }
