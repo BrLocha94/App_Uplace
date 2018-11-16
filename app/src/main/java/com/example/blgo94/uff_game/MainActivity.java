@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else if(item.getItemId() == R.id.menu_pessoas_proximas){
             //Vai para a tela de pessoas proximas
-            Intent intent = new Intent(MainActivity.this, Usuarios_proximos.class);
+            Intent intent = new Intent(MainActivity.this, Localiza.class);
             intent.putExtra("ID_USUARIO", user.getID());
             startActivity(intent);
         }

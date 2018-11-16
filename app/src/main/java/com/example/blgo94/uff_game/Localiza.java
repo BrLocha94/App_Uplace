@@ -30,12 +30,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.DateFormat;
 import java.util.ArrayList;
 
-public class Usuarios_proximos extends AppCompatActivity implements LocationListener{
+public class Localiza extends AppCompatActivity implements LocationListener{
 
     final String TAG = "GPS";
     private final static int ALL_PERMISSIONS_RESULT = 101;
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 100; // 10
-    private static final long MIN_TIME_BW_UPDATES = 2000; // 1000 * 60 * 1
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10
+    private static final long MIN_TIME_BW_UPDATES = 100; // 1000 * 60 * 1
 
     TextView tvLatitude, tvLongitude, tvTime;
     LocationManager locationManager;
@@ -51,10 +51,21 @@ public class Usuarios_proximos extends AppCompatActivity implements LocationList
 
     private String user_name;
 
+    private int contador = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuarios_proximos);
+
+        //Checar se o GPS está ligado
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+
+            Toast.makeText(this, "Ligue seu GPS para acessar este recurso.", Toast.LENGTH_SHORT).show();
+
+            finish();
+        }
 
         tvLatitude = (TextView) findViewById(R.id.tvLatitude);
         tvLongitude = (TextView) findViewById(R.id.tvLongitude);
@@ -250,7 +261,7 @@ public class Usuarios_proximos extends AppCompatActivity implements LocationList
     }
 
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(Usuarios_proximos.this)
+        new AlertDialog.Builder(Localiza.this)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", null)
@@ -270,8 +281,21 @@ public class Usuarios_proximos extends AppCompatActivity implements LocationList
         locations.add(Double.toString(loc.getLatitude()));
         locations.add(Double.toString(loc.getLongitude()));
 
+        Localizacao atual = new Localizacao(locations, DateFormat.getTimeInstance().format(loc.getTime()), user_name);
+
         data = FirebaseDatabase.getInstance().getReference("loc");
-        data.child(user_name).setValue(locations);
+        data.child(user_name).setValue(atual);
+
+        if(contador == 0){
+            //Inicia activity de lista
+            Intent intent = new Intent(Localiza.this, Lista_usuarios_proximos.class);
+            intent.putExtra("ID_USUARIO", user_name);
+            startActivity(intent);
+            contador ++;
+        }
+
+        //CASO ACHE UMA MANEIRA DE ATUALIZAR INSTANTANEAMENTE QUANDO ENTRAR NESSA TELA, FINALIZAR
+        //finish();
     }
 
     @Override
@@ -281,188 +305,4 @@ public class Usuarios_proximos extends AppCompatActivity implements LocationList
             locationManager.removeUpdates(this);
         }
     }
-
-    /*
-    private static final int PERMISSIONS_REQUEST = 100;
-
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
-
-    //Database Realtime do firebase
-    private DatabaseReference mDatabase;
-
-    private String user_name;
-
-    double latitude;
-    double longitude;
-
-    public Button teste;
-
-    LocationManager lm;
-    Location loc;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_usuarios_proximos);
-
-        //Checar se o GPS está ligado
-        lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if ((!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) || (!lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER))) {
-
-            Toast.makeText(this, "Ligue seu GPS e internet para acessar este recurso.", Toast.LENGTH_SHORT).show();
-
-            finish();
-        }
-
-        user_name = (String) getIntent().getStringExtra("ID_USUARIO");
-
-        teste = (Button) findViewById(R.id.button_teste);
-        teste.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //recebe_posicao();
-            }
-        });
-
-        //Checar se as permissoes do app foram concedidas
-        //Caso tenham sido concedidas, inicia o serviço de traking do app
-        //Caso contrário, pede permissão
-        int permission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-        int permission_2 = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION);
-
-
-        if ((permission == PackageManager.PERMISSION_GRANTED) && (permission_2 == PackageManager.PERMISSION_GRANTED)) {
-            //recebe_posicao();
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                    PERMISSIONS_REQUEST);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[]
-            grantResults) {
-
-        //Se a permissão for concedida, inicia o serviço
-        //Caso contrário, fecha a activity
-        if (requestCode == PERMISSIONS_REQUEST && grantResults.length == 1
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            //recebe_posicao();
-        } else {
-            Toast.makeText(this, "Por favor conceda a permissão para usar esse serviço", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        update_location(location);
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        getLocation();
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        if (lm != null) {
-            lm.removeUpdates(this);
-        }
-    }
-
-    private void getLocation(){
-
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES,
-                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-        if (lm != null) {
-            loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (loc != null) update_location(loc);
-        }
-    }
-
-    private void update_location(Location loc) {
-        latitude = loc.getLatitude();
-        longitude = loc.getLongitude();
-        ArrayList<String> locations = new ArrayList<String>();
-        locations.add(Double.toString(longitude));
-        locations.add(Double.toString(latitude));
-
-        Log.d("LOCALIZAÇÕES: ", locations.get(0) + "   " + locations.get(1));
-
-        //salva no database
-        mDatabase = FirebaseDatabase.getInstance().getReference("loc");
-        mDatabase.child(user_name).setValue(loc);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (lm != null) {
-            lm.removeUpdates(this);
-        }
-    }
-
-
-    /*
-    //Start the TrackerService//
-
-    LocationListener locationListener = new LocationListener() {
-        public void onLocationChanged(Location location) {
-            longitude = location.getLongitude();
-            latitude = location.getLatitude();
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-    };
-
-    private void recebe_posicao() {
-
-        //pega a localização atual
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        //Location location =         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
-        //Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        //double longitude = location.getLongitude();
-        //double latitude = location.getLatitude();
-
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
-
-        ArrayList<String> loc = new ArrayList<String>();
-        loc.add(Double.toString(longitude));
-        loc.add(Double.toString(latitude));
-
-        Log.d("LOCALIZAÇÕES: ", loc.get(0) + "   " + loc.get(1));
-
-        //salva no database
-        mDatabase = FirebaseDatabase.getInstance().getReference("loc");
-        mDatabase.child(user_name).setValue(loc);
-        //checa as pessoas próximas
-        //LE OS DADOS
-        //PREENCHE A LISTA
-
-    }
-
-    */
 }

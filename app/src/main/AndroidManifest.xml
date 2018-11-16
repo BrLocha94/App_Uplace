@@ -3,7 +3,7 @@
     package="com.example.blgo94.uff_game">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
@@ -45,8 +45,9 @@
         <activity android:name=".Lista_amigos" />
         <activity android:name=".Perfil" />
         <activity android:name=".Criar_evento" />
-        <activity android:name=".Usuarios_proximos" />
-        <activity android:name=".Lista_provas"></activity>
+        <activity android:name=".Localiza" />
+        <activity android:name=".Lista_provas" />
+        <activity android:name=".Lista_usuarios_proximos"></activity>
     </application>
 
 </manifest>
