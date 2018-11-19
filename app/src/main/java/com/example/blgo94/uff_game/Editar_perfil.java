@@ -2,6 +2,7 @@ package com.example.blgo94.uff_game;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,14 +42,79 @@ public class Editar_perfil extends AppCompatActivity {
         edita_perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                usuario.setUser_name(perfil_nome.getText().toString());
-                usuario.setCourse(perfil_curso.getText().toString());
 
-                mDatabase.child(usuario.getID()).setValue(usuario);
+                boolean ok = checa_problemas();
 
-                finish();
+                if(ok) {
+                    usuario.setUser_name(perfil_nome.getText().toString());
+                    usuario.setCourse(perfil_curso.getText().toString());
+
+                    mDatabase.child(usuario.getID()).setValue(usuario);
+
+                    finish();
+                }
             }
         });
 
+    }
+
+    private boolean checa_problemas() {
+
+        //reseta os erros
+        perfil_nome.setError(null);
+        perfil_curso.setError(null);
+
+        //boleano que checa as chaves
+        boolean prossegue = true;
+
+        //view que foca no local do erro
+        View foco = null;
+
+        //recebe as Strings das informações para serem checadas
+        String nome_string = perfil_nome.getText().toString();
+        String curso_string = perfil_curso.getText().toString();
+
+        //primeiro check: se não foi informado o nome
+        if (TextUtils.isEmpty(nome_string)) {
+            perfil_nome.setError(getString(R.string.erro_vazio));
+            foco = perfil_nome;
+            prossegue = false;
+        }
+        //Chave de segurança do email
+        else if (!chave_tamanho(nome_string)) {
+            perfil_nome.setError(getString(R.string.erro_tamanho));
+            foco = perfil_nome;
+            prossegue = false;
+        }
+
+
+        //primeiro check: se não foi informado o curso
+        if (TextUtils.isEmpty(curso_string)) {
+            perfil_curso.setError(getString(R.string.erro_vazio));
+            foco = perfil_curso;
+            prossegue = false;
+        }
+        //se o tamanho é maior que o permitido
+        else if (!chave_tamanho(curso_string)) {
+            perfil_curso.setError(getString(R.string.erro_tamanho));
+            foco = perfil_curso;
+            prossegue = false;
+        }
+
+
+        if (prossegue) {
+            return true;
+        } else {
+            //Chama a atenção para o campo incorreto
+            foco.requestFocus();
+            return false;
+        }
+    }
+
+    public boolean chave_tamanho(String nome){
+        if(nome.length() > 3){
+            return true;
+        }
+        return false;
     }
 }

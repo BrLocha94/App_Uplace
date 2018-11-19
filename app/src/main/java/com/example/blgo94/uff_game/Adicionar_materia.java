@@ -112,21 +112,61 @@ public class Adicionar_materia extends AppCompatActivity {
         String professor_string = professor.getText().toString();
         String carga_string = carga_horaria.getText().toString();
 
+        //checa nome da matéria
         //primeiro check: se não foi informado o nome
-        if(TextUtils.isEmpty(nome_string)){
+        if(TextUtils.isEmpty(nome_string)) {
             nome.setError(getString(R.string.erro_vazio));
             foco = nome;
             prossegue = false;
         }
 
+        //segundo check: se o nome é muito grande
+        if(!chave_tamanho(nome_string, 28)){
+            nome.setError(getString(R.string.erro_tamanho));
+            foco = nome;
+            prossegue = false;
+        }
+
+        //checa nome do professor
+        //primeiro check: se não foi informado o professor
         if(TextUtils.isEmpty(professor_string)){
             professor.setError(getString(R.string.erro_vazio));
             foco = professor;
             prossegue = false;
         }
 
+        //segundo check: se o nome do professor contém números
+        if(!chave_caracteres(professor_string)){
+            professor.setError(getString(R.string.erro_numeros));
+            foco = professor;
+            prossegue = false;
+        }
+
+        //terceiro check: se o nome do professor é muito grandde
+        if(!chave_tamanho(professor_string,28)){
+            professor.setError(getString(R.string.erro_tamanho));
+            foco = professor;
+            prossegue = false;
+        }
+
+        //chega carga horaria
+        //primeiro check: se não foi informada a carga horária
         if(TextUtils.isEmpty(carga_string)){
             carga_horaria.setError(getString(R.string.erro_vazio));
+            foco = carga_horaria;
+            prossegue = false;
+        }
+
+        //segundo check: se não foram informados números
+        if(chave_caracteres(carga_string)){
+            carga_horaria.setError(getString(R.string.erro_numeros));
+            foco = carga_horaria;
+            prossegue = false;
+        }
+
+        //terceiro check: se o tamanho é muito grande
+        if(chave_tamanho(carga_string,3)){
+            carga_horaria.setError(getString(R.string.erro_tamanho));
             foco = carga_horaria;
             prossegue = false;
         }
@@ -195,10 +235,25 @@ public class Adicionar_materia extends AppCompatActivity {
         }
         else{
             //Chama a atenção para o campo incorreto
-            //foco.requestFocus();
+            foco.requestFocus();
             materia.reset_arrays();
             return false;
         }
+    }
+
+    public boolean chave_caracteres(String nome){
+        String numRegex   = ".*[0-9].*";
+        if(nome.matches(numRegex)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean chave_tamanho(String nome, int tamanho){
+        if(nome.length() > tamanho){
+            return true;
+        }
+        return false;
     }
 
     public void inicializa_UI(){

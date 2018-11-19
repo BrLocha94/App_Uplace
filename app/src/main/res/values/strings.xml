@@ -24,5 +24,7 @@
     <string name="pessoas_proximas">Usuarios proximos</string>
     <string name="cria_evento">Criar evento</string>
     <string name="lista_provas">Lista de provas</string>
+    <string name="erro_numeros">Este campo não pode conter números</string>
+    <string name="erro_tamanho">Este campo não pode ter mais que 28 caractéres </string>
 </resources>
 
