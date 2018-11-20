@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "1096980751850",
-    "firebase_url": "https://uffgame-cec71.firebaseio.com",
-    "project_id": "uffgame-cec71",
-    "storage_bucket": "uffgame-cec71.appspot.com"
+    "project_number": "395812317745",
+    "firebase_url": "https://uplace-ff0b3.firebaseio.com",
+    "project_id": "uplace-ff0b3",
+    "storage_bucket": "uplace-ff0b3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1096980751850:android:613644b39ad78d90",
+        "mobilesdk_app_id": "1:395812317745:android:613644b39ad78d90",
         "android_client_info": {
           "package_name": "com.example.blgo94.uff_game"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1096980751850-89a0nof2o4q6oerrj77oean4oi2mi8cd.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.blgo94.uff_game",
-            "certificate_hash": "eee6a73bbd8eb8fa71d3e22cecd6f68866feca9b"
-          }
-        },
-        {
-          "client_id": "1096980751850-ijch817tcefjbghvqinl93g4lo4maaol.apps.googleusercontent.com",
+          "client_id": "395812317745-bueqn9sfkkb37pu3iqqr86ltej6vvic1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDbYVj68YGelAO9OC1jxWz7qT27GaRh-1k"
+          "current_key": "AIzaSyAVUMEkp5uVZr29BtwSizCuQwrEUt8KOsk"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1096980751850-ijch817tcefjbghvqinl93g4lo4maaol.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
