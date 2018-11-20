@@ -28,5 +28,7 @@
     <string name="erro_tamanho">Este campo não pode ter mais que 28 caractéres </string>
     <string name="title_activity_maps">Map</string>
     <string name="mapa_uff">Mapa UFF</string>
+    <string name="mapa_lugares">Lugares</string>
+    <string name="mapa_amigos">Amigos</string>
 </resources>
 
