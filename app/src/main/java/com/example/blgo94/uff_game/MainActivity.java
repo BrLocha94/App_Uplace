@@ -163,8 +163,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void carrega_imagens(String ProfilePic, String IdBadge1){
 
-        ProfilePic = "gs://uffgame-cec71.appspot.com/Avatar/" + ProfilePic;
-        IdBadge1 = "gs://uffgame-cec71.appspot.com/Badges/" + IdBadge1;
+        ProfilePic = "gs://uplace-ff0b3.appspot.com/avatar/" + ProfilePic;
+        IdBadge1 = "gs://uplace-ff0b3.appspot.com/badge/" + IdBadge1;
 
         mStorageRef_avatar = FirebaseStorage.getInstance().getReferenceFromUrl(ProfilePic);
         mStorageRef_badge_1 = FirebaseStorage.getInstance().getReferenceFromUrl(IdBadge1);
@@ -257,6 +257,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, Criar_evento.class);
             intent.putExtra("ID_USUARIO", user.getID());
             intent.putExtra("nome_usuario", user.getUser_name());
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.menu_mapa_uff){
+            //Vai para a criação de eventos
+            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(intent);
         }
         else if(item.getItemId() == R.id.menu_pessoas_proximas){

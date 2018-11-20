@@ -18,6 +18,11 @@
         />
 
     <item
+        android:id="@+id/menu_mapa_uff"
+        android:title="@string/mapa_uff"
+        />
+
+    <item
         android:id="@+id/menu_pessoas_proximas"
         android:title="@string/pessoas_proximas"
         />

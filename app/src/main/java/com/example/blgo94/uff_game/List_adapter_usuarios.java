@@ -58,7 +58,7 @@ public class List_adapter_usuarios extends ArrayAdapter<Usuario> {
         //getting the user of the specified position
         Usuario user = usuarios.get(position);
 
-        String ProfilePic = "gs://uffgame-cec71.appspot.com/Avatar/" + user.getProfilePic();
+        String ProfilePic = "gs://uplace-ff0b3.appspot.com/avatar/" + user.getProfilePic();
 
         //adding values to the list item
         mStorageRef_avatar = FirebaseStorage.getInstance().getReferenceFromUrl(ProfilePic);
