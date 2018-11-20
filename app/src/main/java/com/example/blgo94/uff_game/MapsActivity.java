@@ -32,6 +32,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ArrayList<Lugar> lugares = new ArrayList<Lugar>();
 
     DatabaseReference data;
+    DatabaseReference data_user;
 
     private String user_name;
 
@@ -100,6 +101,35 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Log.d("TA AQUI IPOFOERWUJM", lugares.get(0).getId());
             mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title(local));
         }
+    }
+
+    public void zoom_user(Localizacao loc){
+        double lat = Double.parseDouble(loc.getLocalizacoes().get(0));
+        double lng = Double.parseDouble(loc.getLocalizacoes().get(1));
+
+        LatLng user = new LatLng(lat, lng);
+        mMap.addMarker(new MarkerOptions().position(user).title("Voce esta aqui"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user, 18));
+    }
+
+    public void onRestart() {
+        super.onRestart();
+        mMap.clear();
+        mapa_update();
+
+        data_user = FirebaseDatabase.getInstance().getReference("loc");
+        data_user.child(user_name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Localizacao loc = dataSnapshot.getValue(Localizacao.class);
+                zoom_user(loc);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

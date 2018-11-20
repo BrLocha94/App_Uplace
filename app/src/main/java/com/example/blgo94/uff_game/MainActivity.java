@@ -246,6 +246,13 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("objeto", user);
             startActivity(intent);
         }
+        else if(item.getItemId() == R.id.menu_perfil){
+            //Vai para a tela de lista de amigos
+            Intent intent = new Intent(MainActivity.this, Perfil.class);
+            intent.putExtra("objeto", user);
+            intent.putExtra("caso", "0");
+            startActivity(intent);
+        }
         else if(item.getItemId() == R.id.menu_lista_amigos){
             //Vai para a tela de lista de amigos
             Intent intent = new Intent(MainActivity.this, Lista_amigos.class);

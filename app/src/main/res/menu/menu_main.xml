@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/menu_perfil"
+        android:title="@string/perfil"
+        />
+
+    <item
         android:id="@+id/menu_editar_perfil"
         android:title="@string/editar_perfil"
         />

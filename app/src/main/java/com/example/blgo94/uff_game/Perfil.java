@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -32,11 +33,15 @@ public class Perfil extends AppCompatActivity {
     private ImageView badge_2;
     private ImageView badge_3;
     private TextView texto_nome;
+    private TextView texto_lv;
+    private TextView texto_score;
 
     private Usuario user;
 
     //botao teste
     private Button add_amigo;
+
+    private ListView lista;
 
     //Caso 0 = perfil próprio ou amigo, Caso 1 = desconhecido
     private int caso;
@@ -63,21 +68,33 @@ public class Perfil extends AppCompatActivity {
         texto_nome = (TextView) findViewById(R.id.perfil_nome_informado);
         texto_nome.setText(user.getUser_name());
 
-        /*
-        add_amigo = (Button) findViewById(R.id.perfil_botao_addamigo);
+        texto_lv = (TextView) findViewById(R.id.perfil_level);
+        texto_lv.setText(user.getLevel());
 
-        if(caso == 0){
-            add_amigo.setVisibility(View.GONE);
-        }
-        else{
+        texto_score = (TextView) findViewById(R.id.perfil_score);
+        texto_score.setText(user.getScore());
+
+
+        if(caso == 1){
+            /*
+            add_amigo = (Button) findViewById(R.id.perfil_botao_addamigo);
+            add_amigo.setVisibility(View.VISIBLE);
+
             add_amigo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     requisita_add_amigo();
                 }
             });
+            */
         }
-        */
+        else{
+            lista = (ListView) findViewById(R.id.lista_5_ultimas);
+            lista.setVisibility(View.VISIBLE);
+
+
+        }
+
 
     }
 
@@ -88,10 +105,10 @@ public class Perfil extends AppCompatActivity {
     private void carrega_imagens(String ProfilePic, String IdBadge1, String IdBadge2,
                                  String IdBadge3){
 
-        ProfilePic = "gs://uffgame-cec71.appspot.com/Avatar/" + ProfilePic;
-        IdBadge1 = "gs://uffgame-cec71.appspot.com/Badges/" + IdBadge1;
-        IdBadge1 = "gs://uffgame-cec71.appspot.com/Badges/" + IdBadge2;
-        IdBadge1 = "gs://uffgame-cec71.appspot.com/Badges/" + IdBadge3;
+        ProfilePic = "gs://uplace-ff0b3.appspot.com/avatar/" + ProfilePic;
+        IdBadge1 = "gs://uplace-ff0b3.appspot.com/badge/" + IdBadge1;
+        IdBadge2 = "gs://uplace-ff0b3.appspot.com/badge/" + IdBadge2;
+        IdBadge3 = "gs://uplace-ff0b3.appspot.com/badge/" + IdBadge3;
 
         mStorageRef_avatar = FirebaseStorage.getInstance().getReferenceFromUrl(ProfilePic);
         mStorageRef_badge_1 = FirebaseStorage.getInstance().getReferenceFromUrl(IdBadge1);
@@ -108,19 +125,19 @@ public class Perfil extends AppCompatActivity {
         //Bagde
         Glide.with(this)
                 .load(mStorageRef_badge_1)
-                .apply(new RequestOptions().override(48,48))
+                .apply(new RequestOptions().override(200,200))
                 .into(badge_1);
 
         //Bagde2
         Glide.with(this)
                 .load(mStorageRef_badge_2)
-                .apply(new RequestOptions().override(48,48))
+                .apply(new RequestOptions().override(200,200))
                 .into(badge_2);
 
         //Bagde3
         Glide.with(this)
                 .load(mStorageRef_badge_3)
-                .apply(new RequestOptions().override(48,48))
+                .apply(new RequestOptions().override(200,200))
                 .into(badge_3);
     }
 }
