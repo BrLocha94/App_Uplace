@@ -25,7 +25,7 @@
                 android:id="@+id/amigo_avatar"
                 android:layout_width="100dp"
                 android:layout_height="95dp"
-                tools:srcCompat="@tools:sample/avatars[0]" />
+                tools:srcCompat="@tools:sample/avatars[1]" />
 
             <TextView
                 android:id="@+id/amigo_nome"
