@@ -260,8 +260,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else if(item.getItemId() == R.id.menu_mapa_uff){
-            //Vai para a criação de eventos
+            //Vai para a a palicação de mapas
             Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            intent.putExtra("ID_USUARIO", user.getID());
             startActivity(intent);
         }
         else if(item.getItemId() == R.id.menu_pessoas_proximas){

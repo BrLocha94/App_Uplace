@@ -4,8 +4,13 @@
     <item android:id="@+id/normal_map"
         android:title="@string/mapa_lugares"
         app:showAsAction="never"/>
+
     <item android:id="@+id/amigos_map"
         android:title="@string/mapa_amigos"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/check_in_map"
+        android:title="@string/check_in"
         app:showAsAction="never"/>
 
 </menu>

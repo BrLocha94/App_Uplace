@@ -1,5 +1,6 @@
 package com.example.blgo94.uff_game;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     DatabaseReference data;
 
+    private String user_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        user_name = (String) getIntent().getStringExtra("ID_USUARIO");
 
         data = FirebaseDatabase.getInstance().getReference("lugares");
 
@@ -109,12 +114,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Change the map type based on the user's selection.
         switch (item.getItemId()) {
             case R.id.normal_map:
-                //CARREGA
-
+                //CARREGA LUGARES
 
                 return true;
             case R.id.amigos_map:
                 //CARREGA AMGOS
+                return true;
+
+            case R.id.check_in_map:
+                Intent intent = new Intent(MapsActivity.this, Check_in.class);
+                intent.putExtra("ID_USUARIO", user_name);
+                startActivity(intent);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
