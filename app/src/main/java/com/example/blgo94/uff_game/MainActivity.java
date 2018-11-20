@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -65,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
     public Button leitor_QR;
     public Button edita_perfil;
 
+    private boolean ok = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 set_info_usuario(dataSnapshot);
                 carrega_imagens(user.getProfilePic(), user.getIdBadge1());
+                ok = true;
             }
 
             @Override
@@ -142,9 +146,14 @@ public class MainActivity extends AppCompatActivity {
         lista_materias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Lista_materias.class);
-                intent.putExtra("ID_USUARIO", user.getID());
-                startActivity(intent);
+                if(ok) {
+                    Intent intent = new Intent(MainActivity.this, Lista_materias.class);
+                    intent.putExtra("ID_USUARIO", user.getID());
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -181,16 +190,6 @@ public class MainActivity extends AppCompatActivity {
                 .load(mStorageRef_badge_1)
                 .apply(new RequestOptions().override(64,64))
                 .into(bagde_1);
-    }
-
-    private void updateUI(FirebaseUser user){
-
-        if(user != null){
-
-
-        } else{
-
-        }
     }
 
     private void get_current_user(){
@@ -241,46 +240,75 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.menu_editar_perfil)
         {
-            //Vai para a tela de adicionar materias
-            Intent intent = new Intent(MainActivity.this, Editar_perfil.class);
-            intent.putExtra("objeto", user);
-            startActivity(intent);
+            if(ok) {
+                //Vai para a tela de adicionar materias
+                Intent intent = new Intent(MainActivity.this, Editar_perfil.class);
+                intent.putExtra("objeto", user);
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+            }
         }
         else if(item.getItemId() == R.id.menu_perfil){
             //Vai para a tela de lista de amigos
-            Intent intent = new Intent(MainActivity.this, Perfil.class);
-            intent.putExtra("objeto", user);
-            intent.putExtra("caso", "0");
-            startActivity(intent);
+            if(ok) {
+                Intent intent = new Intent(MainActivity.this, Perfil.class);
+                intent.putExtra("objeto", user);
+                intent.putExtra("caso", "0");
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+            }
         }
         else if(item.getItemId() == R.id.menu_lista_amigos){
-            //Vai para a tela de lista de amigos
-            Intent intent = new Intent(MainActivity.this, Lista_amigos.class);
-            intent.putExtra("ID_USUARIO", user.getID());
-            startActivity(intent);
+            if(ok) {
+                //Vai para a tela de lista de amigos
+                Intent intent = new Intent(MainActivity.this, Lista_amigos.class);
+                intent.putExtra("ID_USUARIO", user.getID());
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+            }
         }
         else if(item.getItemId() == R.id.menu_cria_evento){
-            //Vai para a criação de eventos
-            Intent intent = new Intent(MainActivity.this, Criar_evento.class);
-            intent.putExtra("ID_USUARIO", user.getID());
-            intent.putExtra("nome_usuario", user.getUser_name());
-            startActivity(intent);
+            if(ok) {
+                //Vai para a criação de eventos
+                Intent intent = new Intent(MainActivity.this, Criar_evento.class);
+                intent.putExtra("ID_USUARIO", user.getID());
+                intent.putExtra("nome_usuario", user.getUser_name());
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+            }
         }
         else if(item.getItemId() == R.id.menu_mapa_uff){
-            //Vai para a a palicação de mapas
-            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-            intent.putExtra("ID_USUARIO", user.getID());
-            startActivity(intent);
+            if(ok) {
+                //Vai para a a palicação de mapas
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                intent.putExtra("ID_USUARIO", user.getID());
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+            }
         }
         else if(item.getItemId() == R.id.menu_pessoas_proximas){
-            //Vai para a tela de pessoas proximas
-            Intent intent = new Intent(MainActivity.this, Localiza.class);
-            intent.putExtra("ID_USUARIO", user.getID());
-            startActivity(intent);
+            if(ok) {
+                //Vai para a tela de pessoas proximas
+                Intent intent = new Intent(MainActivity.this, Localiza.class);
+                intent.putExtra("ID_USUARIO", user.getID());
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+            }
         }
         else if (item.getItemId() == R.id.menu_logout){
 
-            //Vai para a tela de remover materias
             mAuth.signOut();
         }
 
