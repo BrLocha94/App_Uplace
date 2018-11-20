@@ -27,11 +27,11 @@ public class Perfil extends AppCompatActivity {
     private StorageReference mStorageRef_badge_3;
 
     //Locais de carregamento das imagens
-    ImageView avatar_perfil;
-    ImageView bagde_1;
-    ImageView badge_2;
-    ImageView badge_3;
-    TextView texto_nome;
+    private ImageView avatar_perfil;
+    private ImageView badge_1;
+    private ImageView badge_2;
+    private ImageView badge_3;
+    private TextView texto_nome;
 
     private Usuario user;
 
@@ -50,12 +50,20 @@ public class Perfil extends AppCompatActivity {
 
         caso = Integer.parseInt((String) getIntent().getStringExtra("caso"));
 
+        avatar_perfil = (ImageView) findViewById(R.id.perfil_avatar);
+
+        badge_1 = (ImageView) findViewById(R.id.perfil_badge_1);
+        badge_2 = (ImageView) findViewById(R.id.perfil_badge_2);
+        badge_3 = (ImageView) findViewById(R.id.perfil_badge_3);
+
+
         carrega_imagens(user.getProfilePic(), user.getIdBadge1(), user.getIdBadge2(),
                 user.getIdBadge3());
 
-        texto_nome = (TextView) findViewById(R.id.perfil_texto);
+        texto_nome = (TextView) findViewById(R.id.perfil_nome_informado);
         texto_nome.setText(user.getUser_name());
 
+        /*
         add_amigo = (Button) findViewById(R.id.perfil_botao_addamigo);
 
         if(caso == 0){
@@ -69,6 +77,7 @@ public class Perfil extends AppCompatActivity {
                 }
             });
         }
+        */
 
     }
 
@@ -99,19 +108,19 @@ public class Perfil extends AppCompatActivity {
         //Bagde
         Glide.with(this)
                 .load(mStorageRef_badge_1)
-                .apply(new RequestOptions().override(64,64))
-                .into(bagde_1);
+                .apply(new RequestOptions().override(48,48))
+                .into(badge_1);
 
         //Bagde2
         Glide.with(this)
                 .load(mStorageRef_badge_2)
-                .apply(new RequestOptions().override(64,64))
-                .into(bagde_1);
+                .apply(new RequestOptions().override(48,48))
+                .into(badge_2);
 
         //Bagde3
         Glide.with(this)
                 .load(mStorageRef_badge_3)
-                .apply(new RequestOptions().override(64,64))
-                .into(bagde_1);
+                .apply(new RequestOptions().override(48,48))
+                .into(badge_3);
     }
 }

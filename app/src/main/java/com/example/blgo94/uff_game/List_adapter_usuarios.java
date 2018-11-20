@@ -53,7 +53,7 @@ public class List_adapter_usuarios extends ArrayAdapter<Usuario> {
         //getting the view elements of the list from the view
         ImageView imageView = view.findViewById(R.id.amigo_avatar);
         TextView textViewName = view.findViewById(R.id.amigo_nome);
-
+        TextView textViewCurso = view.findViewById(R.id.amigo_curso);
 
         //getting the user of the specified position
         Usuario user = usuarios.get(position);
@@ -70,6 +70,7 @@ public class List_adapter_usuarios extends ArrayAdapter<Usuario> {
                 .into(imageView);
 
         textViewName.setText(user.getUser_name());
+        textViewCurso.setText(user.getCourse());
 
         //finally returning the view
         return view;

@@ -52,6 +52,8 @@ public class Login_Cadastro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_cadastro);
 
+
+
         FirebaseApp.initializeApp(this);
 
         //Instancias de identificação do usuário
@@ -72,7 +74,7 @@ public class Login_Cadastro extends AppCompatActivity {
             }
         };
 
-        login = (Button) findViewById(R.id.botao_sign_in);
+        login = (Button) findViewById(R.id.login);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,8 +84,8 @@ public class Login_Cadastro extends AppCompatActivity {
                 //ANTES, O ID E SENHA PASSAM PELA CHECAGEM DE SEGURANÇA
 
                 //preenche as variaveis EditText com as informações fornecidas
-                email = (EditText) findViewById(R.id.email_informado);
-                senha = (EditText) findViewById(R.id.senha_informada);
+                email = (EditText) findViewById(R.id.mailk);
+                senha = (EditText) findViewById(R.id.passw);
 
                 //checa as chaves de segurança
                 ok = checa_problemas();
@@ -98,7 +100,7 @@ public class Login_Cadastro extends AppCompatActivity {
             }
         });
 
-        cadastrar = (Button) findViewById(R.id.botao_sign_up);
+        cadastrar = (Button) findViewById(R.id.cadastre_se);
 
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +110,8 @@ public class Login_Cadastro extends AppCompatActivity {
                 //ANTES, O ID E SENHA PASSAM PELA CHECAGEM DE SEGURANÇA
 
                 //preenche as variaveis EditText com as informações fornecidas
-                email = (EditText) findViewById(R.id.email_informado);
-                senha = (EditText) findViewById(R.id.senha_informada);
+                email = (EditText) findViewById(R.id.mailk);
+                senha = (EditText) findViewById(R.id.passw);
 
                 //checa as chaves de segurança
                 ok = checa_problemas();
