@@ -69,15 +69,15 @@ public class Perfil extends AppCompatActivity {
         texto_nome.setText(user.getUser_name());
 
         texto_lv = (TextView) findViewById(R.id.perfil_level);
-        texto_lv.setText(user.getLevel());
+        texto_lv.setText("LEVEL: " + user.getLevel());
 
         texto_score = (TextView) findViewById(R.id.perfil_score);
-        texto_score.setText(user.getScore());
+        texto_score.setText("SCORE: " + user.getScore());
 
 
-        if(caso == 1){
-            /*
-            add_amigo = (Button) findViewById(R.id.perfil_botao_addamigo);
+        if(caso == 0){
+
+            add_amigo = (Button) findViewById(R.id.perfil_adicionar_amigo);
             add_amigo.setVisibility(View.VISIBLE);
 
             add_amigo.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +86,7 @@ public class Perfil extends AppCompatActivity {
                     requisita_add_amigo();
                 }
             });
-            */
+
         }
         else{
             lista = (ListView) findViewById(R.id.lista_5_ultimas);
