@@ -75,7 +75,7 @@ public class Perfil extends AppCompatActivity {
         texto_score.setText("SCORE: " + user.getScore());
 
 
-        if(caso == 0){
+        if(caso == 1){
 
             add_amigo = (Button) findViewById(R.id.perfil_adicionar_amigo);
             add_amigo.setVisibility(View.VISIBLE);
