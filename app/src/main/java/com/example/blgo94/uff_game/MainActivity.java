@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Database Realtime do firebase
     private DatabaseReference mDatabase;
+    private DatabaseReference data_amigos;
+    private DatabaseReference data_atualizacoes;
 
     //Usuario atual do app
     public String id_usuario = "";

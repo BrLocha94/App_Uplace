@@ -23,6 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+
 public class Login_Cadastro extends AppCompatActivity {
 
     public final String TAG = "LOGIN/CADASTRO ACTIVTY";
@@ -33,6 +35,9 @@ public class Login_Cadastro extends AppCompatActivity {
 
     //Database Realtime do firebase
     private DatabaseReference mDatabase;
+    private DatabaseReference data_atualizacoes;
+    private DatabaseReference data_localizacao;
+    private DatabaseReference data_badge_acess;
 
     //Botoes da activity
     Button login;
@@ -248,9 +253,32 @@ public class Login_Cadastro extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
 
-        Usuario user = new Usuario(array[0], array[0], "nenhum", "0", "0", "default.gif", "default_b.gif", "", "");
+        Usuario user = new Usuario(array[0], array[0], "nenhum", "0", "0", "default.gif", "default_b.gif", "default_b.gif", "default_b.gif");
 
         mDatabase.child(user.getID()).setValue(user);
+
+        data_badge_acess = FirebaseDatabase.getInstance().getReference("badge_acess");
+
+        ArrayList<String> badge_acess = new ArrayList<String>();
+        badge_acess.add("default_b");
+
+        data_badge_acess.child(user.getID()).setValue(badge_acess);
+
+        data_atualizacoes = FirebaseDatabase.getInstance().getReference("atualizacao");
+
+        ArrayList<String> atualizacoes = new ArrayList<String>();
+        atualizacoes.add("Criou a conta no Uplace!!!");
+
+        data_atualizacoes.child(user.getID()).setValue(atualizacoes);
+
+        data_localizacao = FirebaseDatabase.getInstance().getReference("loc");
+
+        ArrayList<String> latlgn = new ArrayList<String>();
+        latlgn.add("0");
+        latlgn.add("0");
+        Localizacao loc = new Localizacao(latlgn, "00:00:00", user.getID());
+
+        data_localizacao.child(user.getID()).setValue(loc);
     }
 
     private void updateUI(FirebaseUser user) {
