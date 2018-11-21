@@ -39,6 +39,8 @@ public class Criar_evento extends AppCompatActivity {
 
         id_criador = (String) getIntent().getStringExtra("ID_USUARIO");
 
+        /*
+
         criador_text = (TextView) findViewById(R.id.cria_evento_criador);
         data_text = (TextView) findViewById(R.id.cria_evento_data);
         nome_evento = (EditText) findViewById(R.id.cria_evento_nome);
@@ -64,6 +66,8 @@ public class Criar_evento extends AppCompatActivity {
             }
         });
 
+
+        */
     }
 
     public String get_data_atual() {

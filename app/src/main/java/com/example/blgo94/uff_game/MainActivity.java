@@ -9,9 +9,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.example.blgo94.uff_game.MyAppGlideModule;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private DatabaseReference data_amigos;
     private DatabaseReference data_atualizacoes;
+    private DatabaseReference data_eventos;
 
     //Usuario atual do app
     public String id_usuario = "";
@@ -65,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
     public Button lista_materias;
     public Button leitor_QR;
     public Button edita_perfil;
+
+    private ListView lista_atualizacoes;
+    private ListView lista_eventos;
+
+    private ArrayList<Amigo> amigos;
+    private Atualizacoes ata;
+    private ArrayList<String> atualizacoes;
+    private ArrayList<Evento> eventos;
+    private ArrayList<String> nome_eventos;
 
     private boolean ok = false;
 
@@ -91,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     set_database();
+                    set_database_amigos();
+                    set_database_eventos();
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -103,6 +119,103 @@ public class MainActivity extends AppCompatActivity {
         };
 
 
+    }
+
+    private void set_database_eventos(){
+        data_eventos = FirebaseDatabase.getInstance().getReference("events");
+
+        data_eventos.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                eventos = new ArrayList<Evento>();
+                preenche_array_eventos(dataSnapshot);
+                set_lista_evento();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void set_lista_evento(){
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, R.layout.estilo_remove,
+                R.id.nome_remove, nome_eventos);
+
+        lista_eventos.setAdapter(adaptador);
+    }
+
+    private void preenche_array_eventos(DataSnapshot dataSnapshot){
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            eventos.add(snapshot.getValue(Evento.class));
+        }
+        nome_eventos = new ArrayList<String>();
+        for(int i = 0; i < eventos.size(); i++){
+            nome_eventos.add(eventos.get(i).getNome());
+        }
+    }
+
+    private void set_database_atualizacoes(){
+        data_atualizacoes = FirebaseDatabase.getInstance().getReference("atualizacao");
+
+        data_atualizacoes.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                preenche_array_atualizacoes(dataSnapshot);
+                set_lista_atualizacoes();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void set_lista_atualizacoes(){
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, R.layout.estilo_remove,
+                R.id.nome_remove, atualizacoes);
+
+        lista_atualizacoes.setAdapter(adaptador);
+    }
+
+    private void preenche_array_atualizacoes(DataSnapshot dataSnapshot){
+        atualizacoes = new ArrayList<String>();
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            for(int i = 0; i < amigos.size(); i++) {
+                if (snapshot.getKey().equals(amigos.get(i).getId())) {
+                    ata = snapshot.getValue(Atualizacoes.class);
+                    atualizacoes.add(amigos.get(i).getNome() + ata.get_last());
+                    break;
+                }
+            }
+        }
+    }
+
+    private void set_database_amigos(){
+
+        data_amigos = FirebaseDatabase.getInstance().getReference("amigos");
+
+        data_amigos.child(user.getID()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                amigos = new ArrayList<Amigo>();
+                preenche_array_amigos(dataSnapshot);
+                set_database_atualizacoes();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void preenche_array_amigos(DataSnapshot dataSnapshot){
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            amigos.add(snapshot.getValue(Amigo.class));
+        }
     }
 
     private void set_database(){
@@ -138,12 +251,11 @@ public class MainActivity extends AppCompatActivity {
     private void set_UI(){
         avatar = (ImageView) findViewById(R.id.main_avatar);
 
-        nome_usuario = (TextView) findViewById(R.id.main_nome);
+        nome_usuario = (TextView) findViewById(R.id.main_nome_usuario);
 
-        //level_usuario = (TextView) findViewById(R.id.main_level);
+        lista_atualizacoes = (ListView) findViewById(R.id.main_lista_atualizacoes);
 
-        //score_usuario = (TextView) findViewById(R.id.main_score);
-
+        lista_eventos = (ListView) findViewById(R.id.main_lista_eventos);
     }
 
     private void carrega_imagens(String ProfilePic, String IdBadge1){

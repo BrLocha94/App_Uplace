@@ -37,7 +37,7 @@
                     tools:srcCompat="@tools:sample/avatars[6]" />
 
                 <TextView
-                    android:id="@+id/main_nome"
+                    android:id="@+id/main_nome_usuario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@id/main_avatar"
@@ -59,6 +59,14 @@
         android:layout_below="@+id/perfil_main"
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="DESAFIO SEMANAL"
+            android:textSize="50dp" />
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -91,20 +99,13 @@
                     android:layout_below="@id/titulo_att">
 
                     <ListView
+                        android:id="@+id/main_lista_atualizacoes"
                         android:layout_width="match_parent"
                         android:layout_height="190dp">
 
                     </ListView>
 
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="50dp"
-                    android:gravity="center"
-                    android:text="DESAFIO SEMANAL" />
 
                 <TextView
                     android:id="@+id/textViewEventos"
@@ -118,6 +119,7 @@
                     android:textStyle="bold"/>
 
                 <ListView
+                    android:id="@+id/main_lista_eventos"
                     android:layout_width="match_parent"
                     android:layout_height="190dp">
 
