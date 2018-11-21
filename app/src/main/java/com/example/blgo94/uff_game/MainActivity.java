@@ -40,9 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Storage do firebase
     private StorageReference mStorageRef_avatar;
-    private StorageReference mStorageRef_badge_1;
-    private StorageReference mStorageRef_badge_2;
-    private StorageReference mStorageRef_badge_3;
 
     //Locais de carregamento das imagens
     ImageView avatar;
@@ -59,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Locais de exibição das info
     private TextView nome_usuario;
-    private TextView curso_usuario;
+    private TextView level_usuario;
+    private TextView score_usuario;
 
     //PROVISÓRIO
     public Button lista_materias;
@@ -130,53 +128,27 @@ public class MainActivity extends AppCompatActivity {
         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
             user = dataSnapshot.getValue(Usuario.class);
             nome_usuario.setText(user.getUser_name());
-            curso_usuario.setText(user.getCourse());
+            level_usuario.setText("Level: " + user.getLevel());
+            score_usuario.setText("Score: " + user.getScore());
         }
     }
 
     private void set_UI(){
-        avatar = (ImageView) findViewById(R.id.avatar);
-        bagde_1 = (ImageView) findViewById(R.id.badge_01);
+        avatar = (ImageView) findViewById(R.id.main_avatar);
 
-        nome_usuario = (TextView) findViewById(R.id.usuario_nome);
-        curso_usuario = (TextView) findViewById(R.id.usuario_curso);
+        nome_usuario = (TextView) findViewById(R.id.main_nome);
 
-        lista_materias = (Button) findViewById(R.id.botao_lista_materias);
+        level_usuario = (TextView) findViewById(R.id.main_level);
 
-        lista_materias.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(ok) {
-                    Intent intent = new Intent(MainActivity.this, Lista_materias.class);
-                    intent.putExtra("ID_USUARIO", user.getID());
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        leitor_QR = (Button) findViewById(R.id.botao_QR);
-        /*
-        leitor_QR.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Leitor_QR.class);
-                startActivity(intent);
-            }
-        });
-        */
+        score_usuario = (TextView) findViewById(R.id.main_score);
 
     }
 
     private void carrega_imagens(String ProfilePic, String IdBadge1){
 
         ProfilePic = "gs://uplace-ff0b3.appspot.com/avatar/" + ProfilePic;
-        IdBadge1 = "gs://uplace-ff0b3.appspot.com/badge/" + IdBadge1;
 
         mStorageRef_avatar = FirebaseStorage.getInstance().getReferenceFromUrl(ProfilePic);
-        mStorageRef_badge_1 = FirebaseStorage.getInstance().getReferenceFromUrl(IdBadge1);
 
         //Avatar
         Glide.with(this /* context */)
@@ -184,12 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 .apply(new RequestOptions().override(128,128))
                 .into(avatar);
 
-
-        //Bagde
-        Glide.with(this)
-                .load(mStorageRef_badge_1)
-                .apply(new RequestOptions().override(64,64))
-                .into(bagde_1);
     }
 
     private void get_current_user(){
@@ -270,6 +236,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else{
+                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else if(item.getItemId() == R.id.menu_perfil) {
+            if (ok) {
+                Intent intent = new Intent(MainActivity.this, Lista_materias.class);
+                intent.putExtra("ID_USUARIO", user.getID());
+                startActivity(intent);
+            } else {
                 Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
             }
         }

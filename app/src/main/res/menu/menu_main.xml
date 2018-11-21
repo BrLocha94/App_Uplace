@@ -18,6 +18,11 @@
         />
 
     <item
+        android:id="@+id/menu_lista_materias"
+        android:title="@string/lista_materias"
+        />
+
+    <item
         android:id="@+id/menu_cria_evento"
         android:title="@string/cria_evento"
         />

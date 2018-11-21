@@ -34,7 +34,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/perfil_level"
+                        android:id="@+id/main_level"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_horizontal"
@@ -53,7 +53,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/perfil_score"
+                        android:id="@+id/main_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -67,14 +67,14 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/perfil_avatar"
+                android:id="@+id/main_avatar"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 tools:srcCompat="@tools:sample/avatars[6]" />
 
             <TextView
-                android:id="@+id/perfil_nome_informado"
+                android:id="@+id/main_nome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -93,7 +93,7 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
-            <LinearLayout
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
@@ -109,15 +109,38 @@
                 android:textAllCaps="true"
                 android:textStyle="bold" />
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/titulo_att">
+                android:orientation="vertical">
 
-                <ListView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/titulo_att">
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp">
+
+                    </ListView>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="50dp"
+                    android:gravity="center"
+                    android:text="DESAFIO SEMANAL" />
+
             </LinearLayout>
+        </ScrollView>
 
 
     </LinearLayout>
