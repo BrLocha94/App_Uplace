@@ -139,7 +139,28 @@
                     android:gravity="center"
                     android:text="DESAFIO SEMANAL" />
 
+                <TextView
+                    android:id="@+id/textViewEventos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text='Eventos'
+                    android:layout_margin="5sp"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"/>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp">
+
+                </ListView>
+
             </LinearLayout>
+
+
+
+
         </ScrollView>
 
 
