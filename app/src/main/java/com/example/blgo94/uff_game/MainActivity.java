@@ -128,8 +128,8 @@ public class MainActivity extends AppCompatActivity {
         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
             user = dataSnapshot.getValue(Usuario.class);
             nome_usuario.setText(user.getUser_name());
-            level_usuario.setText("Level: " + user.getLevel());
-            score_usuario.setText("Score: " + user.getScore());
+            //level_usuario.setText("Level: " + user.getLevel());
+            //score_usuario.setText("Score: " + user.getScore());
         }
     }
 
@@ -138,9 +138,9 @@ public class MainActivity extends AppCompatActivity {
 
         nome_usuario = (TextView) findViewById(R.id.main_nome);
 
-        level_usuario = (TextView) findViewById(R.id.main_level);
+        //level_usuario = (TextView) findViewById(R.id.main_level);
 
-        score_usuario = (TextView) findViewById(R.id.main_score);
+        //score_usuario = (TextView) findViewById(R.id.main_score);
 
     }
 

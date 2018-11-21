@@ -10,14 +10,17 @@
         android:id="@+id/perfil_main"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:orientation="vertical"
-        android:background="@drawable/login_fundo">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/login_fundo"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@drawable/login_fundo"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -26,51 +29,13 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/main_level"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:textColor="#fff"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        tools:text="Level:99" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/main_score"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:layout_marginLeft="@dimen/cardview_compat_inset_shadow"
-                        android:textColor="#fff"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        tools:text="Score:990" />
-                </LinearLayout>
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/main_avatar"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center_vertical"
                 tools:srcCompat="@tools:sample/avatars[6]" />
 
             <TextView
