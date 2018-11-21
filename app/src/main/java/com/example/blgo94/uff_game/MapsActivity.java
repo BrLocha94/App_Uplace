@@ -32,7 +32,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private ArrayList<Lugar> lugares = new ArrayList<Lugar>();
 
-    private ArrayList<String> amigos = new ArrayList<String>();
+    private ArrayList<Amigo> amigos = new ArrayList<Amigo>();
 
     private ArrayList<Localizacao> loc_amigos = new ArrayList<Localizacao>();
 
@@ -121,7 +121,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void preenche_array_loc(DataSnapshot dataSnapshot){
         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
             for(int i = 0; i < amigos.size(); i++) {
-                if (snapshot.getKey().equals(amigos.get(i))) {
+                if (snapshot.getKey().equals(amigos.get(i).getId())) {
                     loc_amigos.add(snapshot.getValue(Localizacao.class));
                     break;
                 }
@@ -131,7 +131,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void preenche_array_amigos(DataSnapshot dataSnapshot){
         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-            amigos.add(snapshot.getValue(String.class));
+            amigos.add(snapshot.getValue(Amigo.class));
         }
     }
 
@@ -169,7 +169,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             for (int i = 0; i < loc_amigos.size(); i++) {
                 double lat = Double.parseDouble(loc_amigos.get(i).getLocalizacoes().get(0));
                 double lng = Double.parseDouble(loc_amigos.get(i).getLocalizacoes().get(1));
-                String nome = loc_amigos.get(i).getId();
+                String nome = amigos.get(i).getNome();
                 String hora = loc_amigos.get(i).getHora();
 
                 mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title(nome + " hora: " + hora));
