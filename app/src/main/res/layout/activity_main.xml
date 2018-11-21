@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="DESAFIO SEMANAL"
-            android:textSize="50dp" />
+            android:textSize="50sp" />
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -95,8 +95,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/titulo_att">
+                    android:layout_height="match_parent">
 
                     <ListView
                         android:id="@+id/main_lista_atualizacoes"
