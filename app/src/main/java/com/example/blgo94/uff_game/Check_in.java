@@ -59,7 +59,7 @@ public class Check_in extends AppCompatActivity implements LocationListener {
 
     private ArrayList<String> ids_proximos = new ArrayList<String>();
 
-    private double raio = 0.01;
+    private double raio = 0.03;
 
     private ListView lista_lugares;
 
@@ -110,6 +110,7 @@ public class Check_in extends AppCompatActivity implements LocationListener {
             data_lugares.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    lugares = new ArrayList<Lugar>();
                     preenche_array(dataSnapshot);
                     // get location
                     getLocation();
@@ -319,7 +320,9 @@ public class Check_in extends AppCompatActivity implements LocationListener {
 
     private void checa_proximidades(ArrayList<String> loc_usuario){
         if(lugares.size() != 0) {
+            ids_proximos = new ArrayList<String>();
             for (int i = 0; i < lugares.size(); i++) {
+
                 if (distance(Double.parseDouble(loc_usuario.get(0)), Double.parseDouble(loc_usuario.get(1)),
                         Double.parseDouble(lugares.get(i).getLoc().get(0)), Double.parseDouble(lugares.get(i).getLoc().get(1)))
                         <= raio) {

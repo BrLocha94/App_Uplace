@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,10 +32,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private ArrayList<Lugar> lugares = new ArrayList<Lugar>();
 
-    DatabaseReference data;
-    DatabaseReference data_user;
+    private ArrayList<String> amigos = new ArrayList<String>();
+
+    private ArrayList<Localizacao> loc_amigos = new ArrayList<Localizacao>();
+
+    private DatabaseReference data;
+    private DatabaseReference data_amigos;
+    private DatabaseReference data_loc_amigos;
+    private DatabaseReference data_user;
+    private DatabaseReference data_eventos;
 
     private String user_name;
+
+    int contador = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +65,27 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 preenche_array(dataSnapshot);
+                lista_de_amigos();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void lista_de_amigos(){
+
+        data_amigos = FirebaseDatabase.getInstance().getReference("amigos");
+
+        data_amigos.child(user_name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                preenche_array_amigos(dataSnapshot);
+                if(amigos.size() > 0){
+                    localiza_amigos();
+                }
                 mapa_update();
             }
 
@@ -63,6 +94,45 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
+
+    }
+
+    private void localiza_amigos(){
+        data_loc_amigos = FirebaseDatabase.getInstance().getReference("loc");
+
+        data_loc_amigos.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                preenche_array_loc(dataSnapshot);
+                if(contador == 1){
+                    mMap.clear();
+                    mapa_amigos_update();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void preenche_array_loc(DataSnapshot dataSnapshot){
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            for(int i = 0; i < amigos.size(); i++) {
+                if (snapshot.getKey().equals(amigos.get(i))) {
+                    loc_amigos.add(snapshot.getValue(Localizacao.class));
+                    break;
+                }
+            }
+        }
+    }
+
+    private void preenche_array_amigos(DataSnapshot dataSnapshot){
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            amigos.add(snapshot.getValue(String.class));
+        }
     }
 
     private void preenche_array(DataSnapshot dataSnapshot){
@@ -88,9 +158,23 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         LatLng netos = new LatLng(-22.904680, -43.130028);
-        mMap.addMarker(new MarkerOptions().position(netos).title("Neto's PUB"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(netos, 20));
+        //mMap.addMarker(new MarkerOptions().position(netos).title("Neto's PUB"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(netos, 16));
 
+    }
+
+    public void mapa_amigos_update(){
+        if(amigos.size() > 0) {
+            Log.d("ta aqui esse mapa mald", loc_amigos.get(0).getId());
+            for (int i = 0; i < loc_amigos.size(); i++) {
+                double lat = Double.parseDouble(loc_amigos.get(i).getLocalizacoes().get(0));
+                double lng = Double.parseDouble(loc_amigos.get(i).getLocalizacoes().get(1));
+                String nome = loc_amigos.get(i).getId();
+                String hora = loc_amigos.get(i).getHora();
+
+                mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title(nome + " hora: " + hora));
+            }
+        }
     }
 
     public void mapa_update(){
@@ -115,7 +199,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onRestart() {
         super.onRestart();
         mMap.clear();
-        mapa_update();
+        if(contador == 0){
+            mapa_update();
+        }
+        else{
+            mapa_amigos_update();
+        }
 
         data_user = FirebaseDatabase.getInstance().getReference("loc");
         data_user.child(user_name).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -145,10 +234,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (item.getItemId()) {
             case R.id.normal_map:
                 //CARREGA LUGARES
-
+                contador = 0;
+                mMap.clear();
+                mapa_update();
                 return true;
             case R.id.amigos_map:
                 //CARREGA AMGOS
+                if(amigos.size() > 0) {
+                    contador = 1;
+                    mMap.clear();
+                    mapa_amigos_update();
+                }
+                else{
+                    Toast.makeText(this, "Voce não possui amigos adicionados...", Toast.LENGTH_SHORT).show();
+                }
                 return true;
 
             case R.id.check_in_map:
