@@ -28,7 +28,8 @@
         android:ems="10"
         android:hint="nome@id.uff.br"
         android:inputType="textEmailAddress"
-        android:paddingLeft="90dp"
+        android:paddingLeft="90sp"
+        android:paddingRight="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +45,8 @@
         android:ems="10"
         android:hint="Senha"
         android:inputType="textPassword"
-        android:paddingLeft="90dp"
+        android:paddingLeft="90sp"
+        android:paddingRight="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,18 +77,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_image" />
-
     <Button
         android:id="@+id/cadastre_se"
         android:layout_width="111dp"
         android:layout_height="45dp"
-        android:layout_marginStart="136dp"
-        android:layout_marginLeft="136dp"
         android:background="@drawable/vazio"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@id/login"
         android:text="Registre-se"
         android:textColor="#fff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login" />
-
 
 </android.support.constraint.ConstraintLayout>

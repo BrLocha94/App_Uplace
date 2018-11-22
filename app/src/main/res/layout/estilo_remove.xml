@@ -5,12 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/nome_remove"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="NOME"
-        android:textSize="25dp"
+        android:text="ENGENHARIA UFF"
+        android:layout_margin="20sp"
+        android:textSize="30sp"
         android:gravity="center"
         />
+    </android.support.v7.widget.CardView>
 </LinearLayout>
+

@@ -16,17 +16,19 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="40dp">
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:paddingLeft="40dp"
                     android:layout_marginBottom="5sp">
 
                     <ImageView
@@ -51,6 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:paddingLeft="40dp"
                     android:layout_marginBottom="5sp">
 
                     <ImageView
@@ -76,6 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:paddingLeft="40dp"
                     android:layout_marginBottom="5sp">
 
                     <ImageView
@@ -101,6 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:paddingLeft="40dp"
                     android:layout_marginBottom="5sp">
 
                     <ImageView
@@ -126,6 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:paddingLeft="40dp"
                     android:layout_marginBottom="5sp">
 
                     <ImageView
@@ -145,6 +151,31 @@
                         android:text="Número de Faltas: " />
 
                 </LinearLayout>
+
+                <android.support.v7.widget.GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <GridView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </android.support.v7.widget.GridLayout>
+
+                <Button
+                    android:id="@+id/b_materia_nova_prova"
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:text="ADICIONAR NOVA PROVA"
+                    android:background="@drawable/botao"/>
+
+                <Button
+                    android:id="@+id/b_materia_nova_falta"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="ADICIONAR NOVA FALTA"
+                    android:background="@drawable/botao"/>
+
 
             </LinearLayout>
 
