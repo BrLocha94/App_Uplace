@@ -4,30 +4,30 @@ import java.util.ArrayList;
 
 public class Atualizacoes {
 
-    private ArrayList<String> atualizacao;
+    private ArrayList<String> atualiz;
 
     //DataSnapshot
     public Atualizacoes(){
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
-    public Atualizacoes(ArrayList<String> atualizacao){
-        this.atualizacao = atualizacao;
+    public Atualizacoes(ArrayList<String> atualiz){
+        this.atualiz = atualiz;
     }
 
-    public void setAtualizacao(ArrayList<String> atualizacao) {
-        this.atualizacao = atualizacao;
+    public void setAtualiz(ArrayList<String> atualiz) {
+        this.atualiz = atualiz;
     }
 
-    public ArrayList<String> getAtualizacao() {
-        return atualizacao;
+    public ArrayList<String> getAtualiz() {
+        return atualiz;
     }
 
     public String get_last(){
-        return atualizacao.get(0);
+        return this.atualiz.get(0);
     }
 
     public void add_info(String info){
-        atualizacao.add(0, info);
+        this.atualiz.add(0, info);
     }
 }

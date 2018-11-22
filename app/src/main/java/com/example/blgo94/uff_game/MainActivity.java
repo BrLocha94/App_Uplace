@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView lista_eventos;
 
     private ArrayList<Amigo> amigos;
-    private Atualizacoes ata;
+    private Atualizacoes ata = new Atualizacoes();
     private ArrayList<String> atualizacoes;
     private ArrayList<Evento> eventos;
     private ArrayList<String> nome_eventos;
@@ -105,8 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     set_database();
-                    set_database_amigos();
-                    set_database_eventos();
+
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -162,7 +161,9 @@ public class MainActivity extends AppCompatActivity {
         data_atualizacoes.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                atualizacoes = new ArrayList<String>();
                 preenche_array_atualizacoes(dataSnapshot);
+                Log.d("a t u a l i z a c a o", "AQUI NO VALUE");
                 set_lista_atualizacoes();
             }
 
@@ -174,19 +175,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void set_lista_atualizacoes(){
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, R.layout.estilo_remove,
-                R.id.nome_remove, atualizacoes);
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, R.layout.estilo_atualizacoes,
+                R.id.text_atualizacoes, atualizacoes);
+
+        Log.d("a t u a l i z a c a o", "AQUI NA LISTA");
 
         lista_atualizacoes.setAdapter(adaptador);
     }
 
     private void preenche_array_atualizacoes(DataSnapshot dataSnapshot){
-        atualizacoes = new ArrayList<String>();
+        ata = new Atualizacoes();
         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
             for(int i = 0; i < amigos.size(); i++) {
                 if (snapshot.getKey().equals(amigos.get(i).getId())) {
                     ata = snapshot.getValue(Atualizacoes.class);
-                    atualizacoes.add(amigos.get(i).getNome() + ata.get_last());
+                    Log.d("a t u a l i z a c a o", amigos.get(i).getId());
+                    Log.d("a t u a l i z a c a o", ata.getAtualiz().get(0));
+                    Log.d("a t u a l i z a c a o", ata.get_last());
+                    atualizacoes.add(amigos.get(i).getNome() + " " + ata.get_last());
+                    Log.d("a t u a l i z a c a o", atualizacoes.get(i));
                     break;
                 }
             }
@@ -230,6 +237,8 @@ public class MainActivity extends AppCompatActivity {
                 set_info_usuario(dataSnapshot);
                 carrega_imagens(user.getProfilePic(), user.getIdBadge1());
                 ok = true;
+                set_database_amigos();
+                set_database_eventos();
             }
 
             @Override

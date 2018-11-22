@@ -40,13 +40,14 @@
                     android:id="@+id/main_nome_usuario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@id/main_avatar"
                     android:layout_weight="1"
                     android:layout_gravity="center"
                     android:textColor="#fff"
                     android:textSize="21sp"
                     android:textStyle="bold"
                     tools:text="@tools:sample/full_names[100]" />
+                <!--    android:layout_marginLeft="@id/main_avatar"  -->
+
             </LinearLayout>
             </LinearLayout>
 
@@ -60,18 +61,19 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="DESAFIO SEMANAL"
-            android:textSize="50sp" />
-
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="DESAFIO SEMANAL"
+                android:textSize="50sp" />
+        </LinearLayout>
 
             <TextView
                 android:id="@+id/titulo_att"
@@ -93,18 +95,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <ListView
+                    android:id="@+id/main_lista_atualizacoes"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="190dp">
 
-                    <ListView
-                        android:id="@+id/main_lista_atualizacoes"
-                        android:layout_width="match_parent"
-                        android:layout_height="190dp">
-
-                    </ListView>
-
-                </LinearLayout>
+                </ListView>
 
                 <TextView
                     android:id="@+id/textViewEventos"

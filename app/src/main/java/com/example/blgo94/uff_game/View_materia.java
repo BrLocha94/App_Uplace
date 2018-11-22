@@ -63,6 +63,7 @@ public class View_materia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_materia);
 
+        /*
         materia = (Materia) getIntent().getParcelableExtra("materia");
         id = (String) getIntent().getStringExtra("ID_USUARIO");
 
@@ -77,7 +78,7 @@ public class View_materia extends AppCompatActivity {
         prova_nota = (EditText) findViewById(R.id.falta_perdida);
 
         set_view_materias();
-
+        */
     }
 
     public void set_view_materias(){
@@ -87,6 +88,7 @@ public class View_materia extends AppCompatActivity {
         faltas_permitidas.setText(Integer.toString(materia.faltas_permitidas()));
         faltas_obtidas.setText(Integer.toString(materia.total_faltas()));
 
+        /*
         add_falta = (Button) findViewById(R.id.botao_add_falta);
 
         add_falta.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +106,7 @@ public class View_materia extends AppCompatActivity {
                 troca_UI();
             }
         });
+        */
     }
 
     public void adiciona_falta(){
