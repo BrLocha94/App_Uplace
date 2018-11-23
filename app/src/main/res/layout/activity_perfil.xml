@@ -5,38 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Perfil"
-    tools:layout_editor_absoluteY="25dp">
+    tools:layout_editor_absoluteY="81dp">
 
     <Button
         android:id="@+id/perfil_adicionar_amigo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:backgroundTint="#3f51b5"
         android:text="Adicionar aos amigos"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85" />
+        tools:layout_editor_absoluteX="181dp"
+        tools:layout_editor_absoluteY="434dp" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="360dp"
+        android:layout_height="252dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,8 +69,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="@dimen/cardview_compat_inset_shadow"
+                    android:layout_marginRight="20dp"
                     android:textColor="#fff"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -104,8 +89,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/cardview_compat_inset_shadow"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="@dimen/cardview_compat_inset_shadow"
                     android:textColor="#fff"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -122,19 +107,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteY="182dp">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="top"
-            android:gravity="center"
             android:layout_margin="10dp"
             android:baselineAligned="false"
+            android:gravity="center"
             android:orientation="horizontal"
 
             android:weightSum="3">
@@ -188,19 +170,21 @@
             </LinearLayout>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-
             android:orientation="vertical">
+
             <Button
                 android:id="@+id/perfil_ver_mais"
                 android:layout_width="100sp"
                 android:layout_height="wrap_content"
-                android:text="Ver Mais"
+                android:layout_gravity="center"
                 android:backgroundTint="#3f51b5"
-                android:layout_gravity="center"/>
+                android:baselineAligned="false"
+                android:text="Ver Mais" />
 
         </LinearLayout>
 
@@ -208,18 +192,11 @@
 
     <LinearLayout
         android:id="@+id/frameLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        tools:ignore="MissingConstraints">
+        android:layout_width="344dp"
+        android:layout_height="251dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="252dp">
 
         <ListView
             android:id="@+id/lista_5_ultimas"
