@@ -51,6 +51,7 @@ public class Perfil extends AppCompatActivity {
 
     //botao teste
     private Button add_amigo;
+    private Button ver_mais;
 
     private ListView lista;
 
@@ -69,6 +70,11 @@ public class Perfil extends AppCompatActivity {
         user = (Usuario) getIntent().getParcelableExtra("objeto");
 
         caso = Integer.parseInt((String) getIntent().getStringExtra("caso"));
+
+        Log.d("mimimimimimimimimimim", "onCreate: id_view "+ id_view);
+
+        Log.d("mimimimimimimimimimim", "onCreate: user_id "+ user.getID());
+
 
         avatar_perfil = (ImageView) findViewById(R.id.perfil_avatar);
 
@@ -89,8 +95,11 @@ public class Perfil extends AppCompatActivity {
         texto_score = (TextView) findViewById(R.id.perfil_score);
         texto_score.setText("SCORE: " + user.getScore());
 
+        ver_mais = (Button) findViewById(R.id.perfil_ver_mais);
 
         if(caso == 1){
+
+            ver_mais.setVisibility(View.GONE);
 
             add_amigo = (Button) findViewById(R.id.perfil_adicionar_amigo);
             add_amigo.setVisibility(View.VISIBLE);
@@ -104,6 +113,14 @@ public class Perfil extends AppCompatActivity {
 
         }
         else{
+
+            if(user.getID().equals(id_view)){
+                ver_mais.setVisibility(View.VISIBLE);
+            }
+            else {
+                ver_mais.setVisibility(View.GONE);
+            }
+
             lista = (ListView) findViewById(R.id.lista_5_ultimas);
             lista.setVisibility(View.VISIBLE);
 

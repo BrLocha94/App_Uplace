@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class Lista_usuarios_proximos extends AppCompatActivity {
 
-    private String id;
+    private String id_user;
 
     private Localizacao loc_usuario = new Localizacao();
     private Localizacao loc_proximo = new Localizacao();
@@ -40,11 +40,11 @@ public class Lista_usuarios_proximos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_usuarios_proximos);
 
-        id = (String) getIntent().getStringExtra("ID_USUARIO");
+        id_user = (String) getIntent().getStringExtra("ID_USUARIO");
 
         data = FirebaseDatabase.getInstance().getReference("loc");
 
-        data.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+        data.child(id_user).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 loc_usuario = dataSnapshot.getValue(Localizacao.class);
@@ -108,7 +108,7 @@ public class Lista_usuarios_proximos extends AppCompatActivity {
                 Intent intent = new Intent(Lista_usuarios_proximos.this, Perfil.class);
                 intent.putExtra("objeto", user_ref);
                 intent.putExtra("caso", "1");
-                intent.putExtra("ID_USUARIO", id);
+                intent.putExtra("ID_USUARIO", id_user);
                 startActivity(intent);
             }
         });
