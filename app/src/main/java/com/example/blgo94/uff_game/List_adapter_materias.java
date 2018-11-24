@@ -60,7 +60,7 @@ public class List_adapter_materias extends ArrayAdapter<Materia> {
 
         textViewMateria.setText(materia.getNome());
         textViewhorario.setText(materia.get_horario_local(dia));
-        textViewfaltas.setText(materia.total_faltas());
+        textViewfaltas.setText(Integer.toString(materia.total_faltas()));
 
         //finally returning the view
         return view;

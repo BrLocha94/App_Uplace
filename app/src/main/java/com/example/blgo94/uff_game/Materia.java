@@ -177,6 +177,22 @@ public class Materia implements Parcelable {
         return this.faltas.size();
     }
 
+    public String get_format_local_hora(){
+        String retorna = local;
+
+        for(int i = 0; i < dias.size(); i++){
+            retorna = retorna + " " + dias.get(i) + ":" + horarios.get(i);
+        }
+
+        return retorna;
+    }
+
+    public String get_format_carga(){
+        String retorna = "Carga: " + Integer.toString(this.carga_horaria);
+
+        return retorna;
+    }
+
     public String get_horario_local(String dia){
         for(int i = 0; i < dias.size(); i++){
             if(dias.get(i).equals(dia)){

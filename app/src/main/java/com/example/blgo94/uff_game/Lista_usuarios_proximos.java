@@ -28,7 +28,7 @@ public class Lista_usuarios_proximos extends AppCompatActivity {
 
     private ArrayList<Usuario> users = new ArrayList<Usuario>();
 
-    private double raio = 3;
+    private double raio = 1;
 
     DatabaseReference data;
     DatabaseReference data_users;

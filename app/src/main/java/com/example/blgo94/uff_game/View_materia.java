@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class View_materia extends AppCompatActivity {
     //protected TextView nome_materia;
     protected TextView nome_professor;
     protected TextView data_hora_local;
+    protected TextView carga_horaria;
     protected TextView faltas_permitidas;
     protected TextView faltas_obtidas;
 
@@ -49,6 +51,8 @@ public class View_materia extends AppCompatActivity {
 
     public int layout = 0;
 
+    private ListView lista;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,19 +62,28 @@ public class View_materia extends AppCompatActivity {
         materia = (Materia) getIntent().getParcelableExtra("materia");
         id = (String) getIntent().getStringExtra("ID_USUARIO");
 
+        setTitle(materia.getNome());
+
         nome_professor = (TextView) findViewById(R.id.tv_materia_professor);
         data_hora_local = (TextView) findViewById(R.id.tv_materia_horario);
+        carga_horaria = (TextView) findViewById(R.id.tv_materia_ch);
         faltas_permitidas = (TextView) findViewById(R.id.tv_materia_numero_faltas);
         faltas_obtidas = (TextView) findViewById(R.id.tv_materia_numero_faltasf);
 
+        lista = (ListView) findViewById(R.id.lista_post);
+
         set_view_materias();
+
+        List_adapter_faltas adaptador = new List_adapter_faltas(this, R.layout.estilo_post_it, materia.getFaltas());
+
+        lista.setAdapter(adaptador);
 
     }
 
     public void set_view_materias(){
-        //nome_materia.setText(materia.getNome());
         nome_professor.setText(materia.getProfessor());
-        data_hora_local.setText(materia.toString());
+        data_hora_local.setText(materia.get_format_local_hora());
+        carga_horaria.setText(materia.get_format_carga());
         faltas_permitidas.setText(Integer.toString(materia.faltas_permitidas()));
         faltas_obtidas.setText(Integer.toString(materia.total_faltas()));
 
@@ -129,18 +142,7 @@ public class View_materia extends AppCompatActivity {
 
                 atualiza_database_provas(prova);
 
-                /*
-                if(materia.getQuant_provas() == 0){
-                    provas = new ArrayList<Prova>();
-                    provas.add(prova);
-                    data.setValue(provas);
-                    Toast.makeText(View_materia.this, "PROVA ADICIONADA", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-                else{
-                    atualiza_database_provas(prova);
-                }
-                */
+
             }
         });
 

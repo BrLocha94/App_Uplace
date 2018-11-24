@@ -72,8 +72,7 @@ public class Adicionar_materia extends AppCompatActivity {
                 ok = checa_problemas();
 
                 if(ok){
-                    materia = new Materia(nome.getText().toString(), professor.getText().toString(),
-                            local.getText().toString(), Integer.parseInt(carga_horaria.getText().toString()));
+
                     altera_database();
                     finish();
                 }
@@ -113,6 +112,8 @@ public class Adicionar_materia extends AppCompatActivity {
         String nome_string = nome.getText().toString();
         String professor_string = professor.getText().toString();
         String carga_string = carga_horaria.getText().toString();
+
+        /*
 
         //checa nome da matéria
         //primeiro check: se não foi informado o nome
@@ -173,57 +174,62 @@ public class Adicionar_materia extends AppCompatActivity {
             prossegue = false;
         }
 
+        */
+
         boolean informou = false;
 
+        if(prossegue){
+            materia = new Materia(nome.getText().toString(), professor.getText().toString(),
+                    local.getText().toString(), Integer.parseInt(carga_horaria.getText().toString()));
+            if(segunda.isChecked()){
+                informou = true;
 
-        if(segunda.isChecked()){
-            informou = true;
+                materia.add_dia("SEG");
+                materia.add_horario(horario_segunda_i.getText().toString() + " ~ " + horario_segunda_f.getText().toString());
+            }
+            if(terca.isChecked()){
+                informou = true;
 
-            materia.add_dia("SEG");
-            materia.add_horario(horario_segunda_i.getText().toString() + " ~ " + horario_segunda_f.getText().toString());
+                materia.add_dia("TER");
+                materia.add_horario(horario_terca_i.getText().toString() + " ~ " + horario_terca_f.getText().toString());
+
+            }
+            if(quarta.isChecked()){
+                informou = true;
+
+                materia.add_dia("QUA");
+                materia.add_horario(horario_quarta_i.getText().toString() + " ~ " + horario_quarta_f.getText().toString());
+
+            }
+            if(quinta.isChecked()){
+                informou = true;
+
+                materia.add_dia("QUI");
+                materia.add_horario(horario_quinta_i.getText().toString() + " ~ " + horario_quinta_f.getText().toString());
+
+            }
+            if(sexta.isChecked()){
+                informou = true;
+
+                materia.add_dia("SEX");
+                materia.add_horario(horario_sexta_i.getText().toString() + " ~ " + horario_sexta_f.getText().toString());
+
+            }
+            if(sabado.isChecked()){
+                informou = true;
+
+                materia.add_dia("SAB");
+                materia.add_horario(horario_sabado_i.getText().toString() + " ~ " + horario_sabado_f.getText().toString());
+            }
+
+
+            if(!informou) {
+
+                Toast.makeText(getApplicationContext(), "INFORME PELO MENOS UM DIA", Toast.LENGTH_LONG).show();
+                prossegue = false;
+            }
+
         }
-        if(terca.isChecked()){
-            informou = true;
-
-            materia.add_dia("TER");
-            materia.add_horario(horario_terca_i.getText().toString() + " ~ " + horario_terca_f.getText().toString());
-
-        }
-        if(quarta.isChecked()){
-            informou = true;
-
-            materia.add_dia("QUA");
-            materia.add_horario(horario_quarta_i.getText().toString() + " ~ " + horario_quarta_f.getText().toString());
-
-        }
-        if(quinta.isChecked()){
-            informou = true;
-
-            materia.add_dia("QUI");
-            materia.add_horario(horario_quinta_i.getText().toString() + " ~ " + horario_quinta_f.getText().toString());
-
-        }
-        if(sexta.isChecked()){
-            informou = true;
-
-            materia.add_dia("SEX");
-            materia.add_horario(horario_sexta_i.getText().toString() + " ~ " + horario_sexta_f.getText().toString());
-
-        }
-        if(sabado.isChecked()){
-            informou = true;
-
-            materia.add_dia("SAB");
-            materia.add_horario(horario_sabado_i.getText().toString() + " ~ " + horario_sabado_f.getText().toString());
-        }
-
-
-        if(!informou) {
-
-            Toast.makeText(getApplicationContext(), "INFORME PELO MENOS UM DIA", Toast.LENGTH_LONG).show();
-            prossegue = false;
-        }
-
 
         if(prossegue){
 
@@ -232,7 +238,7 @@ public class Adicionar_materia extends AppCompatActivity {
         else{
             //Chama a atenção para o campo incorreto
             foco.requestFocus();
-            materia.reset_arrays();
+            //materia.reset_arrays();
             return false;
         }
     }

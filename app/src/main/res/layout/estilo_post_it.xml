@@ -22,15 +22,11 @@
 
 
             <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-            kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-            kkkkkk
-            kkkkkkkkkk
-            kkk
-            k
-            k"/>
+                android:id="@+id/post_it_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:text="POST IT 1"/>
 
 
                 <LinearLayout
@@ -54,15 +50,11 @@
 
 
         <TextView
+            android:id="@+id/post_it_2"
+            android:textSize="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-            kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-            kkkkkk
-            kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-            kkk
-            k
-            k"/>
+            android:text="POST IT 2"/>
 
     </LinearLayout>
 

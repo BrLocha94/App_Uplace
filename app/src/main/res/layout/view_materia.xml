@@ -152,16 +152,26 @@
 
                 </LinearLayout>
 
+                <ListView
+                    android:id="@+id/lista_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </ListView>
+
+
+                <!--
                 <android.support.v7.widget.GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
 
                     <GridView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                 </android.support.v7.widget.GridLayout>
-
+                -->
                 <Button
                     android:id="@+id/b_materia_nova_prova"
                     android:layout_width="match_parent"
