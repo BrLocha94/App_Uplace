@@ -21,15 +21,6 @@ import java.util.Calendar;
 
 public class View_materia extends AppCompatActivity {
 
-    /*
-       ESTA ACTIVITY DEVE ADICIONAR FALTAS COM OS MOTIVOS ESPECIFICADOS PELO USUARIO
-       CRIE UM OBJETO FALTAS
-       DENTRO DELE DEVEM TER TODAS AS ESPECIFICAÇÕES NECESSÁRIAS
-       ID DO USUARIO AINDA ASSIM É NECESSÁRIO
-       UMA FALTA DEVE TER SEUS CAMPOS PREENCHIDOS ANTES DE SER DEVIDAMENTE MANIPULADA
-     */
-
-
     //Botao
     public Button add_falta;
     public Button add_prova_mesmo;
@@ -45,7 +36,7 @@ public class View_materia extends AppCompatActivity {
     ArrayList<Prova> provas;
 
     //Parametros de exibição da matéria
-    protected TextView nome_materia;
+    //protected TextView nome_materia;
     protected TextView nome_professor;
     protected TextView data_hora_local;
     protected TextView faltas_permitidas;
@@ -63,33 +54,28 @@ public class View_materia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_materia);
 
-        /*
+
         materia = (Materia) getIntent().getParcelableExtra("materia");
         id = (String) getIntent().getStringExtra("ID_USUARIO");
 
-        nome_materia = (TextView) findViewById(R.id.view_nome);
-        nome_professor = (TextView) findViewById(R.id.view_professor);
-        data_hora_local = (TextView) findViewById(R.id.view_dia_hora_loca);
-        faltas_permitidas = (TextView) findViewById(R.id.view_faltas_permitidas);
-        faltas_obtidas = (TextView) findViewById(R.id.view_faltas_obtidas);
-
-        prova_data = (EditText) findViewById(R.id.falta_data);
-        prova_materia = (EditText) findViewById(R.id.falta_motivo);
-        prova_nota = (EditText) findViewById(R.id.falta_perdida);
+        nome_professor = (TextView) findViewById(R.id.tv_materia_professor);
+        data_hora_local = (TextView) findViewById(R.id.tv_materia_horario);
+        faltas_permitidas = (TextView) findViewById(R.id.tv_materia_numero_faltas);
+        faltas_obtidas = (TextView) findViewById(R.id.tv_materia_numero_faltasf);
 
         set_view_materias();
-        */
+
     }
 
     public void set_view_materias(){
-        nome_materia.setText(materia.getNome());
+        //nome_materia.setText(materia.getNome());
         nome_professor.setText(materia.getProfessor());
         data_hora_local.setText(materia.toString());
         faltas_permitidas.setText(Integer.toString(materia.faltas_permitidas()));
         faltas_obtidas.setText(Integer.toString(materia.total_faltas()));
 
-        /*
-        add_falta = (Button) findViewById(R.id.botao_add_falta);
+
+        add_falta = (Button) findViewById(R.id.b_materia_nova_falta);
 
         add_falta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +84,7 @@ public class View_materia extends AppCompatActivity {
             }
         });
 
-        add_prova = (Button) findViewById(R.id.botao_add_prova);
+        add_prova = (Button) findViewById(R.id.b_materia_nova_prova);
 
         add_prova.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +92,7 @@ public class View_materia extends AppCompatActivity {
                 troca_UI();
             }
         });
-        */
+
     }
 
     public void adiciona_falta(){
@@ -124,15 +110,15 @@ public class View_materia extends AppCompatActivity {
 
     public void set_editar_prova(){
 
-        prova_data = (EditText) findViewById(R.id.falta_data);
-        prova_materia = (EditText) findViewById(R.id.falta_motivo);
-        prova_nota = (EditText) findViewById(R.id.falta_perdida);
+        prova_data = (EditText) findViewById(R.id.et_edita_falta_data);
+        prova_materia = (EditText) findViewById(R.id.ed_edita_falta_nome);
+        prova_nota = (EditText) findViewById(R.id.ed_edita_falta_nota);
 
         prova_data.setText(get_data_atual());
         prova_materia.setText("CAGUEI");
         prova_nota.setText("0.0");
 
-        add_prova_mesmo = (Button) findViewById(R.id.botao_add_falta_mesmo);
+        add_prova_mesmo = (Button) findViewById(R.id.botao_add_prova_mesmo);
 
         add_prova_mesmo.setOnClickListener(new View.OnClickListener() {
             @Override

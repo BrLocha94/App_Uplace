@@ -51,12 +51,12 @@ public class Lista_materias extends AppCompatActivity {
     private ArrayList<Materia> array_materias;
 
     //Organiza as materias do inscrito nos diferentes arrays para serem adaptados
-    private ArrayList<String> array_seg;
-    private ArrayList<String> array_ter;
-    private ArrayList<String> array_qua;
-    private ArrayList<String> array_qui;
-    private ArrayList<String> array_sex;
-    private ArrayList<String> array_sab;
+    private ArrayList<Materia> array_seg;
+    private ArrayList<Materia> array_ter;
+    private ArrayList<Materia> array_qua;
+    private ArrayList<Materia> array_qui;
+    private ArrayList<Materia> array_sex;
+    private ArrayList<Materia> array_sab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,12 +111,12 @@ public class Lista_materias extends AppCompatActivity {
     private void organiza_arrays(){
         String DIAS [] = {"SEG", "TER", "QUA", "QUI", "SEX", "SAB"};
 
-        array_seg = new ArrayList<String>();
-        array_ter = new ArrayList<String>();
-        array_qua = new ArrayList<String>();
-        array_qui = new ArrayList<String>();
-        array_sex = new ArrayList<String>();
-        array_sab = new ArrayList<String>();
+        array_seg = new ArrayList<Materia>();
+        array_ter = new ArrayList<Materia>();
+        array_qua = new ArrayList<Materia>();
+        array_qui = new ArrayList<Materia>();
+        array_sex = new ArrayList<Materia>();
+        array_sab = new ArrayList<Materia>();
 
         for(int j = 0; j < array_materias.size(); j++) {
             ArrayList<String> aux = array_materias.get(j).getDias();
@@ -125,22 +125,22 @@ public class Lista_materias extends AppCompatActivity {
                     if (aux.get(k).equals(DIAS[w])) {
                         switch (w) {
                             case 0:
-                                array_seg.add(array_materias.get(j).getNome());
+                                array_seg.add(array_materias.get(j));
                                 break;
                             case 1:
-                                array_ter.add(array_materias.get(j).getNome());
+                                array_ter.add(array_materias.get(j));
                                 break;
                             case 2:
-                                array_qua.add(array_materias.get(j).getNome());
+                                array_qua.add(array_materias.get(j));
                                 break;
                             case 3:
-                                array_qui.add(array_materias.get(j).getNome());
+                                array_qui.add(array_materias.get(j));
                                 break;
                             case 4:
-                                array_sex.add(array_materias.get(j).getNome());
+                                array_sex.add(array_materias.get(j));
                                 break;
                             case 5:
-                                array_sab.add(array_materias.get(j).getNome());
+                                array_sab.add(array_materias.get(j));
                                 break;
                             default:
                                 break;
@@ -156,76 +156,76 @@ public class Lista_materias extends AppCompatActivity {
         //CARREGAR O ARRAYLISTA GERADO, SEPARADAMENTE POR DIA DAS MATÉRIAS, DE ACORDO COM
         //O ESTILO ESCOLHIDO
 
-        ArrayAdapter<String> adapter_seg = new ArrayAdapter<String>(this, R.layout.estilo_remove,
-                R.id.nome_remove, array_seg);
+        List_adapter_materias adapter_seg = new List_adapter_materias(this,R.layout.estilo_lista_materias,array_seg,"SEG");
         lista_seg.setAdapter(adapter_seg);
+
 
         lista_seg.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String chave = (String) parent.getItemAtPosition(position);
-                Log.d(TAG,"CHAVE PASSADA"+chave);
-                inicia_view_materia(chave);
+                Materia chave = (Materia) parent.getItemAtPosition(position);
+                Log.d(TAG,"CHAVE PASSADA"+chave.getNome());
+                inicia_view_materia(chave.getNome());
             }
         });
 
-        ArrayAdapter<String> adapter_ter = new ArrayAdapter<String>(this, R.layout.estilo_remove,
-                R.id.nome_remove, array_ter);
+        List_adapter_materias adapter_ter = new List_adapter_materias(this,R.layout.estilo_lista_materias,array_ter,"TER");
         lista_ter.setAdapter(adapter_ter);
 
         lista_ter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String chave = (String) parent.getItemAtPosition(position);
-                inicia_view_materia(chave);
+                Materia chave = (Materia) parent.getItemAtPosition(position);
+                Log.d(TAG,"CHAVE PASSADA"+chave.getNome());
+                inicia_view_materia(chave.getNome());
             }
         });
 
-        ArrayAdapter<String> adapter_qua = new ArrayAdapter<String>(this, R.layout.estilo_remove,
-                R.id.nome_remove, array_qua);
+        List_adapter_materias adapter_qua = new List_adapter_materias(this,R.layout.estilo_lista_materias,array_qua,"QUA");
         lista_qua.setAdapter(adapter_qua);
 
         lista_qua.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String chave = (String) parent.getItemAtPosition(position);
-                inicia_view_materia(chave);
+                Materia chave = (Materia) parent.getItemAtPosition(position);
+                Log.d(TAG,"CHAVE PASSADA    "+chave.getNome());
+                inicia_view_materia(chave.getNome());
             }
         });
 
-        ArrayAdapter<String> adapter_qui = new ArrayAdapter<String>(this, R.layout.estilo_remove,
-                R.id.nome_remove, array_qui);
+        List_adapter_materias adapter_qui = new List_adapter_materias(this,R.layout.estilo_lista_materias,array_qui,"QUI");
         lista_qui.setAdapter(adapter_qui);
 
         lista_qui.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String chave = (String) parent.getItemAtPosition(position);
-                inicia_view_materia(chave);
+                Materia chave = (Materia) parent.getItemAtPosition(position);
+                Log.d(TAG,"CHAVE PASSADA    "+chave.getNome());
+                inicia_view_materia(chave.getNome());
             }
         });
 
-        ArrayAdapter<String> adapter_sex = new ArrayAdapter<String>(this, R.layout.estilo_remove,
-                R.id.nome_remove, array_sex);
+        List_adapter_materias adapter_sex = new List_adapter_materias(this,R.layout.estilo_lista_materias,array_sex,"SEX");
         lista_sex.setAdapter(adapter_sex);
 
         lista_sex.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String chave = (String) parent.getItemAtPosition(position);
-                inicia_view_materia(chave);
+                Materia chave = (Materia) parent.getItemAtPosition(position);
+                Log.d(TAG,"CHAVE PASSADA    "+chave.getNome());
+                inicia_view_materia(chave.getNome());
             }
         });
 
-        ArrayAdapter<String> adapter_sab = new ArrayAdapter<String>(this, R.layout.estilo_remove,
-                R.id.nome_remove, array_sab);
+        List_adapter_materias adapter_sab = new List_adapter_materias(this,R.layout.estilo_lista_materias,array_sab,"SAB");
         lista_sab.setAdapter(adapter_sab);
 
         lista_sab.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String chave = (String) parent.getItemAtPosition(position);
-                inicia_view_materia(chave);
+                Materia chave = (Materia) parent.getItemAtPosition(position);
+                Log.d(TAG,"CHAVE PASSADA    "+chave.getNome());
+                inicia_view_materia(chave.getNome());
             }
         });
 

@@ -11,7 +11,7 @@ public class Materia implements Parcelable {
     private String professor;
     private ArrayList<String> dias;
     private ArrayList<String> horarios ;
-    private ArrayList<String> locais;
+    private String local;
     private int carga_horaria;
     //private ArrayList<Falta> faltas;
     private ArrayList<String> faltas;
@@ -22,12 +22,12 @@ public class Materia implements Parcelable {
     }
 
     //Construtor normal
-    public Materia(String nome, String professor, int carga_horaria){
+    public Materia(String nome, String professor, String local, int carga_horaria){
         this.nome = nome;
         this.professor = professor;
         this.dias = new ArrayList<String>();
         this.horarios = new ArrayList<String>();
-        this.locais = new ArrayList<String>();
+        this.local = local;
         this.carga_horaria = carga_horaria;
         //this.faltas = new ArrayList<Falta>();
         this.faltas = new ArrayList<String>();
@@ -39,7 +39,7 @@ public class Materia implements Parcelable {
         professor = in.readString();
         dias = in.readArrayList(null);
         horarios = in.readArrayList(null);
-        locais = in.readArrayList(null);
+        local = in.readString();
         carga_horaria = in.readInt();
         faltas = in.readArrayList(null);
     }
@@ -56,7 +56,7 @@ public class Materia implements Parcelable {
         dest.writeString(professor);
         dest.writeList(dias);
         dest.writeList(horarios);
-        dest.writeList(locais);
+        dest.writeString(local);
         dest.writeInt(carga_horaria);
         dest.writeList(faltas);
     }
@@ -112,16 +112,12 @@ public class Materia implements Parcelable {
         horarios.add(horario);
     }
 
-    public ArrayList<String> getLocais() {
-        return locais;
+    public String getLocal() {
+        return local;
     }
 
-    public void setLocais(ArrayList<String> local) {
-        this.locais = local;
-    }
-
-    public void add_local(String local){
-        locais.add(local);
+    public void setLocal(String local) {
+        this.local = local;
     }
 
     public int getCarga_horaria() {
@@ -172,7 +168,6 @@ public class Materia implements Parcelable {
     public void reset_arrays(){
         dias.clear();
         horarios.clear();
-        locais.clear();
     }
 
     public int total_faltas(){
@@ -182,23 +177,18 @@ public class Materia implements Parcelable {
         return this.faltas.size();
     }
 
-    public void add_falta(String falta){
-        this.faltas.add(falta);
+    public String get_horario_local(String dia){
+        for(int i = 0; i < dias.size(); i++){
+            if(dias.get(i).equals(dia)){
+                String string = local + " " + horarios.get(i);
+                return string;
+            }
+        }
+        return "Não informado";
     }
 
-
-    public String toString(){
-
-        String msg = new String();
-
-        for(int i = 0; i < dias.size(); i++){
-
-            msg = msg + dias.get(i) + " - " + horarios.get(i) + " - " + locais.get(i);
-
-            msg = msg + "\n";
-        }
-
-        return msg;
+    public void add_falta(String falta){
+        this.faltas.add(falta);
     }
 
 

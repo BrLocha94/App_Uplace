@@ -65,12 +65,12 @@ public class Lista_amigos extends AppCompatActivity {
 
     public void set_ids_amigos(DataSnapshot dataSnapshot){
         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-            ids_amigos.add(snapshot.getValue().toString());
+            ids_amigos.add(snapshot.getKey());
         }
     }
 
     public void get_ids_amigos(){
-        mDatabase = FirebaseDatabase.getInstance().getReference("friends_list");
+        mDatabase = FirebaseDatabase.getInstance().getReference("amigos");
 
         mDatabase.child(id).addValueEventListener(new ValueEventListener() {
             @Override

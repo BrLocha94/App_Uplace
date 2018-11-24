@@ -34,10 +34,11 @@ public class Editar_perfil extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
 
+
         perfil_nome = (EditText) findViewById(R.id.perfil_nome_informado);
         perfil_curso = (EditText) findViewById(R.id.perfil_curso_informado);
 
-        edita_perfil = (Button) findViewById(R.id.botao_perfil);
+        edita_perfil = (Button) findViewById(R.id.botao_edita_perfil);
 
         edita_perfil.setOnClickListener(new View.OnClickListener() {
             @Override

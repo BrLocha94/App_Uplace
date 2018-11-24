@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp">
 
-    <?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -91,7 +90,7 @@
             android:layout_marginTop="20dp"
             android:orientation="vertical">
             <Button
-                android:id="@+id/botao_add_falta_mesmo"
+                android:id="@+id/botao_add_prova_mesmo"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
                 android:gravity="center"

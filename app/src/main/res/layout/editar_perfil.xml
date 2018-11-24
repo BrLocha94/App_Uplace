@@ -14,7 +14,7 @@
         android:gravity="center">
 
             <EditText
-                android:id="@+id/perfil_curso_informado"
+                android:id="@+id/perfil_nome_informado"
                 android:layout_width="match_parent"
                 android:layout_height="60sp"
                 android:hint="@string/nome"
@@ -33,7 +33,7 @@
         android:gravity="center">
 
         <EditText
-            android:id="@+id/perfil_edita_curso"
+            android:id="@+id/perfil_curso_informado"
             android:layout_width="match_parent"
             android:layout_height="60sp"
             android:hint="Curso"
@@ -57,7 +57,7 @@
             android:layout_width="205dp"
             android:layout_height="71dp"
             android:background="@drawable/box"
-            android:text="Botão" />
+            android:text="Concluido" />
         </LinearLayout>
 
 </RelativeLayout>

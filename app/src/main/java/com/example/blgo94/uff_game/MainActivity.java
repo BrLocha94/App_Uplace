@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
             }
         }
-        else if(item.getItemId() == R.id.menu_perfil) {
+        else if(item.getItemId() == R.id.menu_lista_materias) {
             if (ok) {
                 Intent intent = new Intent(MainActivity.this, Lista_materias.class);
                 intent.putExtra("ID_USUARIO", user.getID());

@@ -40,13 +40,13 @@
                     android:id="@+id/main_nome_usuario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@id/main_avatar"
                     android:layout_weight="1"
                     android:layout_gravity="center"
                     android:textColor="#fff"
                     android:textSize="21sp"
                     android:textStyle="bold"
                     tools:text="@tools:sample/full_names[100]" />
+                <!--android:layout_marginLeft="@id/main_avatar"-->
             </LinearLayout>
             </LinearLayout>
 

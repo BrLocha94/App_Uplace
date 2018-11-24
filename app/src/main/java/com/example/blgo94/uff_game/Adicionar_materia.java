@@ -17,25 +17,26 @@ public class Adicionar_materia extends AppCompatActivity {
     //Parametros usados na criação/edição da matéria
     protected EditText nome;
     protected EditText professor;
+    protected EditText local;
     protected EditText carga_horaria;
     protected CheckBox segunda;
-    protected EditText local_segunda;
-    protected EditText horario_segunda;
+    protected EditText horario_segunda_i;
+    protected EditText horario_segunda_f;
     protected CheckBox terca;
-    protected EditText local_terca;
-    protected EditText horario_terca;
+    protected EditText horario_terca_i;
+    protected EditText horario_terca_f;
     protected CheckBox quarta;
-    protected EditText local_quarta;
-    protected EditText horario_quarta;
+    protected EditText horario_quarta_i;
+    protected EditText horario_quarta_f;
     protected CheckBox quinta;
-    protected EditText local_quinta;
-    protected EditText horario_quinta;
+    protected EditText horario_quinta_i;
+    protected EditText horario_quinta_f;
     protected CheckBox sexta;
-    protected EditText local_sexta;
-    protected EditText horario_sexta;
+    protected EditText horario_sexta_i;
+    protected EditText horario_sexta_f;
     protected CheckBox sabado;
-    protected EditText local_sabado;
-    protected EditText horario_sabado;
+    protected EditText horario_sabado_i;
+    protected EditText horario_sabado_f;
 
     //Botão
     public Button cria_materia;
@@ -61,18 +62,18 @@ public class Adicionar_materia extends AppCompatActivity {
 
         inicializa_UI();
 
-        cria_materia = (Button) findViewById(R.id.botao_cria_materia);
+
+        cria_materia = (Button) findViewById(R.id.botao_gerencia_materia_cria);
 
         cria_materia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                materia = new Materia(nome.getText().toString(), professor.getText().toString(),
-                        Integer.parseInt(carga_horaria.getText().toString()));
-
                 ok = checa_problemas();
 
                 if(ok){
+                    materia = new Materia(nome.getText().toString(), professor.getText().toString(),
+                            local.getText().toString(), Integer.parseInt(carga_horaria.getText().toString()));
                     altera_database();
                     finish();
                 }
@@ -178,47 +179,41 @@ public class Adicionar_materia extends AppCompatActivity {
             informou = true;
 
             materia.add_dia("SEG");
-            materia.add_local(local_segunda.getText().toString());
-            materia.add_horario(horario_segunda.getText().toString());
+            materia.add_horario(horario_segunda_i.getText().toString() + " ~ " + horario_segunda_f.getText().toString());
         }
         if(terca.isChecked()){
             informou = true;
 
             materia.add_dia("TER");
-            materia.add_local(local_terca.getText().toString());
-            materia.add_horario(horario_terca.getText().toString());
+            materia.add_horario(horario_terca_i.getText().toString() + " ~ " + horario_terca_f.getText().toString());
 
         }
         if(quarta.isChecked()){
             informou = true;
 
             materia.add_dia("QUA");
-            materia.add_local(local_quarta.getText().toString());
-            materia.add_horario(horario_quarta.getText().toString());
+            materia.add_horario(horario_quarta_i.getText().toString() + " ~ " + horario_quarta_f.getText().toString());
 
         }
         if(quinta.isChecked()){
             informou = true;
 
             materia.add_dia("QUI");
-            materia.add_local(local_quinta.getText().toString());
-            materia.add_horario(horario_quinta.getText().toString());
+            materia.add_horario(horario_quinta_i.getText().toString() + " ~ " + horario_quinta_f.getText().toString());
 
         }
         if(sexta.isChecked()){
             informou = true;
 
             materia.add_dia("SEX");
-            materia.add_local(local_sexta.getText().toString());
-            materia.add_horario(horario_sexta.getText().toString());
+            materia.add_horario(horario_sexta_i.getText().toString() + " ~ " + horario_sexta_f.getText().toString());
 
         }
         if(sabado.isChecked()){
             informou = true;
 
             materia.add_dia("SAB");
-            materia.add_local(local_sabado.getText().toString());
-            materia.add_horario(horario_sabado.getText().toString());
+            materia.add_horario(horario_sabado_i.getText().toString() + " ~ " + horario_sabado_f.getText().toString());
         }
 
 
@@ -257,32 +252,36 @@ public class Adicionar_materia extends AppCompatActivity {
     }
 
     public void inicializa_UI(){
-        nome = (EditText) findViewById(R.id.nome_informado);
-        professor = (EditText) findViewById(R.id.professor_informado);
-        carga_horaria = (EditText) findViewById(R.id.carga_informada);
+
+
+        nome = (EditText) findViewById(R.id.et_gerencia_materia_nome);
+        professor = (EditText) findViewById(R.id.ed_gerencia_materia_professor);
+        local = (EditText) findViewById(R.id.ed_gerencia_localiz);
+        //carga_horaria = (EditText) findViewById(R.id.ed_gerencia_localiz);
 
         segunda = (CheckBox) findViewById(R.id.checkBoxseg);
-        local_segunda = (EditText) findViewById(R.id.local_seg);
-        horario_segunda = (EditText) findViewById(R.id.horario_seg);
+        horario_segunda_i = (EditText) findViewById(R.id.horarioi_seg);
+        horario_segunda_f = (EditText) findViewById(R.id.horariof_seg);
 
         terca = (CheckBox) findViewById(R.id.checkBoxter);
-        local_terca = (EditText) findViewById(R.id.local_ter);
-        horario_terca  = (EditText) findViewById(R.id.horario_ter);
+        horario_terca_i = (EditText) findViewById(R.id.horarioi_ter);
+        horario_terca_f  = (EditText) findViewById(R.id.horariof_ter);
 
         quarta = (CheckBox) findViewById(R.id.checkBoxqua);
-        local_quarta = (EditText) findViewById(R.id.local_qua);
-        horario_quarta = (EditText) findViewById(R.id.horario_qua);
+        horario_quarta_i = (EditText) findViewById(R.id.horarioi_qua);
+        horario_quarta_f = (EditText) findViewById(R.id.horariof_qua);
 
         quinta = (CheckBox) findViewById(R.id.checkBoxqui);
-        local_quinta  = (EditText) findViewById(R.id.local_qui);
-        horario_quinta  = (EditText) findViewById(R.id.horario_qui);
+        horario_quinta_i  = (EditText) findViewById(R.id.horarioi_qui);
+        horario_quinta_f  = (EditText) findViewById(R.id.horariof_qui);
 
         sexta = (CheckBox) findViewById(R.id.checkBoxsex);
-        local_sexta = (EditText) findViewById(R.id.local_sex);
-        horario_sexta = (EditText) findViewById(R.id.horario_sex);
+        horario_sexta_i = (EditText) findViewById(R.id.horarioi_sex);
+        horario_sexta_f = (EditText) findViewById(R.id.horariof_sex);
 
         sabado = (CheckBox) findViewById(R.id.checkBoxsab);
-        local_sabado = (EditText) findViewById(R.id.local_sab);
-        horario_sabado = (EditText) findViewById(R.id.horario_sab);
+        horario_sabado_i = (EditText) findViewById(R.id.horarioi_sab);
+        horario_sabado_f = (EditText) findViewById(R.id.horariof_sab);
+
     }
 }
