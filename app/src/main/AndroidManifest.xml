@@ -64,7 +64,8 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".Check_in" />
-        <activity android:name=".View_evento"></activity>
+        <activity android:name=".View_evento" />
+        <activity android:name=".Adiciona_amigo"></activity>
     </application>
 
 </manifest>

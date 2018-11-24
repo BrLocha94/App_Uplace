@@ -18,6 +18,11 @@
         />
 
     <item
+        android:id="@+id/menu_lista_pedidos"
+        android:title="@string/pedidos_de_amizade"
+        />
+
+    <item
         android:id="@+id/menu_lista_materias"
         android:title="@string/lista_materias"
         />

@@ -364,6 +364,17 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
             }
         }
+        else if(item.getItemId() == R.id.menu_lista_pedidos){
+            if(ok) {
+                //Vai para a tela de lista de amigos
+                Intent intent = new Intent(MainActivity.this, Adiciona_amigo.class);
+                intent.putExtra("ID_USUARIO", user.getID());
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+            }
+        }
         else if(item.getItemId() == R.id.menu_lista_materias) {
             if (ok) {
                 Intent intent = new Intent(MainActivity.this, Lista_materias.class);
