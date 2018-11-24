@@ -3,6 +3,7 @@ package com.example.blgo94.uff_game;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -22,8 +23,10 @@ public class Lista_provas extends AppCompatActivity {
 
     //Database usado
     DatabaseReference data;
+    DatabaseReference data_02;
 
     //Recebe as materias que o usuario está inscrito
+    private ArrayList<String> array_ids_materias;
     private ArrayList<Prova> array_provas;
 
     private ListView lista;
@@ -42,9 +45,9 @@ public class Lista_provas extends AppCompatActivity {
         data.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                array_provas = new ArrayList<Prova>();
+                array_ids_materias = new ArrayList<String>();
                 set_array(dataSnapshot);
-                carrega_lista();
+                set_provas();
             }
 
             @Override
@@ -55,9 +58,39 @@ public class Lista_provas extends AppCompatActivity {
 
     }
 
+    private void set_provas(){
+        data_02 = FirebaseDatabase.getInstance().getReference("provas").child(id);
+
+        array_provas = new ArrayList<Prova>();
+
+        for(int i = 0; i < array_ids_materias.size(); i++){
+            data_02.child(array_ids_materias.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    set_array_provas(dataSnapshot);
+                    carrega_lista();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+    }
+
+    private void set_array_provas(DataSnapshot dataSnapshot){
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+            array_provas.add(snapshot.getValue(Prova.class));
+            Log.d("mimimmimimimimimimimim", "set_array_provas: " + array_provas.get(0).getData());
+        }
+    }
+
     private void set_array(DataSnapshot dataSnapshot){
         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-            array_provas.add(snapshot.getValue(Prova.class));
+            array_ids_materias.add(snapshot.getKey());
+            Log.d("mimimimimimimimimimimi", "set_array: " + snapshot.getKey());
         }
     }
 

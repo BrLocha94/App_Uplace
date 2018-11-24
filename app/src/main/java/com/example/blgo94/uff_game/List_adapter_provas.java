@@ -55,7 +55,7 @@ public class List_adapter_provas extends ArrayAdapter<Prova> {
         //getting the user of the specified position
         Prova prova = provas.get(position);
 
-        textViewMateria.setText(prova.getMateria());
+        textViewMateria.setText(prova.getId());
         textViewData.setText(prova.getData());
         textViewNota.setText(prova.getNota());
 

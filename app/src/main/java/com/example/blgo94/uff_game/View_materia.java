@@ -137,8 +137,8 @@ public class View_materia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Prova prova = new Prova(id, prova_materia.getText().toString(),
-                        get_data_atual(), prova_nota.getText().toString());
+                Prova prova = new Prova(materia.getNome(), prova_materia.getText().toString(),
+                        prova_data.getText().toString(), prova_nota.getText().toString());
 
                 atualiza_database_provas(prova);
 
