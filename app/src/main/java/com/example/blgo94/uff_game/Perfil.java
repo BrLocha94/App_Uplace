@@ -3,7 +3,9 @@ package com.example.blgo94.uff_game;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,6 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 
 public class Perfil extends AppCompatActivity {
 
@@ -38,10 +42,19 @@ public class Perfil extends AppCompatActivity {
 
     private Usuario user;
 
+    private DatabaseReference data_atualizacoes;
+    private ArrayList<String> atualizacoes;
+    private Atualizacoes ata;
+
+    private DatabaseReference data_amigo;
+    private DatabaseReference data;
+
     //botao teste
     private Button add_amigo;
 
     private ListView lista;
+
+    private String id_view;
 
     //Caso 0 = perfil próprio ou amigo, Caso 1 = desconhecido
     private int caso;
@@ -50,6 +63,8 @@ public class Perfil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+
+        id_view = (String) getIntent().getStringExtra("ID_USUARIO");
 
         user = (Usuario) getIntent().getParcelableExtra("objeto");
 
@@ -92,7 +107,7 @@ public class Perfil extends AppCompatActivity {
             lista = (ListView) findViewById(R.id.lista_5_ultimas);
             lista.setVisibility(View.VISIBLE);
 
-
+            set_database_atualizacoes();
         }
 
 
@@ -100,6 +115,61 @@ public class Perfil extends AppCompatActivity {
 
     private void requisita_add_amigo(){
 
+        data = FirebaseDatabase.getInstance().getReference("users");
+
+        data.child(id_view).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Usuario view_usuario = dataSnapshot.getValue(Usuario.class);
+                manda_req(view_usuario);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void manda_req(Usuario view_usuario){
+        Amigo amigo = new Amigo(view_usuario.getID(), view_usuario.getUser_name(), view_usuario.getCourse());
+        data_amigo = FirebaseDatabase.getInstance().getReference("req_amigo");
+
+        data_amigo.child(user.getID()).child(amigo.getId()).setValue(amigo);
+
+        finish();
+    }
+
+    private void set_database_atualizacoes(){
+        data_atualizacoes = FirebaseDatabase.getInstance().getReference("atualizacao");
+
+        data_atualizacoes.child(user.getID()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                atualizacoes = new ArrayList<String>();
+                preenche_array_atualizacoes(dataSnapshot);
+                set_lista_atualizacoes();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void set_lista_atualizacoes(){
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, R.layout.estilo_atualizacoes,
+                R.id.text_atualizacoes, atualizacoes);
+
+        lista.setAdapter(adaptador);
+    }
+
+    private void preenche_array_atualizacoes(DataSnapshot dataSnapshot){
+        ata = new Atualizacoes();
+        ata = dataSnapshot.getValue(Atualizacoes.class);
+        atualizacoes = ata.getAtualiz();
     }
 
     private void carrega_imagens(String ProfilePic, String IdBadge1, String IdBadge2,
@@ -118,7 +188,7 @@ public class Perfil extends AppCompatActivity {
         //Avatar
         Glide.with(this /* context */)
                 .load(mStorageRef_avatar)
-                .apply(new RequestOptions().override(128,128))
+                .apply(new RequestOptions().override(140,140))
                 .into(avatar_perfil);
 
 

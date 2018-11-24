@@ -13,8 +13,9 @@
         android:layout_gravity="center"
         android:background="#3f51b5"
         android:text="Adicionar aos amigos"
-        android:layout_marginTop="10sp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_marginTop="400sp"
+        />
 
         <LinearLayout
             android:id="@+id/perfil_box1"
@@ -207,7 +208,7 @@
 
         <ListView
             android:id="@+id/lista_5_ultimas"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="8dp"
@@ -215,16 +216,12 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ADD AMIGO" />
     </LinearLayout>
 
 

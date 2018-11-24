@@ -73,7 +73,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="40sp"
                     android:background="@drawable/border"
-                    android:inputType="date"
                     android:hint="Local"
                     android:paddingLeft="10dp"
                     android:paddingTop="5sp"
@@ -92,7 +91,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="40sp"
                     android:background="@drawable/border"
-                    android:inputType="date"
                     android:hint="Organizador"
                     android:paddingLeft="10dp"
                     android:paddingTop="5sp"
@@ -112,7 +110,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"
-                    android:inputType="date"
                     android:hint="Descreva seu Evento"
                     android:paddingLeft="10dp"
                     android:paddingTop="5sp"
@@ -131,7 +128,7 @@
             android:layout_marginTop="20dp"
             android:orientation="vertical">
             <Button
-                android:id="@+id/botao_add_prova_mesmo"
+                android:id="@+id/botao_cria_evento"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
                 android:gravity="center"

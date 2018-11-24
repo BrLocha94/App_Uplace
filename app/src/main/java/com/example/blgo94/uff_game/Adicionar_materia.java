@@ -100,6 +100,7 @@ public class Adicionar_materia extends AppCompatActivity {
         //reseta os erros
         nome.setError(null);
         professor.setError(null);
+        local.setError(null);
         carga_horaria.setError(null);
 
         //boleano que checa as chaves
@@ -257,7 +258,7 @@ public class Adicionar_materia extends AppCompatActivity {
         nome = (EditText) findViewById(R.id.et_gerencia_materia_nome);
         professor = (EditText) findViewById(R.id.ed_gerencia_materia_professor);
         local = (EditText) findViewById(R.id.ed_gerencia_localiz);
-        //carga_horaria = (EditText) findViewById(R.id.ed_gerencia_localiz);
+        carga_horaria = (EditText) findViewById(R.id.ed_gerencia_materia_ch);
 
         segunda = (CheckBox) findViewById(R.id.checkBoxseg);
         horario_segunda_i = (EditText) findViewById(R.id.horarioi_seg);

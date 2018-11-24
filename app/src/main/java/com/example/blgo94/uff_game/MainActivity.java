@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         nome_eventos = new ArrayList<String>();
         for(int i = 0; i < eventos.size(); i++){
             nome_eventos.add(eventos.get(i).getNome());
+            Log.d(TAG, nome_eventos.get(i));
         }
     }
 
@@ -345,6 +346,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, Perfil.class);
                 intent.putExtra("objeto", user);
                 intent.putExtra("caso", "0");
+                intent.putExtra("ID_USUARIO", user.getID());
                 startActivity(intent);
             }
             else{

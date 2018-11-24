@@ -1,5 +1,6 @@
 package com.example.blgo94.uff_game;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -102,6 +103,13 @@ public class Lista_usuarios_proximos extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Usuario user_ref = (Usuario) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(Lista_usuarios_proximos.this, Perfil.class);
+                intent.putExtra("objeto", user_ref);
+                intent.putExtra("caso", "1");
+                intent.putExtra("ID_USUARIO", id);
+                startActivity(intent);
             }
         });
     }

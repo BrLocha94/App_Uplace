@@ -1,5 +1,6 @@
 package com.example.blgo94.uff_game;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,8 +57,13 @@ public class Lista_amigos extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //VAI PARA A VISÃO DO PERFIL
-                //PASSA O INT CASO = 0
+                Usuario user_ref = (Usuario) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(Lista_amigos.this, Perfil.class);
+                intent.putExtra("objeto", user_ref);
+                intent.putExtra("caso", "0");
+                intent.putExtra("ID_USUARIO", id);
+                startActivity(intent);
 
             }
         });
