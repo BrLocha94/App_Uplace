@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -143,6 +144,23 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nome_remove, nome_eventos);
 
         lista_eventos.setAdapter(adaptador);
+
+        lista_eventos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(ok) {
+                    String id_evento = (String) parent.getItemAtPosition(position);
+                    for (int i = 0; i < eventos.size(); i++) {
+                        if (eventos.get(i).getNome().equals(id_evento)) {
+                            Intent intent = new Intent(MainActivity.this, View_evento.class);
+                            intent.putExtra("evento", eventos.get(i));
+                            intent.putExtra("ID_USUARIO", user.getID());
+                            startActivity(intent);
+                        }
+                    }
+                }
+            }
+        });
     }
 
     private void preenche_array_eventos(DataSnapshot dataSnapshot){

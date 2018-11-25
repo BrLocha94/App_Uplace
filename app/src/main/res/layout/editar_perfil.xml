@@ -13,14 +13,14 @@
         android:background="@drawable/login_fundo">
 
         <ImageView
-            android:id="@+id/perfil_avatar"
+            android:id="@+id/editar_perfil_avatar"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10sp"
             tools:srcCompat="@tools:sample/avatars[6]" />
         <TextView
-            android:id="@+id/perfil_nome_informado"
+            android:id="@+id/perfil_nome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -78,7 +78,7 @@
         android:gravity="center">
 
             <EditText
-                android:id="@+id/perfil_curso_informado"
+                android:id="@+id/perfil_edita_nome"
                 android:layout_width="match_parent"
                 android:layout_height="60sp"
                 android:hint="@string/nome"
@@ -122,7 +122,7 @@
             android:layout_height="71dp"
             android:textColor="#fff"
             android:background="@drawable/botao"
-            android:text="Botão" />
+            android:text="Concluir" />
         </LinearLayout>
 
 </RelativeLayout>

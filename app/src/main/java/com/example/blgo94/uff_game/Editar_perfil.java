@@ -6,20 +6,34 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class Editar_perfil extends AppCompatActivity {
 
     //Database Realtime do firebase
     private DatabaseReference mDatabase;
 
+    //Storage do firebase
+    private StorageReference mStorageRef_avatar;
+
+    //Locais de carregamento das imagens
+    private ImageView avatar;
+
     //Usuário logado
     public Usuario usuario;
 
+    private TextView perfil_nome;
+
     //Edittexts da edição do perfil
-    private EditText perfil_nome;
+    private EditText perfil_nome_informado;
     private EditText perfil_curso;
 
     //Botao
@@ -34,9 +48,14 @@ public class Editar_perfil extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
 
+        avatar = (ImageView) findViewById(R.id.editar_perfil_avatar);
 
-        perfil_nome = (EditText) findViewById(R.id.perfil_nome_informado);
-        perfil_curso = (EditText) findViewById(R.id.perfil_curso_informado);
+        carrega_imagens(usuario.getProfilePic());
+
+        perfil_nome = (TextView) findViewById(R.id.perfil_nome);
+
+        perfil_nome_informado = (EditText) findViewById(R.id.perfil_edita_nome);
+        perfil_curso = (EditText) findViewById(R.id.perfil_edita_curso);
 
         edita_perfil = (Button) findViewById(R.id.botao_edita_perfil);
 
@@ -59,8 +78,23 @@ public class Editar_perfil extends AppCompatActivity {
 
     }
 
+    private void carrega_imagens(String ProfilePic){
+
+        ProfilePic = "gs://uplace-ff0b3.appspot.com/avatar/" + ProfilePic;
+
+        mStorageRef_avatar = FirebaseStorage.getInstance().getReferenceFromUrl(ProfilePic);
+
+        //Avatar
+        Glide.with(this /* context */)
+                .load(mStorageRef_avatar)
+                .apply(new RequestOptions().override(128,128))
+                .into(avatar);
+
+    }
+
     private boolean checa_problemas() {
 
+        /*
         //reseta os erros
         perfil_nome.setError(null);
         perfil_curso.setError(null);
@@ -117,5 +151,8 @@ public class Editar_perfil extends AppCompatActivity {
             return true;
         }
         return false;
+
+        */
+        return true;
     }
 }
