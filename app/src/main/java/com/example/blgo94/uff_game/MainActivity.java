@@ -200,6 +200,32 @@ public class MainActivity extends AppCompatActivity {
         Log.d("a t u a l i z a c a o", "AQUI NA LISTA");
 
         lista_atualizacoes.setAdapter(adaptador);
+
+        lista_atualizacoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(ok) {
+                    String id_amigo = amigos.get(position).getId();
+
+                    mDatabase.child(id_amigo).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Usuario amigo = dataSnapshot.getValue(Usuario.class);
+                            Intent intent = new Intent(MainActivity.this, Perfil.class);
+                            intent.putExtra("objeto", amigo);
+                            intent.putExtra("caso", "0");
+                            intent.putExtra("ID_USUARIO", user.getID());
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+        });
     }
 
     private void preenche_array_atualizacoes(DataSnapshot dataSnapshot){
@@ -208,11 +234,7 @@ public class MainActivity extends AppCompatActivity {
             for(int i = 0; i < amigos.size(); i++) {
                 if (snapshot.getKey().equals(amigos.get(i).getId())) {
                     ata = snapshot.getValue(Atualizacoes.class);
-                    Log.d("a t u a l i z a c a o", amigos.get(i).getId());
-                    Log.d("a t u a l i z a c a o", ata.getAtualiz().get(0));
-                    Log.d("a t u a l i z a c a o", ata.get_last());
                     atualizacoes.add(amigos.get(i).getNome() + " " + ata.get_last());
-                    Log.d("a t u a l i z a c a o", atualizacoes.get(i));
                     break;
                 }
             }
