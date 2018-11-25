@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="adicionar_materia">Adicionar materia</string>
+    <string name="cadastro">Regístrese</string>
+    <string name="erro_vazio">Campo vacío</string>
+    <string name="carga_horaria">Carga académica</string>
+    <string name="erro_carga_horaria">Debes ser número entero</string>
+    <string name="Dia_Horario_Local">Día-Hora-Local</string>
+    <string name="editar_perfil">Editar el perfil</string>
+    <string name="erro_email">El e-mail debes ser del tipo id.uff.br</string>
+    <string name="erro_numeros">Este campo no puedes tener números</string>
+    <string name="erro_tamanho">Este campo no puedes tener más que 28 caracteres</string>
+    <string name="faltas">Faltas</string>
+    <string name="leitor_QR">Lector QR</string>
+    <string name="lista_materias">Enumerar materias</string>
+    <string name="valor_QR">"Ningún QR fuera detectado "</string>
+    <string name="nome">Nombre</string>
+    <string name="professor">Profesor</string>
+    <string name="remover_materia">Eliminar materia</string>
+    <string name="senha">Contraseña</string>
+    <string name="erro_senha">Contraseña debes tener dentre 6 y 12 caracteres</string>
+</resources>

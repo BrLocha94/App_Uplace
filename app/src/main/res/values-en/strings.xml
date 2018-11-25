@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Dia_Horario_Local">Day-Time-Place</string>
+    <string name="nome">Name</string>
+    <string name="faltas">Absences</string>
+    <string name="adicionar_materia">Add course</string>
+    <string name="remover_materia">Remove course</string>
+    <string name="professor">Professor</string>
+    <string name="carga_horaria">Course load</string>
+    <string name="erro_vazio">Empty field</string>
+    <string name="erro_carga_horaria">Must be an integer</string>
+    <string name="leitor_QR">QR reader</string>
+    <string name="lista_materias">Show courses</string>
+    <string name="valor_QR">No QR was detected</string>
+    <string name="senha">Password</string>
+    <string name="cadastro">Sign-in</string>
+    <string name="erro_email">E-mail must end with @id.uff.br</string>
+    <string name="erro_senha">Password must be between 6 and 12 characters</string>
+    <string name="editar_perfil">Edit profile</string>
+    <string name="erro_numeros">This field cannot contain numbers</string>
+    <string name="erro_tamanho">This field cannot be longer than 28 characters</string>
+</resources>

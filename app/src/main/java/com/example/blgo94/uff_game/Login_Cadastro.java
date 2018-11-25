@@ -99,7 +99,7 @@ public class Login_Cadastro extends AppCompatActivity {
                     sign_in(email.getText().toString().trim(), senha.getText().toString().trim());
                 }
                 else{
-                    Toast.makeText(Login_Cadastro.this, "Informe o email e senha corretamente.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login_Cadastro.this, R.string.informe_email_senha , Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -125,7 +125,7 @@ public class Login_Cadastro extends AppCompatActivity {
                     sign_up(email.getText().toString().trim(), senha.getText().toString().trim());
                 }
                 else{
-                    Toast.makeText(Login_Cadastro.this, "Informe o email e senha corretamente.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login_Cadastro.this, R.string.informe_email_senha, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -200,13 +200,13 @@ public class Login_Cadastro extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            Toast.makeText(Login_Cadastro.this, "Login feito com sucesso", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login_Cadastro.this, R.string.login_sucesso , Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(Login_Cadastro.this, "Authentication falhou, verifique seu email e senha.",
+                            Toast.makeText(Login_Cadastro.this,  R.string.autenticacao_falhou,
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -227,7 +227,7 @@ public class Login_Cadastro extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            Toast.makeText(Login_Cadastro.this, "Verifique seu email para confirmação...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login_Cadastro.this, R.string.verifique_seu_email , Toast.LENGTH_SHORT).show();
 
                             set_database();
 
@@ -236,7 +236,7 @@ public class Login_Cadastro extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(Login_Cadastro.this, "Ocorreu um erro no cadastro...",
+                            Toast.makeText(Login_Cadastro.this, R.string.ocorreu_erro_cadastro,
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }

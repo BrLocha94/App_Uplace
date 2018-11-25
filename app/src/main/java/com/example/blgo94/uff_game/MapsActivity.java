@@ -246,7 +246,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     mapa_amigos_update();
                 }
                 else{
-                    Toast.makeText(this, "Voce não possui amigos adicionados...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.sem_amigos , Toast.LENGTH_SHORT).show();
                 }
                 return true;
 

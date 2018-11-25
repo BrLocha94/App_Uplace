@@ -377,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else{
-                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.aguarde, Toast.LENGTH_SHORT).show();
             }
         }
         else if(item.getItemId() == R.id.menu_perfil){
@@ -390,7 +390,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else{
-                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.aguarde, Toast.LENGTH_SHORT).show();
             }
         }
         else if(item.getItemId() == R.id.menu_lista_amigos){
@@ -401,7 +401,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else{
-                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.aguarde, Toast.LENGTH_SHORT).show();
             }
         }
         else if(item.getItemId() == R.id.menu_lista_pedidos){
@@ -413,7 +413,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else{
-                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.aguarde, Toast.LENGTH_SHORT).show();
             }
         }
         else if(item.getItemId() == R.id.menu_lista_materias) {
@@ -422,7 +422,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("ID_USUARIO", user.getID());
                 startActivity(intent);
             } else {
-                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.aguarde, Toast.LENGTH_SHORT).show();
             }
         }
         else if(item.getItemId() == R.id.menu_cria_evento){
@@ -434,7 +434,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else{
-                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.aguarde, Toast.LENGTH_SHORT).show();
             }
         }
         else if(item.getItemId() == R.id.menu_mapa_uff){
@@ -445,7 +445,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else{
-                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.aguarde, Toast.LENGTH_SHORT).show();
             }
         }
         else if(item.getItemId() == R.id.menu_pessoas_proximas){
@@ -456,7 +456,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             else{
-                Toast.makeText(MainActivity.this, "Aguarde as informações serem carregadas...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.aguarde, Toast.LENGTH_SHORT).show();
             }
         }
         else if (item.getItemId() == R.id.menu_logout){

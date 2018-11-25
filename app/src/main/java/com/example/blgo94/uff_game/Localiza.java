@@ -62,7 +62,7 @@ public class Localiza extends AppCompatActivity implements LocationListener{
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
-            Toast.makeText(this, "Ligue seu GPS para acessar este recurso.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.ligue_seu_gps , Toast.LENGTH_SHORT).show();
 
             finish();
         }

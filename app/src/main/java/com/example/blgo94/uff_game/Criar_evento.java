@@ -59,7 +59,7 @@ public class Criar_evento extends AppCompatActivity {
                 data = FirebaseDatabase.getInstance().getReference("events");
                 data.child(evento.getNome()).setValue(evento);
 
-                Toast.makeText(Criar_evento.this, "Evento criado com sucesso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Criar_evento.this, R.string.evento_criado , Toast.LENGTH_SHORT).show();
 
                 finish();
             }

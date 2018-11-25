@@ -225,7 +225,7 @@ public class Adicionar_materia extends AppCompatActivity {
 
             if(!informou) {
 
-                Toast.makeText(getApplicationContext(), "INFORME PELO MENOS UM DIA", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.informe_um_dia , Toast.LENGTH_LONG).show();
                 prossegue = false;
             }
 

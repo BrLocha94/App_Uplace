@@ -75,7 +75,7 @@ public class Check_in extends AppCompatActivity implements LocationListener {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
-            Toast.makeText(this, "Ligue seu GPS para acessar este recurso.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.ligue_seu_gps , Toast.LENGTH_SHORT).show();
 
             finish();
         }
@@ -333,7 +333,7 @@ public class Check_in extends AppCompatActivity implements LocationListener {
                 }
             }
             if(ids_proximos.size() == 0){
-                mensagem.setText("Não é possivel fazer login pois está muito longe");
+                mensagem.setText( R.string.nao_consegue_checkin );
             }
             else{
                 mensagem.setText("");
@@ -357,10 +357,10 @@ public class Check_in extends AppCompatActivity implements LocationListener {
                 final String id_selecionado = (String) parent.getItemAtPosition(position);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(Check_in.this);
-                builder.setTitle("Você está em " + id_selecionado + "?");
+                builder.setTitle(R.string.voce_esta_em + id_selecionado + "?");
 
                 //if the response is positive in the alert
-                builder.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -370,9 +370,8 @@ public class Check_in extends AppCompatActivity implements LocationListener {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 Atualizacoes ata = dataSnapshot.getValue(Atualizacoes.class);
-                                ata.add_info("Check in " + id_selecionado + " em " + get_data_atual() + " as " + get_hora_atual());
+                                ata.add_info("Check in " + id_selecionado + ", " + get_data_atual() + " - " + get_hora_atual());
                                 data_atualizacao.child(user_name).setValue(ata);
-                                Toast.makeText(Check_in.this, "Checked in " + id_selecionado, Toast.LENGTH_SHORT);
 
                                 finish();
                             }
@@ -387,7 +386,7 @@ public class Check_in extends AppCompatActivity implements LocationListener {
                 });
 
                 //if response is negative nothing is being done
-                builder.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 

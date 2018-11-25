@@ -34,5 +34,26 @@
     <string name="perfil">Meu perfil</string>
     <string name="eventos">Eventos</string>
     <string name="pedidos_de_amizade">Pedidos de amizade</string>
+    <string name="deseja_adicionar">Deseja adicionar</string>
+    <string name="aos_seus_amigos">aos seus amigos?</string>
+    <string name="sim">SIM</string>
+    <string name="nao">Nao</string>
+    <string name="voces_sao_amigos">Vocês agora são amigos!!!</string>
+    <string name="informe_um_dia">INFORME AO MENOS UM DIA</string>
+    <string name="ligue_seu_gps">Ligue seu GPS para acessar este recurso</string>
+    <string name="permissoes_obrigatorias">Estas permissões são obrigatórias para utilizar recursos do app. Por favor garanta acesso.</string>
+    <string name="nao_consegue_checkin">Não é possivel fazer Check In, pois está muito longe.</string>
+    <string name="voce_esta_em">Você está em</string>
+    <string name="evento_criado">Evento criado com sucesso!</string>
+    <string name="informe_email_senha">Informe o email e senha corretamente.</string>
+    <string name="login_sucesso">Login feito com sucesso!</string>
+    <string name="autenticacao_falhou">Autenticacao falhou! Verifique se seu email e senha estão corretos.</string>
+    <string name="verifique_seu_email">Verifique seu email para confirmação...</string>
+    <string name="ocorreu_erro_cadastro">Ocorreu um erro no cadastro...</string>
+    <string name="aguarde">Aguarde as informações serem carregadas...</string>
+    <string name="sem_amigos">Você não possui amigos adicionados...</string>
+    <string name="deseja_excluir_materia">Deseja excluir a matéria</string>
+    <string name="materia_removida">Materia Removida!</string>
+    <string name="prova_adicionada">Prova adicionada</string>
 </resources>
 

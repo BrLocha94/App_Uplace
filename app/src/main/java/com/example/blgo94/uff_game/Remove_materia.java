@@ -96,10 +96,10 @@ public class Remove_materia extends AppCompatActivity {
                 setChave((String) parent.getItemAtPosition(position));
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(Remove_materia.this);
-                builder.setTitle("Deseja excluir a matéria " + chave +"?");
+                builder.setTitle( getString(R.string.deseja_excluir_materia) + chave +"?");
 
                 //if the response is positive in the alert
-                builder.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -111,7 +111,7 @@ public class Remove_materia extends AppCompatActivity {
                 });
 
                 //if response is negative nothing is being done
-                builder.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -130,7 +130,7 @@ public class Remove_materia extends AppCompatActivity {
         data.child(chave).removeValue();
         data2 = FirebaseDatabase.getInstance().getReference("provas");
         data2.child(id).child(chave).removeValue();
-        Toast.makeText(getApplicationContext(),"MATERIA " + chave + " REMOVIDA", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),R.string.materia_removida , Toast.LENGTH_LONG).show();
         finish();
     }
 

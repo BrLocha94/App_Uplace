@@ -98,10 +98,10 @@ public class Adiciona_amigo extends AppCompatActivity {
                 set_user((Usuario) parent.getItemAtPosition(position));
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(Adiciona_amigo.this);
-                builder.setTitle("Deseja adicionar " + user_amigo.getUser_name() +" aos seus amigos?");
+                builder.setTitle( getString(R.string.deseja_adicionar) + user_amigo.getUser_name() + R.string.aos_seus_amigos );
 
                 //if the response is positive in the alert
-                builder.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton( R.string.sim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -112,7 +112,7 @@ public class Adiciona_amigo extends AppCompatActivity {
                 });
 
                 //if response is negative nothing is being done
-                builder.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -161,7 +161,7 @@ public class Adiciona_amigo extends AppCompatActivity {
                 preenche_array_amigos(dataSnapshot);
                 amigos.add(new Amigo(user_amigo.getID(), user_amigo.getUser_name(), user_amigo.getCourse()));
                 grava_amigos_database();
-                Toast.makeText(Adiciona_amigo.this, "Voces agora são amigos...", Toast.LENGTH_SHORT);
+                Toast.makeText(Adiciona_amigo.this, R.string.voces_sao_amigos , Toast.LENGTH_SHORT);
                 remove_req();
             }
 

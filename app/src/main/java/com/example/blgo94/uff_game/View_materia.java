@@ -158,7 +158,7 @@ public class View_materia extends AppCompatActivity {
                 set_array_provas(dataSnapshot);
                 provas.add(prova);
                 data.setValue(provas);
-                Toast.makeText(View_materia.this, "PROVA ADICIONADA", Toast.LENGTH_SHORT).show();
+                Toast.makeText(View_materia.this, R.string.prova_adicionada , Toast.LENGTH_SHORT).show();
                 finish();
             }
 
