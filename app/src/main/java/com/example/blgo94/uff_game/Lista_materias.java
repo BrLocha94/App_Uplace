@@ -268,6 +268,31 @@ public class Lista_materias extends AppCompatActivity {
                 if(ok){
                     badge_aula_sabado();
                 }
+                ok = true;
+
+                for(int i = 0; i < badges.size(); i++){
+                    if(badges.get(i).equals("2_provas")){
+                        ok = false;
+                        break;
+                    }
+                }
+
+                if(ok){
+                    badge_duas_provas();
+                }
+                ok = true;
+
+                for(int i = 0; i < badges.size(); i++){
+                    if(badges.get(i).equals("5_provas")){
+                        ok = false;
+                        break;
+                    }
+                }
+
+                if(ok){
+                    badge_cinco_provas();
+                }
+                ok = true;
             }
 
             @Override
@@ -276,6 +301,72 @@ public class Lista_materias extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void badge_cinco_provas(){
+        Logica_badges log_bad = new Logica_badges();
+        if(log_bad.cinco_provas(id)){
+
+            badges.add("5_provas");
+            data_badge_acess.child(id).setValue(badges);
+
+            get_usuario(id);
+
+            //LIBERA BADGE DIALOG
+            data_badges = FirebaseDatabase.getInstance().getReference("badges");
+            data_badges.child("5_provas").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    badge = dataSnapshot.getValue(Badge.class);
+                    pop_up_badges(badge);
+                    Modfica_usuario mod = new Modfica_usuario(id, user);
+                    boolean level_up = mod.add_score(Integer.parseInt(badge.getPontuacao()));
+
+                    if(level_up){
+                        pop_up_level_up(mod.getUser());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+    }
+
+    private void badge_duas_provas(){
+        Logica_badges log_bad = new Logica_badges();
+        if(log_bad.duas_provas(id)){
+
+            badges.add("2_provas");
+            data_badge_acess.child(id).setValue(badges);
+
+            get_usuario(id);
+
+            //LIBERA BADGE DIALOG
+            data_badges = FirebaseDatabase.getInstance().getReference("badges");
+            data_badges.child("2_provas").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    badge = dataSnapshot.getValue(Badge.class);
+                    pop_up_badges(badge);
+                    Modfica_usuario mod = new Modfica_usuario(id, user);
+                    boolean level_up = mod.add_score(Integer.parseInt(badge.getPontuacao()));
+
+                    if(level_up){
+                        pop_up_level_up(mod.getUser());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
     }
 
     private void badge_aula_sabado(){

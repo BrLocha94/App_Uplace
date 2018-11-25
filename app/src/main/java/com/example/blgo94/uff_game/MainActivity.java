@@ -1,5 +1,6 @@
 package com.example.blgo94.uff_game;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -57,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference data_amigos;
     private DatabaseReference data_atualizacoes;
     private DatabaseReference data_eventos;
+    private DatabaseReference data_badge_acess;
+    private DatabaseReference data_badges;
+
+    Badge badge;
+
+    boolean ok_badge = true;
+
+    private ArrayList<String> badges;
 
     //Usuario atual do app
     public String id_usuario = "";
@@ -119,6 +128,164 @@ public class MainActivity extends AppCompatActivity {
         };
 
 
+    }
+
+    private void checa_badges(){
+
+        data_badge_acess = FirebaseDatabase.getInstance().getReference("badge_acess");
+
+        data_badge_acess.child(user.getID()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                badges = new ArrayList<String>();
+                preenche_array_badges(dataSnapshot);
+
+                for(int i = 0; i < badges.size(); i++){
+                    if(badges.get(i).equals("calouro")){
+                        ok_badge = false;
+                        break;
+                    }
+                }
+
+                if(ok_badge){
+                    badge_calouro();
+                }
+                else{
+                    ok = true;
+                    for(int i = 0; i < badges.size(); i++){
+                        if(badges.get(i).equals("veterano")){
+                            ok_badge = false;
+                            break;
+                        }
+                    }
+                }
+                
+
+                if(ok_badge){
+                    badge_veterano();
+                }
+                ok = true;
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void badge_calouro(){
+        Logica_badges log_bad = new Logica_badges();
+        if(log_bad.calouro(user.getLevel())){
+
+            badges.add("calouro");
+            data_badge_acess.child(user.getID()).setValue(badges);
+
+            //LIBERA BADGE DIALOG
+            data_badges = FirebaseDatabase.getInstance().getReference("badges");
+            data_badges.child("calouro").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    badge = dataSnapshot.getValue(Badge.class);
+                    pop_up_badges(badge);
+                    Modfica_usuario mod = new Modfica_usuario(user.getID(), user);
+                    boolean level_up = mod.add_score(Integer.parseInt(badge.getPontuacao()));
+
+                    if(level_up){
+                        pop_up_level_up(mod.getUser());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+    }
+
+    private void badge_veterano(){
+        Logica_badges log_bad = new Logica_badges();
+
+        Log.d(TAG, "badge_veterano: AQUI AHAHAHHAHAHAHAHAHAHAHAHAHHAAH");
+        if(log_bad.veterano(user.getLevel())){
+
+            badges.add("veterano");
+            data_badge_acess.child(user.getID()).setValue(badges);
+
+            //LIBERA BADGE DIALOG
+            data_badges = FirebaseDatabase.getInstance().getReference("badges");
+            data_badges.child("veterano").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    badge = dataSnapshot.getValue(Badge.class);
+                    pop_up_badges(badge);
+                    Modfica_usuario mod = new Modfica_usuario(user.getID(), user);
+                    boolean level_up = mod.add_score(Integer.parseInt(badge.getPontuacao()));
+
+                    if(level_up){
+                        pop_up_level_up(mod.getUser());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+    }
+
+    private void pop_up_level_up(Usuario usuario){
+        Dialog settingsDialog = new Dialog(this);
+
+        settingsDialog.setContentView(R.layout.mostra_badge);
+        settingsDialog.setTitle("LEVEL_UP");
+
+        TextView descricao_badge = settingsDialog.findViewById(R.id.descricao_badge);
+        descricao_badge.setText("PARABENS POR SUBIR DE LV!!!");
+
+        TextView ponto_badge = settingsDialog.findViewById(R.id.ponto_badge);
+        String mensagem = "Level: " + usuario.getLevel() + " Score: " + usuario.getScore();
+        ponto_badge.setText(mensagem);
+
+        settingsDialog.show();
+    }
+
+    private void pop_up_badges(Badge badge){
+        Dialog settingsDialog = new Dialog(this);
+
+        settingsDialog.setContentView(R.layout.mostra_badge);
+        settingsDialog.setTitle("BADGE");
+
+        TextView descricao_badge = settingsDialog.findViewById(R.id.descricao_badge);
+        descricao_badge.setText(badge.getDescricao());
+
+        TextView ponto_badge = settingsDialog.findViewById(R.id.ponto_badge);
+        String mensagem = badge.getPontuacao() + " " + getString(R.string.pontos);
+        ponto_badge.setText(mensagem);
+
+        ImageView imagem_badge = settingsDialog.findViewById(R.id.imagem_badge);
+        String IdBadge = "gs://uplace-ff0b3.appspot.com/badge/" + badge.getId() +".gif";
+        StorageReference Ref_badge_1 = FirebaseStorage.getInstance().getReferenceFromUrl(IdBadge);
+
+        //Bagde
+        Glide.with(this)
+                .load(Ref_badge_1)
+                .apply(new RequestOptions().override(350,350))
+                .into(imagem_badge);
+
+        settingsDialog.show();
+    }
+
+    private void preenche_array_badges(DataSnapshot dataSnapshot){
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+            badges.add(snapshot.getValue(String.class));
+        }
     }
 
     private void set_database_eventos(){
@@ -278,6 +445,7 @@ public class MainActivity extends AppCompatActivity {
                 set_info_usuario(dataSnapshot);
                 carrega_imagens(user.getProfilePic(), user.getIdBadge1());
                 ok = true;
+                checa_badges();
                 set_database_amigos();
                 set_database_eventos();
             }

@@ -26,16 +26,16 @@ public class Logica_badges {
     }
 
     //badge calouro ---- lv >= 1
-    public boolean calouro(String score_usuario){
-        if(Integer.parseInt(score_usuario) >= 1){
+    public boolean calouro(String level_usuario){
+        if(Integer.parseInt(level_usuario) >= 1){
             return true;
         }
         return false;
     }
 
     //badge veterano ---- lv >= 8
-    public boolean veterano(String score_usuario){
-        if(Integer.parseInt(score_usuario) >= 8){
+    public boolean veterano(String level_usuario){
+        if(Integer.parseInt(level_usuario) >= 8){
             return true;
         }
         return false;
