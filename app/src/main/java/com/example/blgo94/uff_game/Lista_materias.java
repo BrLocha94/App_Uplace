@@ -1,5 +1,6 @@
 package com.example.blgo94.uff_game;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
@@ -16,16 +17,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -46,6 +52,16 @@ public class Lista_materias extends AppCompatActivity {
 
     //Database usado
     DatabaseReference data;
+    DatabaseReference data_badges;
+    DatabaseReference data_badge_acess;
+
+    Badge badge;
+
+    Usuario user;
+
+    boolean ok = true;
+
+    private ArrayList<String> badges;
 
     //Recebe as materias que o usuario está inscrito
     private ArrayList<Materia> array_materias;
@@ -229,6 +245,133 @@ public class Lista_materias extends AppCompatActivity {
             }
         });
 
+        checa_badges();
+
+    }
+
+    private void checa_badges(){
+
+        data_badge_acess = FirebaseDatabase.getInstance().getReference("badge_acess");
+
+        data_badge_acess.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                badges = new ArrayList<String>();
+                preenche_array_badges(dataSnapshot);
+                for(int i = 0; i < badges.size(); i++){
+                    if(badges.get(i).equals("aula_sabado")){
+                        ok = false;
+                        break;
+                    }
+                }
+
+                if(ok){
+                    badge_aula_sabado();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void badge_aula_sabado(){
+        if(array_sab.size() > 0){
+            badges.add("aula_sabado");
+            data_badge_acess.child(id).setValue(badges);
+
+            get_usuario(id);
+
+            //LIBERA BADGE DIALOG
+            data_badges = FirebaseDatabase.getInstance().getReference("badges");
+            data_badges.child("aula_sabado").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    badge = dataSnapshot.getValue(Badge.class);
+                    pop_up_badges(badge);
+                    Modfica_usuario mod = new Modfica_usuario(id, user);
+                    Log.d(TAG, "onDataChange: "+ mod.getUser().getScore());
+                    boolean level_up = mod.add_score(Integer.parseInt(badge.getPontuacao()));
+
+                    if(level_up){
+                        pop_up_level_up(mod.getUser());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+    }
+
+    private void get_usuario(String id){
+        DatabaseReference data = FirebaseDatabase.getInstance().getReference("users");
+
+        data.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user = (dataSnapshot.getValue(Usuario.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void pop_up_level_up(Usuario usuario){
+        Dialog settingsDialog = new Dialog(this);
+
+        settingsDialog.setContentView(R.layout.mostra_badge);
+        settingsDialog.setTitle("LEVEL_UP");
+
+        TextView descricao_badge = settingsDialog.findViewById(R.id.descricao_badge);
+        descricao_badge.setText("PARABENS POR SUBIR DE LV!!!");
+
+        TextView ponto_badge = settingsDialog.findViewById(R.id.ponto_badge);
+        String mensagem = "Level: " + usuario.getLevel() + " Score: " + usuario.getScore();
+        ponto_badge.setText(mensagem);
+
+        settingsDialog.show();
+    }
+
+    private void pop_up_badges(Badge badge){
+        Dialog settingsDialog = new Dialog(this);
+
+        settingsDialog.setContentView(R.layout.mostra_badge);
+        settingsDialog.setTitle("BADGE");
+
+        TextView descricao_badge = settingsDialog.findViewById(R.id.descricao_badge);
+        descricao_badge.setText(badge.getDescricao());
+
+        TextView ponto_badge = settingsDialog.findViewById(R.id.ponto_badge);
+        String mensagem = badge.getPontuacao() + " " + getString(R.string.pontos);
+        ponto_badge.setText(mensagem);
+
+        ImageView imagem_badge = settingsDialog.findViewById(R.id.imagem_badge);
+        String IdBadge = "gs://uplace-ff0b3.appspot.com/badge/" + badge.getId() +".gif";
+        StorageReference Ref_badge_1 = FirebaseStorage.getInstance().getReferenceFromUrl(IdBadge);
+
+        //Bagde
+        Glide.with(this)
+                .load(Ref_badge_1)
+                .apply(new RequestOptions().override(350,350))
+                .into(imagem_badge);
+
+        settingsDialog.show();
+    }
+
+    private void preenche_array_badges(DataSnapshot dataSnapshot){
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+            badges.add(snapshot.getValue(String.class));
+        }
     }
 
     public void inicia_view_materia(String chave){
