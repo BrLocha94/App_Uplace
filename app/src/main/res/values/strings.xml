@@ -55,5 +55,6 @@
     <string name="deseja_excluir_materia">Deseja excluir a matéria</string>
     <string name="materia_removida">Materia Removida!</string>
     <string name="prova_adicionada">Prova adicionada</string>
+    <string name="pontos">Pontos</string>
 </resources>
 

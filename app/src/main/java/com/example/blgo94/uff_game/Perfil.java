@@ -1,10 +1,12 @@
 package com.example.blgo94.uff_game;
 
+import android.app.Dialog;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -48,6 +50,7 @@ public class Perfil extends AppCompatActivity {
 
     private DatabaseReference data_amigo;
     private DatabaseReference data;
+    private DatabaseReference data_badges;
 
     //botao teste
     private Button add_amigo;
@@ -127,7 +130,89 @@ public class Perfil extends AppCompatActivity {
             set_database_atualizacoes();
         }
 
+        badge_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data_badges = FirebaseDatabase.getInstance().getReference("badges");
+                data_badges.child(user.getIdBadge1()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Badge badge = dataSnapshot.getValue(Badge.class);
+                        pop_up_badges(badge);
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+        badge_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data_badges = FirebaseDatabase.getInstance().getReference("badges");
+                data_badges.child(user.getIdBadge2()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Badge badge = dataSnapshot.getValue(Badge.class);
+                        pop_up_badges(badge);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+        badge_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data_badges = FirebaseDatabase.getInstance().getReference("badges");
+                data_badges.child(user.getIdBadge3()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Badge badge = dataSnapshot.getValue(Badge.class);
+                        pop_up_badges(badge);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+    }
+
+    private void pop_up_badges(Badge badge){
+        Dialog settingsDialog = new Dialog(this);
+
+        settingsDialog.setContentView(R.layout.mostra_badge);
+        settingsDialog.setTitle("BADGE");
+
+        TextView descricao_badge = settingsDialog.findViewById(R.id.descricao_badge);
+        descricao_badge.setText(badge.getDescricao());
+
+        TextView ponto_badge = settingsDialog.findViewById(R.id.ponto_badge);
+        String mensagem = badge.getPontuacao() + " " + getString(R.string.pontos);
+        ponto_badge.setText(mensagem);
+
+        ImageView imagem_badge = settingsDialog.findViewById(R.id.imagem_badge);
+        String IdBadge = "gs://uplace-ff0b3.appspot.com/badge/" + badge.getId() +".gif";
+        StorageReference Ref_badge_1 = FirebaseStorage.getInstance().getReferenceFromUrl(IdBadge);
+
+        //Bagde
+        Glide.with(this)
+                .load(Ref_badge_1)
+                .apply(new RequestOptions().override(350,350))
+                .into(imagem_badge);
+
+        settingsDialog.show();
     }
 
     private void requisita_add_amigo(){
@@ -193,9 +278,9 @@ public class Perfil extends AppCompatActivity {
                                  String IdBadge3){
 
         ProfilePic = "gs://uplace-ff0b3.appspot.com/avatar/" + ProfilePic;
-        IdBadge1 = "gs://uplace-ff0b3.appspot.com/badge/" + IdBadge1;
-        IdBadge2 = "gs://uplace-ff0b3.appspot.com/badge/" + IdBadge2;
-        IdBadge3 = "gs://uplace-ff0b3.appspot.com/badge/" + IdBadge3;
+        IdBadge1 = "gs://uplace-ff0b3.appspot.com/badge/" + IdBadge1 +".gif";
+        IdBadge2 = "gs://uplace-ff0b3.appspot.com/badge/" + IdBadge2 +".gif";
+        IdBadge3 = "gs://uplace-ff0b3.appspot.com/badge/" + IdBadge3 +".gif";
 
         mStorageRef_avatar = FirebaseStorage.getInstance().getReferenceFromUrl(ProfilePic);
         mStorageRef_badge_1 = FirebaseStorage.getInstance().getReferenceFromUrl(IdBadge1);
