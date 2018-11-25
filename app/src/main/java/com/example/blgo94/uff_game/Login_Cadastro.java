@@ -253,7 +253,7 @@ public class Login_Cadastro extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
 
-        Usuario user = new Usuario(array[0], array[0], "nenhum", "0", "0", "default.gif", "default_b.gif", "default_b.gif", "default_b.gif");
+        Usuario user = new Usuario(array[0], array[0], "nenhum", "0", "0", "default", "default_b", "default_b", "default_b");
 
         mDatabase.child(user.getID()).setValue(user);
 
@@ -269,7 +269,7 @@ public class Login_Cadastro extends AppCompatActivity {
         ArrayList<String> atualizacoes = new ArrayList<String>();
         atualizacoes.add("Criou a conta no Uplace!!!");
 
-        data_atualizacoes.child(user.getID()).setValue(atualizacoes);
+        data_atualizacoes.child(user.getID()).child("atualiz").setValue(atualizacoes);
 
         data_localizacao = FirebaseDatabase.getInstance().getReference("loc");
 

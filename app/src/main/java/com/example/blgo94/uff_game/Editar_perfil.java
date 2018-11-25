@@ -66,7 +66,7 @@ public class Editar_perfil extends AppCompatActivity {
                 boolean ok = checa_problemas();
 
                 if(ok) {
-                    usuario.setUser_name(perfil_nome.getText().toString());
+                    usuario.setUser_name(perfil_nome_informado.getText().toString());
                     usuario.setCourse(perfil_curso.getText().toString());
 
                     mDatabase.child(usuario.getID()).setValue(usuario);
