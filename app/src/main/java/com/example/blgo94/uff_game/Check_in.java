@@ -31,7 +31,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Check_in extends AppCompatActivity implements LocationListener {
 
@@ -52,6 +54,7 @@ public class Check_in extends AppCompatActivity implements LocationListener {
 
     DatabaseReference data;
     DatabaseReference data_lugares;
+    DatabaseReference data_atualizacao;
 
     private String user_name;
 
@@ -351,6 +354,49 @@ public class Check_in extends AppCompatActivity implements LocationListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                final String id_selecionado = (String) parent.getItemAtPosition(position);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Check_in.this);
+                builder.setTitle("Você está em " + id_selecionado + "?");
+
+                //if the response is positive in the alert
+                builder.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        data_atualizacao = FirebaseDatabase.getInstance().getReference("atualizacao");
+
+                        data_atualizacao.child(user_name).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Atualizacoes ata = dataSnapshot.getValue(Atualizacoes.class);
+                                ata.add_info("Check in " + id_selecionado + " em " + get_data_atual() + " as " + get_hora_atual());
+                                data_atualizacao.child(user_name).setValue(ata);
+                                Toast.makeText(Check_in.this, "Checked in " + id_selecionado, Toast.LENGTH_SHORT);
+
+                                finish();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                    }
+                });
+
+                //if response is negative nothing is being done
+                builder.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+                //creating and displaying the alert dialog
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
     }
@@ -366,6 +412,20 @@ public class Check_in extends AppCompatActivity implements LocationListener {
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
         return (dist);
+    }
+
+    public String get_hora_atual(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss");
+
+        return formato.format(calendar.getTime());
+    }
+
+    public String get_data_atual() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formato = new SimpleDateFormat("dd / MM / yyyy");
+
+        return formato.format(calendar.getTime());
     }
 
     private double deg2rad(double deg) {

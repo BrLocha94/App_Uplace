@@ -29,5 +29,8 @@ public class Atualizacoes {
 
     public void add_info(String info){
         this.atualiz.add(0, info);
+        if(atualiz.size() > 8){
+            atualiz.remove(atualiz.size() - 1);
+        }
     }
 }
