@@ -5,38 +5,18 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Latitude:"
+        android:id="@+id/texto_lista_usuarios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="PROCURANDO USUARIOS PRÓXIMOS..."
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        />
 
-    <TextView
-        android:id="@+id/tvLatitude"
+    <ListView
+        android:id="@+id/lista_usuarios_proximos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
-    <TextView
-        android:text="Longitude:"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/tvLongitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:text="Time of request:"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/tvTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </LinearLayout>

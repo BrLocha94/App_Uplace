@@ -56,5 +56,6 @@
     <string name="materia_removida">Materia Removida!</string>
     <string name="prova_adicionada">Prova adicionada</string>
     <string name="pontos">Pontos</string>
+    <string name="nenhum_usuario">Nenhum usuario encontrado nas suas proximidades...</string>
 </resources>
 
