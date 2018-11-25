@@ -89,4 +89,18 @@ public class Prova implements Parcelable {
     public void setNota(String nota) {
         this.nota = nota;
     }
+
+    public int get_dia(){
+        String array [] = new String[2];
+        array = data.split("/");
+
+        return Integer.parseInt(array[0]);
+    }
+
+    public int get_mes(){
+        String array [] = new String[2];
+        array = data.split("/");
+
+        return Integer.parseInt(array[1]);
+    }
 }

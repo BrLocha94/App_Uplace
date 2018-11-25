@@ -253,7 +253,7 @@ public class Login_Cadastro extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
 
-        Usuario user = new Usuario(array[0], array[0], "nenhum", "0", "0", "default", "default_b", "default_b", "default_b");
+        Usuario user = new Usuario(array[0], array[0], "nenhum", "0", "0", "default.gif", "default_b", "default_b", "default_b");
 
         mDatabase.child(user.getID()).setValue(user);
 

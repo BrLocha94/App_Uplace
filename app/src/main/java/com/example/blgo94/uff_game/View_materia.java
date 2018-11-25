@@ -183,7 +183,7 @@ public class View_materia extends AppCompatActivity {
 
     public String get_data_atual() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formato = new SimpleDateFormat("dd / MM / yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
         return formato.format(calendar.getTime());
     }
