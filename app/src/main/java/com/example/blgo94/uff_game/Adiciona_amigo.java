@@ -24,6 +24,8 @@ public class Adiciona_amigo extends AppCompatActivity {
     private DatabaseReference data;
     private DatabaseReference data_users;
     private DatabaseReference data_add_amigo;
+    private DatabaseReference data_atualizacao;
+
 
     private String id;
 
@@ -189,6 +191,47 @@ public class Adiciona_amigo extends AppCompatActivity {
                     checa_pedidos_amigo();
                 }
                 checa_pedidos();
+                //finish();
+                atualizacao_amigo();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void atualizacao_amigo(){
+        data_atualizacao = FirebaseDatabase.getInstance().getReference("atualizacao");
+
+        data_atualizacao.child(user_amigo.getID()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Atualizacoes ata = dataSnapshot.getValue(Atualizacoes.class);
+                ata.add_info(getString(R.string.comecou_amizade) + " " + usuario.getUser_name());
+                data_atualizacao.child(user_amigo.getID()).setValue(ata);
+
+                atualizacao_user();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void atualizacao_user(){
+        data_atualizacao = FirebaseDatabase.getInstance().getReference("atualizacao");
+
+        data_atualizacao.child(usuario.getID()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Atualizacoes ata = dataSnapshot.getValue(Atualizacoes.class);
+                ata.add_info(getString(R.string.comecou_amizade) + " " + user_amigo.getUser_name());
+                data_atualizacao.child(usuario.getID()).setValue(ata);
+
                 finish();
             }
 
