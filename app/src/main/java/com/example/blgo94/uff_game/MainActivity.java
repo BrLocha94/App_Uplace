@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 badges = new ArrayList<String>();
                 preenche_array_badges(dataSnapshot);
 
+                ok_badge = true;
                 for(int i = 0; i < badges.size(); i++){
                     if(badges.get(i).equals("calouro")){
                         ok_badge = false;
@@ -149,22 +150,25 @@ public class MainActivity extends AppCompatActivity {
 
                 if(ok_badge){
                     badge_calouro();
+                    checa_badges();
                 }
                 else{
-                    ok = true;
+                    ok_badge = true;
+                    Log.d(TAG, "badge_veterano: AQUI AHAHAHHAHAHAHAHAHAHAHAHAHHAAH " + badges.size());
                     for(int i = 0; i < badges.size(); i++){
+                        Log.d(TAG, "b a d g e s v e t e r a n o " + badges.get(i));
                         if(badges.get(i).equals("veterano")){
+                            Log.d(TAG, "badge_veterano: ");
                             ok_badge = false;
                             break;
                         }
                     }
+                    Log.d(TAG, "badge_veterano: " + ok_badge);
+                    if(ok_badge){
+                        badge_veterano();
+                    }
+                    ok_badge = true;
                 }
-                
-
-                if(ok_badge){
-                    badge_veterano();
-                }
-                ok = true;
 
             }
 
@@ -208,10 +212,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void badge_veterano(){
-        Logica_badges log_bad = new Logica_badges();
+        Logica_badges log_bad_vet = new Logica_badges();
 
-        Log.d(TAG, "badge_veterano: AQUI AHAHAHHAHAHAHAHAHAHAHAHAHHAAH");
-        if(log_bad.veterano(user.getLevel())){
+        if(log_bad_vet.veterano(user.getLevel())){
 
             badges.add("veterano");
             data_badge_acess.child(user.getID()).setValue(badges);
@@ -445,9 +448,9 @@ public class MainActivity extends AppCompatActivity {
                 set_info_usuario(dataSnapshot);
                 carrega_imagens(user.getProfilePic(), user.getIdBadge1());
                 ok = true;
-                checa_badges();
                 set_database_amigos();
                 set_database_eventos();
+                checa_badges();
             }
 
             @Override

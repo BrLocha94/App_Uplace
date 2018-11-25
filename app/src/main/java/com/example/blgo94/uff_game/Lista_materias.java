@@ -258,6 +258,7 @@ public class Lista_materias extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 badges = new ArrayList<String>();
                 preenche_array_badges(dataSnapshot);
+                ok = true;
                 for(int i = 0; i < badges.size(); i++){
                     if(badges.get(i).equals("aula_sabado")){
                         ok = false;
@@ -267,32 +268,38 @@ public class Lista_materias extends AppCompatActivity {
 
                 if(ok){
                     badge_aula_sabado();
+                    checa_badges();
                 }
-                ok = true;
+                else {
+                    ok = true;
 
-                for(int i = 0; i < badges.size(); i++){
-                    if(badges.get(i).equals("2_provas")){
-                        ok = false;
-                        break;
+                    for (int i = 0; i < badges.size(); i++) {
+                        if (badges.get(i).equals("2_provas")) {
+                            ok = false;
+                            break;
+                        }
+                    }
+
+                    if (ok) {
+                        badge_duas_provas();
+                        checa_badges();
+                    }
+                    else {
+                        ok = true;
+
+                        for (int i = 0; i < badges.size(); i++) {
+                            if (badges.get(i).equals("5_provas")) {
+                                ok = false;
+                                break;
+                            }
+                        }
+
+                        if (ok) {
+                            badge_cinco_provas();
+                        }
+                        ok = true;
                     }
                 }
-
-                if(ok){
-                    badge_duas_provas();
-                }
-                ok = true;
-
-                for(int i = 0; i < badges.size(); i++){
-                    if(badges.get(i).equals("5_provas")){
-                        ok = false;
-                        break;
-                    }
-                }
-
-                if(ok){
-                    badge_cinco_provas();
-                }
-                ok = true;
             }
 
             @Override
