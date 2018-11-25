@@ -369,6 +369,7 @@ public class MainActivity extends AppCompatActivity {
                 //Vai para a tela de lista de amigos
                 Intent intent = new Intent(MainActivity.this, Adiciona_amigo.class);
                 intent.putExtra("ID_USUARIO", user.getID());
+                intent.putExtra("objeto", user);
                 startActivity(intent);
             }
             else{

@@ -24,6 +24,8 @@ public class Lista_usuarios_proximos extends AppCompatActivity {
     private Localizacao loc_usuario = new Localizacao();
     private Localizacao loc_proximo = new Localizacao();
 
+    private ArrayList<String> ids_amigos = new ArrayList<String>();
+
     private ArrayList<String> ids_proximos = new ArrayList<String>();
 
     private ArrayList<Usuario> users = new ArrayList<Usuario>();
@@ -32,6 +34,7 @@ public class Lista_usuarios_proximos extends AppCompatActivity {
 
     DatabaseReference data;
     DatabaseReference data_users;
+    DatabaseReference data_amigos;
 
     private ListView lista;
 
@@ -41,6 +44,20 @@ public class Lista_usuarios_proximos extends AppCompatActivity {
         setContentView(R.layout.activity_lista_usuarios_proximos);
 
         id_user = (String) getIntent().getStringExtra("ID_USUARIO");
+
+        data_amigos = FirebaseDatabase.getInstance().getReference("amigos");
+
+        data_amigos.child(id_user).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                preenche_array_amigos(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         data = FirebaseDatabase.getInstance().getReference("loc");
 
@@ -56,6 +73,12 @@ public class Lista_usuarios_proximos extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void preenche_array_amigos(DataSnapshot dataSnapshot){
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+            ids_amigos.add(snapshot.getKey());
+        }
     }
 
     private void checa_usuarios_proximos(){
@@ -107,11 +130,25 @@ public class Lista_usuarios_proximos extends AppCompatActivity {
 
                 Intent intent = new Intent(Lista_usuarios_proximos.this, Perfil.class);
                 intent.putExtra("objeto", user_ref);
-                intent.putExtra("caso", "1");
+                if(valida(user_ref.getID())){
+                    intent.putExtra("caso", "0");
+                }
+                else {
+                    intent.putExtra("caso", "1");
+                }
                 intent.putExtra("ID_USUARIO", id_user);
                 startActivity(intent);
             }
         });
+    }
+
+    private boolean valida(String alvo_id){
+        for(int i = 0; i < ids_amigos.size(); i++){
+            if (ids_amigos.get(i).equals(alvo_id)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void set_users(DataSnapshot dataSnapshot){
