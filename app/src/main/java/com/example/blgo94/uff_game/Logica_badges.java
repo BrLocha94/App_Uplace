@@ -21,8 +21,7 @@ public class Logica_badges {
 
     private ArrayList<String> array_campi = new ArrayList<String>();
 
-
-    private String count;
+    private ArrayList<String> count = new ArrayList<String>();
 
     public Logica_badges(){
 
@@ -87,61 +86,8 @@ public class Logica_badges {
         return checa_logica_cinco_provas();
     }
 
-    //badge de bandeco - mais de 15 check-in no bandeco do grags ou pv
-    public boolean bandejao(final String id_usuario){
+    //bandejao 15 logs
 
-        final DatabaseReference data = FirebaseDatabase.getInstance().getReference("badge_req");
-
-        final boolean ok = false;
-
-        data.child("bandejao").child(id_usuario).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                count = dataSnapshot.getValue(String.class);
-                if(count.isEmpty()){
-                    count = "1";
-                    data.child("bandejao").child(id_usuario).setValue(count);
-                }
-                else{
-                    count = Integer.toString(Integer.parseInt(count) + 1);
-                    data.child("bandejao").child(id_usuario).setValue(count);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        if(Integer.parseInt(count) >= 15){
-            return true;
-        }
-        else {
-            return false;
-        }
-
-    }
-
-    //badge de campi - pelo menos um check in em todos os campus da uff
-    public boolean campi(final String log, final String id_usuario){
-
-        final DatabaseReference data = FirebaseDatabase.getInstance().getReference("badge_req");
-
-        data.child("campi").child(id_usuario).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                preenche_array_campi(dataSnapshot);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return checa_logica_campi(id_usuario, log);
-    }
 
     private boolean checa_logica_campi(final String id_usuario, String log){
         String array[] = {"UFF PV", "UFF Gragoatá", "Valonguinho", "Vet UFF", "Farmácia UFF",
@@ -151,13 +97,13 @@ public class Logica_badges {
             for(int i = 0; i < array.length; i++){
                 array_campi.add("0");
             }
-            salva_array_campi(id_usuario);
+            //salva_array_campi(id_usuario);
         }
 
         for(int i = 0; i < array.length; i++){
             if(array[i].equals(log)){
                 array_campi.set(i, "1");
-                salva_array_campi(id_usuario);
+                //salva_array_campi(id_usuario);
                 break;
             }
         }
@@ -168,18 +114,6 @@ public class Logica_badges {
             }
         }
         return true;
-    }
-
-    private void salva_array_campi(String id_usuario){
-        final DatabaseReference data = FirebaseDatabase.getInstance().getReference("badge_req");
-
-        data.child(id_usuario).setValue(array_campi);
-    }
-
-    private void preenche_array_campi(DataSnapshot dataSnapshot){
-        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-            array_campi.add(snapshot.getValue(String.class));
-        }
     }
 
     private boolean checa_logica_cinco_provas(){
