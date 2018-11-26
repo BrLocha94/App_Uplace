@@ -267,6 +267,9 @@ public class MainActivity extends AppCompatActivity {
         settingsDialog.setContentView(R.layout.mostra_badge);
         settingsDialog.setTitle("BADGE");
 
+        TextView nome_badge = settingsDialog.findViewById(R.id.nome_badge);
+        nome_badge.setText(badge.getNome());
+
         TextView descricao_badge = settingsDialog.findViewById(R.id.descricao_badge);
         descricao_badge.setText(badge.getDescricao());
 
