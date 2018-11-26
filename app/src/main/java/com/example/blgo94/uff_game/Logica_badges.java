@@ -12,12 +12,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class Logica_badges {
 
     private ArrayList<String> array_ids_materias = new ArrayList<String>();
     private ArrayList<Prova> array_provas = new ArrayList<Prova>();
 
-    private boolean ok;
+    private ArrayList<String> array_campi = new ArrayList<String>();
+
 
     private String count;
 
@@ -89,6 +92,8 @@ public class Logica_badges {
 
         final DatabaseReference data = FirebaseDatabase.getInstance().getReference("badge_req");
 
+        final boolean ok = false;
+
         data.child("bandejao").child(id_usuario).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -99,12 +104,7 @@ public class Logica_badges {
                 }
                 else{
                     count = Integer.toString(Integer.parseInt(count) + 1);
-                    if(Integer.parseInt(count) >= 15){
-                        ok = true;
-                    }
-                    else {
-                        ok = false;
-                    }
+                    data.child("bandejao").child(id_usuario).setValue(count);
                 }
             }
 
@@ -114,10 +114,73 @@ public class Logica_badges {
             }
         });
 
-        return ok;
+        if(Integer.parseInt(count) >= 15){
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 
     //badge de campi - pelo menos um check in em todos os campus da uff
+    public boolean campi(final String log, final String id_usuario){
+
+        final DatabaseReference data = FirebaseDatabase.getInstance().getReference("badge_req");
+
+        data.child("campi").child(id_usuario).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                preenche_array_campi(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return checa_logica_campi(id_usuario, log);
+    }
+
+    private boolean checa_logica_campi(final String id_usuario, String log){
+        String array[] = {"UFF PV", "UFF Gragoatá", "Valonguinho", "Vet UFF", "Farmácia UFF",
+                "Direito", "IACS", "IACS II", "Biomédico"};
+
+        if(array_campi.size() == 0){
+            for(int i = 0; i < array.length; i++){
+                array_campi.add("0");
+            }
+            salva_array_campi(id_usuario);
+        }
+
+        for(int i = 0; i < array.length; i++){
+            if(array[i].equals(log)){
+                array_campi.set(i, "1");
+                salva_array_campi(id_usuario);
+                break;
+            }
+        }
+
+        for (int i = 0; i < array.length; i++){
+            if(array_campi.get(i).equals("0")){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void salva_array_campi(String id_usuario){
+        final DatabaseReference data = FirebaseDatabase.getInstance().getReference("badge_req");
+
+        data.child(id_usuario).setValue(array_campi);
+    }
+
+    private void preenche_array_campi(DataSnapshot dataSnapshot){
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+            array_campi.add(snapshot.getValue(String.class));
+        }
+    }
 
     private boolean checa_logica_cinco_provas(){
         if(array_provas.size() <= 4) return false;

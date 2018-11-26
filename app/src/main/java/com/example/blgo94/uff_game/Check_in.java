@@ -2,6 +2,7 @@ package com.example.blgo94.uff_game;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,15 +21,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -65,6 +71,17 @@ public class Check_in extends AppCompatActivity implements LocationListener {
     private double raio = 0.03;
 
     private ListView lista_lugares;
+
+    DatabaseReference data_badges;
+    DatabaseReference data_badge_acess;
+
+    Badge badge;
+
+    Usuario user;
+
+    boolean ok = true;
+
+    private ArrayList<String> badges;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -373,6 +390,8 @@ public class Check_in extends AppCompatActivity implements LocationListener {
                                 ata.add_info("Check in " + id_selecionado + ", " + get_data_atual() + " - " + get_hora_atual());
                                 data_atualizacao.child(user_name).setValue(ata);
 
+                                checa_badges(id_selecionado, true);
+
                                 finish();
                             }
 
@@ -398,6 +417,189 @@ public class Check_in extends AppCompatActivity implements LocationListener {
                 alertDialog.show();
             }
         });
+    }
+
+    private void checa_badges(final String log, final boolean controle){
+
+        data_badge_acess = FirebaseDatabase.getInstance().getReference("badge_acess");
+
+        data_badge_acess.child(user_name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                badges = new ArrayList<String>();
+                preenche_array_badges(dataSnapshot);
+                ok = true;
+                for(int i = 0; i < badges.size(); i++){
+                    if(badges.get(i).equals("bandejao")){
+                        ok = false;
+                        break;
+                    }
+                }
+
+                if(ok && controle){
+                    badge_bandejao(log);
+                    checa_badges(log, false);
+                }
+                else {
+                    ok = true;
+
+                    for (int i = 0; i < badges.size(); i++) {
+                        if (badges.get(i).equals("campi")) {
+                            ok = false;
+                            break;
+                        }
+                    }
+
+                    if (ok) {
+                        badge_campi(log);
+                        //checa_badges();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void badge_campi(String log){
+
+        if(log.equals("Bandejão PV") || log.equals("Bandejão grags")) {
+
+            Logica_badges log_bad = new Logica_badges();
+            if (log_bad.campi(log, user_name)) {
+
+                badges.add("campi");
+                data_badge_acess.child(user_name).setValue(badges);
+
+                get_usuario(user_name);
+
+                //LIBERA BADGE DIALOG
+                data_badges = FirebaseDatabase.getInstance().getReference("badges");
+                data_badges.child("campi").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        badge = dataSnapshot.getValue(Badge.class);
+                        pop_up_badges(badge);
+                        Modfica_usuario mod = new Modfica_usuario(user_name, user);
+                        boolean level_up = mod.add_score(Integer.parseInt(badge.getPontuacao()));
+
+                        if (level_up) {
+                            pop_up_level_up(mod.getUser());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        }
+    }
+
+    private void badge_bandejao(String log){
+
+        Log.d(TAG, "onDataChange: ENTROU AQUI MESMO AHAHAHAHAAHAHHA");
+
+        Logica_badges log_bad = new Logica_badges();
+        if (log_bad.bandejao(user_name)) {
+
+            Log.d(TAG, "onDataChange: ENTROU AQUI MESMO AHAHAHAHAAHAHHA");
+
+            badges.add("bandejao");
+            data_badge_acess.child(user_name).setValue(badges);
+
+            get_usuario(user_name);
+
+            //LIBERA BADGE DIALOG
+            data_badges = FirebaseDatabase.getInstance().getReference("badges");
+            data_badges.child("bandejao").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    badge = dataSnapshot.getValue(Badge.class);
+                    pop_up_badges(badge);
+                    Modfica_usuario mod = new Modfica_usuario(user_name, user);
+                    boolean level_up = mod.add_score(Integer.parseInt(badge.getPontuacao()));
+
+                    if (level_up) {
+                        pop_up_level_up(mod.getUser());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
+    private void get_usuario(String id){
+        DatabaseReference data = FirebaseDatabase.getInstance().getReference("users");
+
+        data.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user = (dataSnapshot.getValue(Usuario.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void pop_up_level_up(Usuario usuario){
+        Dialog settingsDialog = new Dialog(this);
+
+        settingsDialog.setContentView(R.layout.mostra_badge);
+        settingsDialog.setTitle("LEVEL_UP");
+
+        TextView descricao_badge = settingsDialog.findViewById(R.id.descricao_badge);
+        descricao_badge.setText("PARABENS POR SUBIR DE LV!!!");
+
+        TextView ponto_badge = settingsDialog.findViewById(R.id.ponto_badge);
+        String mensagem = "Level: " + usuario.getLevel() + " Score: " + usuario.getScore();
+        ponto_badge.setText(mensagem);
+
+        settingsDialog.show();
+    }
+
+    private void pop_up_badges(Badge badge){
+        Dialog settingsDialog = new Dialog(this);
+
+        settingsDialog.setContentView(R.layout.mostra_badge);
+        settingsDialog.setTitle("BADGE");
+
+        TextView descricao_badge = settingsDialog.findViewById(R.id.descricao_badge);
+        descricao_badge.setText(badge.getDescricao());
+
+        TextView ponto_badge = settingsDialog.findViewById(R.id.ponto_badge);
+        String mensagem = badge.getPontuacao() + " " + getString(R.string.pontos);
+        ponto_badge.setText(mensagem);
+
+        ImageView imagem_badge = settingsDialog.findViewById(R.id.imagem_badge);
+        String IdBadge = "gs://uplace-ff0b3.appspot.com/badge/" + badge.getId() +".gif";
+        StorageReference Ref_badge_1 = FirebaseStorage.getInstance().getReferenceFromUrl(IdBadge);
+
+        //Bagde
+        Glide.with(this)
+                .load(Ref_badge_1)
+                .apply(new RequestOptions().override(350,350))
+                .into(imagem_badge);
+
+        settingsDialog.show();
+    }
+
+    private void preenche_array_badges(DataSnapshot dataSnapshot){
+        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+            badges.add(snapshot.getValue(String.class));
+        }
     }
 
     private double distance(double lat1, double lon1, double lat2, double lon2) {
