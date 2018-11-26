@@ -101,6 +101,8 @@ public class Check_in extends AppCompatActivity implements LocationListener {
 
         user_name = (String) getIntent().getStringExtra("ID_USUARIO");
 
+        get_usuario(user_name);
+
         locationManager = (LocationManager) getSystemService(Service.LOCATION_SERVICE);
         isGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         isNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
@@ -143,6 +145,22 @@ public class Check_in extends AppCompatActivity implements LocationListener {
             });
 
         }
+    }
+
+    private void get_usuario(String id){
+        DatabaseReference data = FirebaseDatabase.getInstance().getReference("users");
+
+        data.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user = (dataSnapshot.getValue(Usuario.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void preenche_array(DataSnapshot dataSnapshot){
@@ -390,7 +408,16 @@ public class Check_in extends AppCompatActivity implements LocationListener {
                                 ata.add_info("Check in " + id_selecionado + ", " + get_data_atual() + " - " + get_hora_atual());
                                 data_atualizacao.child(user_name).setValue(ata);
 
-                                finish();
+                                Modfica_usuario mod = new Modfica_usuario(user_name, user);
+                                Log.d(TAG, "onDataChange: "+ mod.getUser().getScore());
+                                boolean level_up = mod.add_score(1);
+
+                                if(level_up){
+                                    pop_up_level_up(mod.getUser());
+                                    finish();
+                                }
+
+                                //finish();
                             }
 
                             @Override
@@ -415,6 +442,22 @@ public class Check_in extends AppCompatActivity implements LocationListener {
                 alertDialog.show();
             }
         });
+    }
+
+    private void pop_up_level_up(Usuario usuario){
+        Dialog settingsDialog = new Dialog(this);
+
+        settingsDialog.setContentView(R.layout.mostra_badge);
+        settingsDialog.setTitle("LEVEL_UP");
+
+        TextView descricao_badge = settingsDialog.findViewById(R.id.descricao_badge);
+        descricao_badge.setText("PARABENS POR SUBIR DE LV!!!");
+
+        TextView ponto_badge = settingsDialog.findViewById(R.id.ponto_badge);
+        String mensagem = "Level: " + usuario.getLevel() + " Score: " + usuario.getScore();
+        ponto_badge.setText(mensagem);
+
+        settingsDialog.show();
     }
 
     private double distance(double lat1, double lon1, double lat2, double lon2) {
