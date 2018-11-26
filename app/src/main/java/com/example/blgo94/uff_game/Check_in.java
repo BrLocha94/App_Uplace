@@ -409,15 +409,9 @@ public class Check_in extends AppCompatActivity implements LocationListener {
                                 data_atualizacao.child(user_name).setValue(ata);
 
                                 Modfica_usuario mod = new Modfica_usuario(user_name, user);
-                                Log.d(TAG, "onDataChange: "+ mod.getUser().getScore());
-                                boolean level_up = mod.add_score(1);
+                                mod.somente_add_score(1);
 
-                                if(level_up){
-                                    pop_up_level_up(mod.getUser());
-                                    finish();
-                                }
-
-                                //finish();
+                                finish();
                             }
 
                             @Override
@@ -442,22 +436,6 @@ public class Check_in extends AppCompatActivity implements LocationListener {
                 alertDialog.show();
             }
         });
-    }
-
-    private void pop_up_level_up(Usuario usuario){
-        Dialog settingsDialog = new Dialog(this);
-
-        settingsDialog.setContentView(R.layout.mostra_badge);
-        settingsDialog.setTitle("LEVEL_UP");
-
-        TextView descricao_badge = settingsDialog.findViewById(R.id.descricao_badge);
-        descricao_badge.setText("PARABENS POR SUBIR DE LV!!!");
-
-        TextView ponto_badge = settingsDialog.findViewById(R.id.ponto_badge);
-        String mensagem = "Level: " + usuario.getLevel() + " Score: " + usuario.getScore();
-        ponto_badge.setText(mensagem);
-
-        settingsDialog.show();
     }
 
     private double distance(double lat1, double lon1, double lat2, double lon2) {

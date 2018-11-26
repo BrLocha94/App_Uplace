@@ -100,7 +100,7 @@ public class Adiciona_amigo extends AppCompatActivity {
                 set_user((Usuario) parent.getItemAtPosition(position));
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(Adiciona_amigo.this);
-                builder.setTitle( getString(R.string.deseja_adicionar) + user_amigo.getUser_name() + R.string.aos_seus_amigos );
+                builder.setTitle( getString(R.string.deseja_adicionar) + user_amigo.getUser_name() + getString(R.string.aos_seus_amigos) );
 
                 //if the response is positive in the alert
                 builder.setPositiveButton( R.string.sim, new DialogInterface.OnClickListener() {

@@ -1,5 +1,6 @@
 package com.example.blgo94.uff_game;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -92,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean ok = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         data_badge_acess.child(user.getID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 badges = new ArrayList<String>();
                 preenche_array_badges(dataSnapshot);
 
@@ -149,8 +150,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if(ok_badge){
+                    badges.add("calouro");
                     badge_calouro();
-                    checa_badges();
+                    //checa_badges();
                 }
                 else{
                     ok_badge = true;
@@ -184,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
         Logica_badges log_bad = new Logica_badges();
         if(log_bad.calouro(user.getLevel())){
 
-            badges.add("calouro");
             data_badge_acess.child(user.getID()).setValue(badges);
 
             //LIBERA BADGE DIALOG
@@ -209,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
         }
+
     }
 
     private void badge_veterano(){
@@ -450,7 +452,7 @@ public class MainActivity extends AppCompatActivity {
                 ok = true;
                 set_database_amigos();
                 set_database_eventos();
-                checa_badges();
+                //checa_badges();
             }
 
             @Override
@@ -524,6 +526,22 @@ public class MainActivity extends AppCompatActivity {
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+
+        if(user != null) {
+            Modfica_usuario mod = new Modfica_usuario(user.getID(), user);
+            boolean level_up = mod.checa_lv();
+
+            if (level_up) {
+                pop_up_level_up(mod.getUser());
+                checa_badges();
+            }
+        }
+
     }
 
     public void onBackPressed(){

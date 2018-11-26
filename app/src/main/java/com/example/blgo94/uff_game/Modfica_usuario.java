@@ -27,6 +27,13 @@ public class Modfica_usuario {
         return checa_lv();
     }
 
+    public void somente_add_score(int score){
+        user.setScore(Integer.toString(Integer.parseInt(user.getScore()) + score));
+
+        data.child(user.getID()).setValue(user);
+
+    }
+
     public boolean checa_lv(){
         int acumulador = 0;
         int count = 0;
