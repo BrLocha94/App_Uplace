@@ -1,5 +1,6 @@
 package com.example.blgo94.uff_game;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,8 +9,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,6 +33,9 @@ public class Criar_evento extends AppCompatActivity {
 
     //Database usado
     DatabaseReference data;
+    DatabaseReference data_atualizacao;
+
+    Usuario user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,7 @@ public class Criar_evento extends AppCompatActivity {
 
         id_criador = (String) getIntent().getStringExtra("ID_USUARIO");
 
+        get_usuario(id_criador);
 
         criador_text = (TextView) findViewById(R.id.et_cria_evento_org);
         data_text = (TextView) findViewById(R.id.et_cria_evento_data);
@@ -61,6 +69,27 @@ public class Criar_evento extends AppCompatActivity {
 
                 Toast.makeText(Criar_evento.this, R.string.evento_criado , Toast.LENGTH_SHORT).show();
 
+                data_atualizacao = FirebaseDatabase.getInstance().getReference("atualizacao");
+
+                data_atualizacao.child(id_criador).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Atualizacoes ata = dataSnapshot.getValue(Atualizacoes.class);
+                    ata.add_info("Criou o evento " + nome_evento.getText().toString() + " " + get_data_atual() + " - " + get_hora_atual());
+                        data_atualizacao.child(id_criador).setValue(ata);
+
+                        Modfica_usuario mod = new Modfica_usuario(id_criador, user);
+                        mod.somente_add_score(10);
+
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
                 finish();
             }
         });
@@ -68,9 +97,32 @@ public class Criar_evento extends AppCompatActivity {
 
     }
 
+    private void get_usuario(String id){
+        DatabaseReference data = FirebaseDatabase.getInstance().getReference("users");
+
+        data.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user = (dataSnapshot.getValue(Usuario.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public String get_hora_atual(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formato = new SimpleDateFormat("HH:mm:ss");
+
+        return formato.format(calendar.getTime());
+    }
+
     public String get_data_atual() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formato = new SimpleDateFormat("dd / MM / yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
         return formato.format(calendar.getTime());
     }

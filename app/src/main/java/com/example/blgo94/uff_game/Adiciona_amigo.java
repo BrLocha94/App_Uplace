@@ -138,6 +138,10 @@ public class Adiciona_amigo extends AppCompatActivity {
                 preenche_array_amigos(dataSnapshot);
                 amigos.add(new Amigo(usuario.getID(), usuario.getUser_name(), usuario.getCourse()));
                 grava_amigos_database_amigo();
+
+                Modfica_usuario mod = new Modfica_usuario(user_amigo.getID(), user_amigo);
+                mod.somente_add_score(5);
+
                 add_amigo_02();
             }
             @Override
@@ -163,6 +167,10 @@ public class Adiciona_amigo extends AppCompatActivity {
                 preenche_array_amigos(dataSnapshot);
                 amigos.add(new Amigo(user_amigo.getID(), user_amigo.getUser_name(), user_amigo.getCourse()));
                 grava_amigos_database();
+
+                Modfica_usuario mod = new Modfica_usuario(usuario.getID(), usuario);
+                mod.somente_add_score(5);
+
                 Toast.makeText(Adiciona_amigo.this, R.string.voces_sao_amigos , Toast.LENGTH_SHORT);
                 remove_req();
             }
