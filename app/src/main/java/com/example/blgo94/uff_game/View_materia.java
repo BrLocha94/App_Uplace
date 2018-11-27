@@ -74,10 +74,14 @@ public class View_materia extends AppCompatActivity {
 
         set_view_materias();
 
-        List_adapter_faltas adaptador = new List_adapter_faltas(this, R.layout.estilo_post_it, materia.getFaltas());
+        ArrayList<String> faltas = materia.getFaltas();
 
-        lista.setAdapter(adaptador);
+        if(faltas != null) {
 
+            List_adapter_faltas adaptador = new List_adapter_faltas(this, R.layout.estilo_post_it, materia.getFaltas());
+
+            lista.setAdapter(adaptador);
+        }
     }
 
     public void set_view_materias(){
