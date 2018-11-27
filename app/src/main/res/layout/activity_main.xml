@@ -48,7 +48,7 @@
                     tools:text="@tools:sample/full_names[100]" />
                 <!--android:layout_marginLeft="@id/main_avatar"-->
             </LinearLayout>
-            </LinearLayout>
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -60,25 +60,63 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/desafio_semanal"
-            android:textSize="50sp" />
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-
-
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <TextView
+                    android:id="@+id/tv_main_evento_semanal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/desafio_semanal"
+                    android:textSize="50sp" />
+                <TextView
+                    android:id="@+id/textViewEventos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5sp"
+                    android:gravity="center"
+                    android:text="@string/eventos"
+                    android:textAllCaps="true"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_main2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/titulo_att"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5sp"
+                    android:gravity="center"
+                    android:text="@string/atualizacoes_amigos"
+                    android:textAllCaps="true"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+        </ScrollView>
+
+        <!--  ANTIGO LAYOUT
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,17 +146,7 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textViewEventos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/eventos"
-                    android:textSize="20sp"
-                    android:layout_margin="5sp"
-                    android:textAllCaps="true"
-                    android:textStyle="bold"/>
+
 
                 <ListView
                     android:id="@+id/main_lista_eventos"
@@ -133,10 +161,10 @@
 
 
         </ScrollView>
+-->
 
 
     </LinearLayout>
-
 
 
 
