@@ -58,5 +58,10 @@
     <string name="pontos">Pontos</string>
     <string name="nenhum_usuario">Nenhum usuario encontrado nas suas proximidades...</string>
     <string name="comecou_amizade">Começou uma amizade com</string>
+    <string name="erro_tamanho_local">Este campo não pode ter mais que 20 caractéres </string>
+    <string name="erro_tamanho_ch">Este campo não pode ter mais que 3 caractéres </string>
+    <string name="erro_tamanho_curso">Este campo não pode ter mais que 32 caractéres </string>
+    <string name="erro_tamanho_evento_local">Este campo não pode ter mais que 50 caractéres </string>
+    <string name="erro_tamanho_evento_descricao">Este campo não pode ter mais que 140 caractéres </string>
 </resources>
 

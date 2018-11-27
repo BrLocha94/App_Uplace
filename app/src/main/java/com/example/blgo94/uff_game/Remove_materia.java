@@ -96,7 +96,7 @@ public class Remove_materia extends AppCompatActivity {
                 setChave((String) parent.getItemAtPosition(position));
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(Remove_materia.this);
-                builder.setTitle( getString(R.string.deseja_excluir_materia) + chave +"?");
+                builder.setTitle( getString(R.string.deseja_excluir_materia) + " " + chave +"?");
 
                 //if the response is positive in the alert
                 builder.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {

@@ -112,8 +112,8 @@ public class Adicionar_materia extends AppCompatActivity {
         String nome_string = nome.getText().toString();
         String professor_string = professor.getText().toString();
         String carga_string = carga_horaria.getText().toString();
+        String local_string = local.getText().toString();
 
-        /*
 
         //checa nome da matéria
         //primeiro check: se não foi informado o nome
@@ -124,11 +124,28 @@ public class Adicionar_materia extends AppCompatActivity {
         }
 
         //segundo check: se o nome é muito grande
-        if(!chave_tamanho(nome_string, 28)){
+        if(!chave_tamanho(nome_string, 32)){
             nome.setError(getString(R.string.erro_tamanho));
             foco = nome;
             prossegue = false;
         }
+
+        //checa local
+        //primeiro check: se não foi informado o local
+        if(TextUtils.isEmpty(local_string)){
+            local.setError(getString(R.string.erro_vazio));
+            foco = local;
+            prossegue = false;
+        }
+
+        //segundo check: se o local é muito grande
+        if(!chave_tamanho(local_string, 20)){
+            local.setError(getString(R.string.erro_tamanho_local));
+            foco = local;
+            prossegue = false;
+        }
+
+
 
         //checa nome do professor
         //primeiro check: se não foi informado o professor
@@ -146,7 +163,7 @@ public class Adicionar_materia extends AppCompatActivity {
         }
 
         //terceiro check: se o nome do professor é muito grandde
-        if(!chave_tamanho(professor_string,28)){
+        if(!chave_tamanho(professor_string,32)){
             professor.setError(getString(R.string.erro_tamanho));
             foco = professor;
             prossegue = false;
@@ -169,12 +186,12 @@ public class Adicionar_materia extends AppCompatActivity {
 
         //terceiro check: se o tamanho é muito grande
         if(chave_tamanho(carga_string,3)){
-            carga_horaria.setError(getString(R.string.erro_tamanho));
+            carga_horaria.setError(getString(R.string.erro_tamanho_ch));
             foco = carga_horaria;
             prossegue = false;
         }
 
-        */
+
 
         boolean informou = false;
 
@@ -238,7 +255,7 @@ public class Adicionar_materia extends AppCompatActivity {
         else{
             //Chama a atenção para o campo incorreto
             foco.requestFocus();
-            //materia.reset_arrays();
+            materia.reset_arrays();
             return false;
         }
     }

@@ -94,7 +94,7 @@ public class Editar_perfil extends AppCompatActivity {
 
     private boolean checa_problemas() {
 
-        /*
+
         //reseta os erros
         perfil_nome.setError(null);
         perfil_curso.setError(null);
@@ -109,29 +109,30 @@ public class Editar_perfil extends AppCompatActivity {
         String nome_string = perfil_nome.getText().toString();
         String curso_string = perfil_curso.getText().toString();
 
+        //nome
         //primeiro check: se não foi informado o nome
         if (TextUtils.isEmpty(nome_string)) {
             perfil_nome.setError(getString(R.string.erro_vazio));
             foco = perfil_nome;
             prossegue = false;
         }
-        //Chave de segurança do email
-        else if (!chave_tamanho(nome_string)) {
+        //Segundo check: tamanho do nome
+        else if (!chave_tamanho(nome_string,32)) {
             perfil_nome.setError(getString(R.string.erro_tamanho));
             foco = perfil_nome;
             prossegue = false;
         }
 
-
+        //curso
         //primeiro check: se não foi informado o curso
         if (TextUtils.isEmpty(curso_string)) {
             perfil_curso.setError(getString(R.string.erro_vazio));
             foco = perfil_curso;
             prossegue = false;
         }
-        //se o tamanho é maior que o permitido
-        else if (!chave_tamanho(curso_string)) {
-            perfil_curso.setError(getString(R.string.erro_tamanho));
+        //segundo check: tamanho do curso
+        else if (!chave_tamanho(curso_string,32)) {
+            perfil_curso.setError(getString(R.string.erro_tamanho_curso));
             foco = perfil_curso;
             prossegue = false;
         }
@@ -146,13 +147,10 @@ public class Editar_perfil extends AppCompatActivity {
         }
     }
 
-    public boolean chave_tamanho(String nome){
-        if(nome.length() > 3){
+    public boolean chave_tamanho(String nome, int tamanho){
+        if(nome.length() > tamanho){
             return true;
         }
         return false;
-
-        */
-        return true;
     }
 }
