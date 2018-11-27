@@ -22,7 +22,7 @@
                 android:background="#b0c4de"
                 android:gravity="center"
                 android:textAllCaps="true"
-                android:text="segunda"
+                android:text="@string/segunda"
                 android:textSize="22sp" />
 
             <ListView
@@ -39,7 +39,7 @@
                 android:background="#b0c4de"
                 android:gravity="center"
                 android:textAllCaps="true"
-                android:text="terça"
+                android:text="@string/terca"
                 android:textSize="22sp"/>
 
             <ListView
@@ -56,7 +56,7 @@
                 android:background="#b0c4de"
                 android:gravity="center"
                 android:textAllCaps="true"
-                android:text="quarta"
+                android:text="@string/quarta"
                 android:textSize="22sp" />
 
             <ListView
@@ -73,7 +73,7 @@
                 android:background="#b0c4de"
                 android:gravity="center"
                 android:textAllCaps="true"
-                android:text="Quinta"
+                android:text="@string/quinta"
                 android:textSize="22sp"/>
 
             <ListView
@@ -90,7 +90,7 @@
                 android:background="#b0c4de"
                 android:gravity="center"
                 android:textAllCaps="true"
-                android:text="Sexta"
+                android:text="@string/sexta"
                 android:textSize="22sp"/>
 
             <ListView
@@ -107,7 +107,7 @@
                 android:background="#b0c4de"
                 android:gravity="center"
                 android:textAllCaps="true"
-                android:text="Sábado"
+                android:text="@string/sabado"
                 android:textSize="22sp"/>
 
             <ListView

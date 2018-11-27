@@ -176,7 +176,7 @@
                     android:id="@+id/b_materia_nova_prova"
                     android:layout_width="match_parent"
                     android:layout_height="50sp"
-                    android:text="ADICIONAR NOVA PROVA"
+                    android:text="@string/adicionar_nova_prova"
                     android:textColor="#fff"
                     android:background="@drawable/botao"/>
 
@@ -184,7 +184,7 @@
                     android:id="@+id/b_materia_nova_falta"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:text="ADICIONAR NOVA FALTA"
+                    android:text="@string/adicionar_falta"
                     android:textColor="#fff"
                     android:background="@drawable/botao"/>
 

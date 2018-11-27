@@ -40,7 +40,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textColor="#fff"
-                        android:text="Nome do Evento"
+                        android:text="@string/nome_evento"
                         android:textStyle="bold"
                         android:textSize="25dp" />
                 </LinearLayout>

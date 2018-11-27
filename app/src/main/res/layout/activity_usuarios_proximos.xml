@@ -8,7 +8,7 @@
         android:id="@+id/texto_lista_usuarios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PROCURANDO USUARIOS PRÓXIMOS..."
+        android:text="@string/procurando_usuarios"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textStyle="bold"
         />

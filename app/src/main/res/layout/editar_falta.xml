@@ -34,7 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40sp"
                     android:background="@drawable/border"
-                    android:hint="Data"
+                    android:hint="@string/data"
                     android:paddingLeft="10dp"
                     android:paddingTop="5sp"
                     android:paddingRight="10dp"
@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40sp"
                     android:background="@drawable/border"
-                    android:hint="Nome do Matéria"
+                    android:hint="@string/nome_da_materia"
                     android:paddingLeft="10dp"
                     android:paddingTop="5sp"
                     android:paddingRight="10dp"
@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40sp"
                     android:background="@drawable/border"
-                    android:hint="Nota"
+                    android:hint="@string/nota"
                     android:paddingLeft="10dp"
                     android:paddingTop="5sp"
                     android:paddingRight="10dp"
@@ -95,7 +95,7 @@
                 android:layout_height="70dp"
                 android:gravity="center"
                 android:textColor="#fff"
-                android:text="adicionar falta"
+                android:text="@string/adicionar_prova"
                 android:background="@drawable/botao"/>
         </LinearLayout>
 

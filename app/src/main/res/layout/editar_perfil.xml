@@ -43,7 +43,7 @@
             android:background="@drawable/vazio"
                 android:layout_weight="1"
             app:layout_constraintEnd_toEndOf="@id/login"
-            android:text="Mudar Avatar"
+            android:text="@string/mudar_avatar"
             android:textColor="#fff"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login" />
@@ -55,7 +55,7 @@
                 android:background="@drawable/vazio"
                 app:layout_constraintEnd_toEndOf="@id/login"
                 android:layout_weight="1"
-                android:text="Badges em Destaque"
+                android:text="@string/badges_destaque"
                 android:textColor="#fff"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login" />
@@ -100,7 +100,7 @@
             android:id="@+id/perfil_edita_curso"
             android:layout_width="match_parent"
             android:layout_height="60sp"
-            android:hint="Curso"
+            android:hint="@string/curso"
             android:paddingLeft="20sp"
             android:background="@drawable/border"
             android:visibility="visible" />
@@ -122,7 +122,7 @@
             android:layout_height="71dp"
             android:textColor="#fff"
             android:background="@drawable/botao"
-            android:text="Concluir" />
+            android:text="@string/concluir" />
         </LinearLayout>
 
 </RelativeLayout>
