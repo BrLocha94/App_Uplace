@@ -103,5 +103,6 @@
     <string name="adicionar_falta">Adicionar falta</string>
     <string name="faltas_permitidas">Faltas permitidas:</string>
     <string name="titulo">Titulo (P1, P2, VR, VS)</string>
+    <string name="nao_possui_provas">Você não possui provas cadastradas</string>
 </resources>
 

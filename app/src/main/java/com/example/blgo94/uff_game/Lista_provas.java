@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +32,7 @@ public class Lista_provas extends AppCompatActivity {
     private ArrayList<Prova> array_provas;
 
     private ListView lista;
+    private TextView mensagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class Lista_provas extends AppCompatActivity {
         id_usuario = (String) getIntent().getStringExtra("ID_USUARIO");
 
         lista = (ListView) findViewById(R.id.lista_provas);
+
+        mensagem = (TextView) findViewById(R.id.lista_provas_mensagem);
 
         data = FirebaseDatabase.getInstance().getReference("provas").child(id_usuario);
 
@@ -78,9 +82,6 @@ public class Lista_provas extends AppCompatActivity {
                 }
             });
         }
-
-        //carrega_lista();
-
     }
 
     private void set_array_provas(DataSnapshot dataSnapshot){
@@ -97,6 +98,10 @@ public class Lista_provas extends AppCompatActivity {
     }
 
     private void carrega_lista(){
+
+        if(array_provas.size() > 0){
+            mensagem.setVisibility(View.GONE);
+        }
 
         List_adapter_provas adapter = new List_adapter_provas(this, R.layout.estilo_lista_provas, array_provas);
 
