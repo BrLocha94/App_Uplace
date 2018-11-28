@@ -65,50 +65,78 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginBottom="20sp"
             android:text="@string/desafio_semanal"
             android:textSize="50sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical" />
+
+
+
+        <ScrollView
+            android:id="@+id/main_zzzzz"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             >
-            <Button
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="50sp"
-                android:text="Atualizações de Amigos"
-                android:layout_margin="5sp"
-                android:layout_gravity="center"
-                android:textColor="#fff"
-                android:textSize="20sp"
-                android:background="@color/colorPrimary"
-                />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/titulo_att"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/atualizacoes_amigos"
+                    android:layout_margin="5sp"
+                    android:textSize="20sp"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="5sp"
-                android:layout_gravity="center"
-                android:layout_height="50sp"
-                android:text="Ver Eventos"
-                android:textColor="#fff"
-                android:textSize="20sp"
-                android:background="@color/colorPrimary" />
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"/>
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"/>
+                    <ListView
+                        android:id="@+id/main_lista_atualizacoes"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
+                    </ListView>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewEventos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/eventos"
+                    android:textSize="20sp"
+                    android:layout_margin="5sp"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"/>
+
+                <ListView
+                    android:id="@+id/main_lista_eventos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ListView>
+
+            </LinearLayout>
+
+
+
+
+        </ScrollView>
 
     </LinearLayout>
+
 
 
 </RelativeLayout>
