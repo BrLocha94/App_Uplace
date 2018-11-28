@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
     public Button lista_materias;
     public Button leitor_QR;
     public Button edita_perfil;
+    private Button botao_lista_atu;
+    private Button botao_lista_eve;
 
     private ListView lista_atualizacoes;
     private ListView lista_eventos;
@@ -480,8 +482,29 @@ public class MainActivity extends AppCompatActivity {
         nome_usuario = (TextView) findViewById(R.id.main_nome_usuario);
 
         lista_atualizacoes = (ListView) findViewById(R.id.main_lista_atualizacoes);
+        lista_atualizacoes.setVisibility(View.VISIBLE);
 
         lista_eventos = (ListView) findViewById(R.id.main_lista_eventos);
+        lista_eventos.setVisibility(View.GONE);
+
+        botao_lista_atu = (Button) findViewById(R.id.botao_ver_atualizacoes);
+        botao_lista_atu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lista_atualizacoes.setVisibility(View.VISIBLE);
+                lista_eventos.setVisibility(View.GONE);
+            }
+        });
+
+        botao_lista_eve = (Button) findViewById(R.id.botao_ver_eventos);
+        botao_lista_eve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lista_eventos.setVisibility(View.VISIBLE);
+                lista_atualizacoes.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     private void carrega_imagens(String ProfilePic, String IdBadge1){

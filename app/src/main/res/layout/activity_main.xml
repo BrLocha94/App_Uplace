@@ -75,6 +75,7 @@
             android:orientation="horizontal"
             >
             <Button
+                android:id="@+id/botao_ver_atualizacoes"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="50sp"
@@ -87,6 +88,7 @@
                 />
 
             <Button
+                android:id="@+id/botao_ver_eventos"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="5sp"
@@ -99,10 +101,12 @@
         </LinearLayout>
 
         <ListView
+            android:id="@+id/main_lista_atualizacoes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"/>
         <ListView
+            android:id="@+id/main_lista_eventos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"/>
