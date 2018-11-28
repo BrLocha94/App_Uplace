@@ -79,7 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="50sp"
-                android:text="Atualizações de Amigos"
+                android:text="@string/atualizacoes_amigos"
                 android:layout_margin="5sp"
                 android:layout_gravity="center"
                 android:textColor="#fff"
@@ -94,7 +94,7 @@
                 android:layout_margin="5sp"
                 android:layout_gravity="center"
                 android:layout_height="50sp"
-                android:text="Ver Eventos"
+                android:text="@string/eventos"
                 android:textColor="#fff"
                 android:textSize="20sp"
                 android:background="@color/colorPrimary" />
