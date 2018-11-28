@@ -24,8 +24,8 @@ public class Criar_evento extends AppCompatActivity {
     public String criador;
     public String id_criador;
 
-    TextView criador_text;
-    TextView data_text;
+    EditText criador_text;
+    EditText data_text;
     EditText nome_evento;
     EditText local;
     EditText descricao;
@@ -49,8 +49,8 @@ public class Criar_evento extends AppCompatActivity {
 
         get_usuario(id_criador);
 
-        criador_text = (TextView) findViewById(R.id.et_cria_evento_org);
-        data_text = (TextView) findViewById(R.id.et_cria_evento_data);
+        criador_text = (EditText) findViewById(R.id.et_cria_evento_org);
+        data_text = (EditText) findViewById(R.id.et_cria_evento_data);
         nome_evento = (EditText) findViewById(R.id.et_cria_evento_nome);
         local = (EditText) findViewById(R.id.et_cria_evento_local);
         descricao = (EditText) findViewById(R.id.et_cria_evento_desc);
@@ -137,6 +137,7 @@ public class Criar_evento extends AppCompatActivity {
         //falta ver o tamanho máximo das strings
         //reseta os erros
         nome_evento.setError(null);
+        data_text.setError(null);
         local.setError(null);
         descricao.setError(null);
 
@@ -149,6 +150,7 @@ public class Criar_evento extends AppCompatActivity {
 
         //recebe as Strings das informações para serem checadas
         String nome_string = nome_evento.getText().toString();
+        String data_string = data_text.getText().toString();
         String descricao_string = descricao.getText().toString();
         String local_string = local.getText().toString();
 
@@ -162,9 +164,17 @@ public class Criar_evento extends AppCompatActivity {
         }
 
         //segundo check: se o nome é muito grande
-        if(!chave_tamanho(nome_string, 32)){
+        if(chave_tamanho(nome_string, 32)){
             nome_evento.setError(getString(R.string.erro_tamanho));
             foco = nome_evento;
+            prossegue = false;
+        }
+
+        //checa data
+        //primeiro check: se não foi informada a data
+        if(TextUtils.isEmpty(data_string)) {
+            data_text.setError(getString(R.string.erro_vazio));
+            foco = data_text;
             prossegue = false;
         }
 
@@ -177,7 +187,7 @@ public class Criar_evento extends AppCompatActivity {
         }
 
         //segundo check: se o nome é muito grande
-        if(!chave_tamanho(local_string, 50)){
+        if(chave_tamanho(local_string, 50)){
             local.setError(getString(R.string.erro_tamanho_evento_local));
             foco = local;
             prossegue = false;
@@ -194,7 +204,7 @@ public class Criar_evento extends AppCompatActivity {
         }
 
         //segundo check: se a descricao é muito grandde
-        if(!chave_tamanho(descricao_string,140)){
+        if(chave_tamanho(descricao_string,140)){
             descricao.setError(getString(R.string.erro_tamanho_evento_descricao));
             foco = descricao;
             prossegue = false;

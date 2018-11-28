@@ -62,7 +62,6 @@ public class Adicionar_materia extends AppCompatActivity {
 
         inicializa_UI();
 
-
         cria_materia = (Button) findViewById(R.id.botao_gerencia_materia_cria);
 
         cria_materia.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +123,7 @@ public class Adicionar_materia extends AppCompatActivity {
         }
 
         //segundo check: se o nome é muito grande
-        if(!chave_tamanho(nome_string, 32)){
+        if(chave_tamanho(nome_string, 32)){
             nome.setError(getString(R.string.erro_tamanho));
             foco = nome;
             prossegue = false;
@@ -139,7 +138,7 @@ public class Adicionar_materia extends AppCompatActivity {
         }
 
         //segundo check: se o local é muito grande
-        if(!chave_tamanho(local_string, 20)){
+        if(chave_tamanho(local_string, 20)){
             local.setError(getString(R.string.erro_tamanho_local));
             foco = local;
             prossegue = false;
@@ -156,14 +155,14 @@ public class Adicionar_materia extends AppCompatActivity {
         }
 
         //segundo check: se o nome do professor contém números
-        if(!chave_caracteres(professor_string)){
+        if(chave_caracteres(professor_string)){
             professor.setError(getString(R.string.erro_numeros));
             foco = professor;
             prossegue = false;
         }
 
         //terceiro check: se o nome do professor é muito grandde
-        if(!chave_tamanho(professor_string,32)){
+        if(chave_tamanho(professor_string,32)){
             professor.setError(getString(R.string.erro_tamanho));
             foco = professor;
             prossegue = false;
@@ -196,16 +195,63 @@ public class Adicionar_materia extends AppCompatActivity {
         boolean informou = false;
 
         if(prossegue){
+
+            horario_segunda_i.setError(null);
+            horario_segunda_f.setError(null);
+
+            horario_terca_i.setError(null);
+            horario_terca_f.setError(null);
+
+            horario_quarta_i.setError(null);
+            horario_quarta_f.setError(null);
+
+            horario_quinta_i.setError(null);
+            horario_quinta_f.setError(null);
+
+            horario_sexta_i.setError(null);
+            horario_sexta_f.setError(null);
+
+            horario_sabado_i.setError(null);
+            horario_sabado_f.setError(null);
+
             materia = new Materia(nome.getText().toString(), professor.getText().toString(),
                     local.getText().toString(), Integer.parseInt(carga_horaria.getText().toString()));
             if(segunda.isChecked()){
                 informou = true;
+
+                //segunda_i
+                if(TextUtils.isEmpty(horario_segunda_i.getText().toString())){
+                    horario_segunda_i.setError(getString(R.string.erro_vazio));
+                    foco = horario_segunda_i;
+                    prossegue = false;
+                }
+
+                //segunda_f
+                if(TextUtils.isEmpty(horario_segunda_f.getText().toString())){
+                    horario_segunda_f.setError(getString(R.string.erro_vazio));
+                    foco = horario_segunda_f;
+                    prossegue = false;
+                }
 
                 materia.add_dia("SEG");
                 materia.add_horario(horario_segunda_i.getText().toString() + " ~ " + horario_segunda_f.getText().toString());
             }
             if(terca.isChecked()){
                 informou = true;
+
+                //terça_i
+                if(TextUtils.isEmpty(horario_terca_i.getText().toString())){
+                    horario_terca_i.setError(getString(R.string.erro_vazio));
+                    foco = horario_terca_i;
+                    prossegue = false;
+                }
+
+                //terça_f
+                if(TextUtils.isEmpty(horario_terca_f.getText().toString())){
+                    horario_terca_f.setError(getString(R.string.erro_vazio));
+                    foco = horario_terca_f;
+                    prossegue = false;
+                }
 
                 materia.add_dia("TER");
                 materia.add_horario(horario_terca_i.getText().toString() + " ~ " + horario_terca_f.getText().toString());
@@ -214,12 +260,40 @@ public class Adicionar_materia extends AppCompatActivity {
             if(quarta.isChecked()){
                 informou = true;
 
+                //quarta_i
+                if(TextUtils.isEmpty(horario_quarta_i.getText().toString())){
+                    horario_quarta_i.setError(getString(R.string.erro_vazio));
+                    foco = horario_quarta_i;
+                    prossegue = false;
+                }
+
+                //quarta_f
+                if(TextUtils.isEmpty(horario_quarta_f.getText().toString())){
+                    horario_quarta_f.setError(getString(R.string.erro_vazio));
+                    foco = horario_quarta_f;
+                    prossegue = false;
+                }
+
                 materia.add_dia("QUA");
                 materia.add_horario(horario_quarta_i.getText().toString() + " ~ " + horario_quarta_f.getText().toString());
 
             }
             if(quinta.isChecked()){
                 informou = true;
+
+                //quinta_i
+                if(TextUtils.isEmpty(horario_quinta_i.getText().toString())){
+                    horario_quinta_i.setError(getString(R.string.erro_vazio));
+                    foco = horario_quinta_i;
+                    prossegue = false;
+                }
+
+                //quinta_f
+                if(TextUtils.isEmpty(horario_quinta_f.getText().toString())){
+                    horario_quinta_f.setError(getString(R.string.erro_vazio));
+                    foco = horario_quinta_f;
+                    prossegue = false;
+                }
 
                 materia.add_dia("QUI");
                 materia.add_horario(horario_quinta_i.getText().toString() + " ~ " + horario_quinta_f.getText().toString());
@@ -228,12 +302,40 @@ public class Adicionar_materia extends AppCompatActivity {
             if(sexta.isChecked()){
                 informou = true;
 
+                //sexta_i
+                if(TextUtils.isEmpty(horario_sexta_i.getText().toString())){
+                    horario_sexta_i.setError(getString(R.string.erro_vazio));
+                    foco = horario_sexta_i;
+                    prossegue = false;
+                }
+
+                //sexta_i
+                if(TextUtils.isEmpty(horario_sexta_f.getText().toString())){
+                    horario_sexta_f.setError(getString(R.string.erro_vazio));
+                    foco = horario_sexta_f;
+                    prossegue = false;
+                }
+
                 materia.add_dia("SEX");
                 materia.add_horario(horario_sexta_i.getText().toString() + " ~ " + horario_sexta_f.getText().toString());
 
             }
             if(sabado.isChecked()){
                 informou = true;
+
+                //sabado_i
+                if(TextUtils.isEmpty(horario_sabado_i.getText().toString())){
+                    horario_sabado_i.setError(getString(R.string.erro_vazio));
+                    foco = horario_sabado_i;
+                    prossegue = false;
+                }
+
+                //sabado_f
+                if(TextUtils.isEmpty(horario_sabado_f.getText().toString())){
+                    horario_sabado_f.setError(getString(R.string.erro_vazio));
+                    foco = horario_sabado_f;
+                    prossegue = false;
+                }
 
                 materia.add_dia("SAB");
                 materia.add_horario(horario_sabado_i.getText().toString() + " ~ " + horario_sabado_f.getText().toString());
@@ -255,7 +357,7 @@ public class Adicionar_materia extends AppCompatActivity {
         else{
             //Chama a atenção para o campo incorreto
             foco.requestFocus();
-            materia.reset_arrays();
+            //materia.reset_arrays();
             return false;
         }
     }

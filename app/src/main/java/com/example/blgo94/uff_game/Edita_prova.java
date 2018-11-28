@@ -3,6 +3,7 @@ package com.example.blgo94.uff_game;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -63,17 +64,76 @@ public class Edita_prova extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                prova.setData(prova_data.getText().toString());
-                prova.setMateria(prova_materia.getText().toString());
-                prova.setNota(prova_nota.getText().toString());
-                prova.setNome(prova_nome.getText().toString());
+                boolean ok = checa_problemas();
 
-                salva_tudo();
+                if(ok) {
+                    prova.setData(prova_data.getText().toString());
+                    prova.setMateria(prova_materia.getText().toString());
+                    prova.setNota(prova_nota.getText().toString());
+                    prova.setNome(prova_nome.getText().toString());
 
+                    salva_tudo();
+                }
             }
         });
 
-        //set_database();
+    }
+
+    public boolean checa_problemas(){
+        //falta ver o tamanho máximo das strings
+        //reseta os erros
+        prova_data.setError(null);
+        prova_materia.setError(null);
+        prova_nota.setError(null);
+        prova_nome.setError(null);
+
+
+        //boleano que checa as chaves
+        boolean prossegue = true;
+
+        //view que foca no local do erro
+        View foco = null;
+
+        //recebe as Strings das informações para serem checadas
+        String data_string = prova_data.getText().toString();
+        String nome_string = prova_nome.getText().toString();
+        String materia_string = prova_materia.getText().toString();
+        String nota_string = prova_nota.getText().toString();
+
+
+        if(TextUtils.isEmpty(data_string)) {
+            prova_data.setError(getString(R.string.erro_vazio));
+            foco = prova_data;
+            prossegue = false;
+        }
+
+        if(TextUtils.isEmpty(nome_string)) {
+            prova_nome.setError(getString(R.string.erro_vazio));
+            foco = prova_nome;
+            prossegue = false;
+        }
+
+        if(TextUtils.isEmpty(materia_string)){
+            prova_materia.setError(getString(R.string.erro_vazio));
+            foco = prova_materia;
+            prossegue = false;
+        }
+
+        if(TextUtils.isEmpty(nota_string)){
+            prova_nota.setError(getString(R.string.erro_vazio));
+            foco = prova_nota;
+            prossegue = false;
+        }
+
+        if(prossegue){
+
+            return true;
+        }
+        else{
+            //Chama a atenção para o campo incorreto
+            foco.requestFocus();
+            return false;
+        }
     }
 
     private void set_database(){
