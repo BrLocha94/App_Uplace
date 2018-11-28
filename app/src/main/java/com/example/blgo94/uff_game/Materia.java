@@ -203,6 +203,15 @@ public class Materia implements Parcelable {
         return "Não informado";
     }
 
+    public boolean procura_dia(String dia){
+        for(int i = 0; i < this.dias.size(); i++){
+            if(dias.get(i).equals(dia)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void add_falta(String falta){
         this.faltas.add(falta);
     }

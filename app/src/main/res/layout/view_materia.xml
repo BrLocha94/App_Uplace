@@ -191,6 +191,14 @@
                     android:text="@string/adicionar_falta"
                     android:textColor="#fff" />
 
+                <Button
+                    android:id="@+id/b_materia_edita"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/botao"
+                    android:text="@string/editar_materia"
+                    android:textColor="#fff" />
+
 
             </LinearLayout>
 

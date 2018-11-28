@@ -176,12 +176,14 @@ public class Adicionar_materia extends AppCompatActivity {
             prossegue = false;
         }
 
+        /*
         //segundo check: se não foram informados números
         if(chave_caracteres(carga_string)){
             carga_horaria.setError(getString(R.string.erro_numeros));
             foco = carga_horaria;
             prossegue = false;
         }
+        */
 
         //terceiro check: se o tamanho é muito grande
         if(chave_tamanho(carga_string,3)){

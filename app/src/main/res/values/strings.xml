@@ -104,5 +104,8 @@
     <string name="faltas_permitidas">Faltas permitidas:</string>
     <string name="titulo">Titulo (P1, P2, VR, VS)</string>
     <string name="nao_possui_provas">Você não possui provas cadastradas</string>
+    <string name="materia_modificada">Materia modificada</string>
+    <string name="editar_materia">Editar matéria</string>
+    <string name="corrija_os_erros">Corrija os erros</string>
 </resources>
 
