@@ -24,44 +24,56 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".Login_Cadastro"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Lista_materias"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Editar_perfil"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Login_Cadastro"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Lista_materias"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Editar_perfil"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
-        <activity android:name=".View_materia"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Adicionar_materia"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Remove_materia"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Lista_amigos"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Perfil"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Criar_evento"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Localiza"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Lista_provas"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Lista_usuarios_proximos"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".View_materia"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Adicionar_materia"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Remove_materia"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Lista_amigos"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Perfil"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Criar_evento"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Localiza"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Lista_provas"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Lista_usuarios_proximos"
+            android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -76,16 +88,21 @@
 
         <activity
             android:name=".MapsActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_maps" />
-        <activity android:name=".Check_in"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View_evento"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Adiciona_amigo"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Edita_prova"
-            android:screenOrientation="portrait"></activity>
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Check_in"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View_evento"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Adiciona_amigo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Edita_prova"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Buscar"></activity>
     </application>
 
 </manifest>

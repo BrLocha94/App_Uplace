@@ -107,5 +107,7 @@
     <string name="materia_modificada">Materia modificada</string>
     <string name="editar_materia">Editar matéria</string>
     <string name="corrija_os_erros">Corrija os erros</string>
+    <string name="buscar">Use o iduff</string>
+    <string name="busca">Buscar</string>
 </resources>
 
