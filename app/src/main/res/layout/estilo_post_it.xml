@@ -10,7 +10,7 @@
         android:weightSum="2">
 
         <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="200dp"
         android:orientation="horizontal"
         android:paddingTop="35sp"
@@ -25,7 +25,7 @@
                 android:id="@+id/post_it_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:text="POST IT 1"/>
 
 
@@ -37,6 +37,7 @@
 
         </LinearLayout>
 
+        <!--
     <LinearLayout
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -57,6 +58,6 @@
             android:text="POST IT 2"/>
 
     </LinearLayout>
-
+    -->
     </LinearLayout>
 </RelativeLayout>

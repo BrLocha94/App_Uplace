@@ -19,8 +19,6 @@ public class List_adapter_faltas extends ArrayAdapter<String> {
 
     int resource;
 
-    int count = 0;
-
     public List_adapter_faltas(Context context, int resource, List<String> faltas){
         super(context,resource,faltas);
 
@@ -44,7 +42,7 @@ public class List_adapter_faltas extends ArrayAdapter<String> {
 
         //getting the view elements of the list from the view
         TextView post_it_1 = view.findViewById(R.id.post_it_1);
-        TextView post_it_2 = view.findViewById(R.id.post_it_2);
+        //TextView post_it_2 = view.findViewById(R.id.post_it_2);
 
         post_it_1.setText(faltas.get(position));
 

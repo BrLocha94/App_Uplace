@@ -49,6 +49,25 @@
                 android:layout_margin="8sp">
 
                 <EditText
+                    android:id="@+id/ed_edita_falta_titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="40sp"
+                    android:background="@drawable/border"
+                    android:hint="@string/titulo"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5sp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5sp"
+                    android:textSize="25sp"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8sp">
+
+                <EditText
                     android:id="@+id/ed_edita_falta_nome"
                     android:layout_width="match_parent"
                     android:layout_height="40sp"

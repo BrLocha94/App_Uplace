@@ -84,6 +84,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Adiciona_amigo"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".Edita_prova"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

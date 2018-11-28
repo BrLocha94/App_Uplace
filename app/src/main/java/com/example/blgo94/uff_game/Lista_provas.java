@@ -1,5 +1,6 @@
 package com.example.blgo94.uff_game;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class Lista_provas extends AppCompatActivity {
 
     //RECEBE O STRING EXTRA DO INTENT
-    private String id;
+    private String id_usuario;
 
     //Database usado
     DatabaseReference data;
@@ -36,11 +37,11 @@ public class Lista_provas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_provas);
 
-        id = (String) getIntent().getStringExtra("ID_USUARIO");
+        id_usuario = (String) getIntent().getStringExtra("ID_USUARIO");
 
         lista = (ListView) findViewById(R.id.lista_provas);
 
-        data = FirebaseDatabase.getInstance().getReference("provas").child(id);
+        data = FirebaseDatabase.getInstance().getReference("provas").child(id_usuario);
 
         data.addValueEventListener(new ValueEventListener() {
             @Override
@@ -59,7 +60,7 @@ public class Lista_provas extends AppCompatActivity {
     }
 
     private void set_provas(){
-        data_02 = FirebaseDatabase.getInstance().getReference("provas").child(id);
+        data_02 = FirebaseDatabase.getInstance().getReference("provas").child(id_usuario);
 
         array_provas = new ArrayList<Prova>();
 
@@ -78,19 +79,20 @@ public class Lista_provas extends AppCompatActivity {
             });
         }
 
+        //carrega_lista();
+
     }
 
     private void set_array_provas(DataSnapshot dataSnapshot){
         for(DataSnapshot snapshot : dataSnapshot.getChildren()){
             array_provas.add(snapshot.getValue(Prova.class));
-            Log.d("mimimmimimimimimimimim", "set_array_provas: " + array_provas.get(0).getData());
+            Log.d("mimimimimimimimimimimi", "set_array: " + snapshot.getValue(Prova.class).getId() + " " + snapshot.getValue(Prova.class).getNome());
         }
     }
 
     private void set_array(DataSnapshot dataSnapshot){
         for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
             array_ids_materias.add(snapshot.getKey());
-            Log.d("mimimimimimimimimimimi", "set_array: " + snapshot.getKey());
         }
     }
 
@@ -103,7 +105,14 @@ public class Lista_provas extends AppCompatActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Prova prova = array_provas.get(position);
 
+                Intent intent = new Intent(Lista_provas.this, Edita_prova.class);
+                intent.putExtra("ID_USUARIO", id_usuario);
+                intent.putExtra("position", Integer.toString(position));
+                intent.putExtra("prova", prova);
+
+                startActivity(intent);
             }
         });
 

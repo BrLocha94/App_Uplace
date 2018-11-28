@@ -101,5 +101,7 @@
     <string name="nome_evento">Nome do evento</string>
     <string name="adicionar_nova_prova">Adicionar nova prova</string>
     <string name="adicionar_falta">Adicionar falta</string>
+    <string name="faltas_permitidas">Faltas permitidas:</string>
+    <string name="titulo">Titulo (P1, P2, VR, VS)</string>
 </resources>
 

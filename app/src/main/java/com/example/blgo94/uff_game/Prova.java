@@ -11,6 +11,7 @@ public class Prova implements Parcelable {
     private String materia;
     private String data;
     private String nota;
+    private String nome;
 
     //DataSnapshot
     public Prova(){
@@ -18,11 +19,12 @@ public class Prova implements Parcelable {
     }
 
     //Construtor normal
-    public Prova(String id, String materia, String data, String nota){
+    public Prova(String id, String materia, String data, String nota, String nome){
         this.id = id;
         this.materia = materia;
         this.data = data;
         this.nota = nota;
+        this.nome = nome;
     }
 
     //Construtor Parcel
@@ -31,6 +33,7 @@ public class Prova implements Parcelable {
         materia = in.readString();
         data = in.readString();
         nota = in.readString();
+        nome = in.readString();
     }
 
     @Override
@@ -45,6 +48,7 @@ public class Prova implements Parcelable {
         dest.writeString(materia);
         dest.writeString(data);
         dest.writeString(nota);
+        dest.writeString(nome);
     }
 
     public static final Parcelable.Creator<Prova> CREATOR = new Parcelable.Creator<Prova>() {
@@ -90,6 +94,14 @@ public class Prova implements Parcelable {
         this.nota = nota;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public int get_dia(){
         String array [] = new String[2];
         array = data.split("/");
@@ -102,5 +114,12 @@ public class Prova implements Parcelable {
         array = data.split("/");
 
         return Integer.parseInt(array[1]);
+    }
+
+    public void troca_prova(Prova nova){
+        this.materia = nova.getMateria();
+        this.data = nova.getData();
+        this.nota = nova.getNota();
+        this.nome = nova.getNome();
     }
 }

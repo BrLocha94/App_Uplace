@@ -188,7 +188,7 @@ public class Materia implements Parcelable {
     }
 
     public String get_format_carga(){
-        String retorna = "Carga: " + Integer.toString(this.carga_horaria);
+        String retorna = "Carga horaria: " + Integer.toString(this.carga_horaria);
 
         return retorna;
     }

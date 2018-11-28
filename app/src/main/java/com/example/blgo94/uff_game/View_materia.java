@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class View_materia extends AppCompatActivity {
 
@@ -48,6 +51,7 @@ public class View_materia extends AppCompatActivity {
     protected EditText prova_data;
     protected EditText prova_materia;
     protected EditText prova_nota;
+    protected EditText prova_nome;
 
     public int layout = 0;
 
@@ -73,6 +77,14 @@ public class View_materia extends AppCompatActivity {
         lista = (ListView) findViewById(R.id.lista_post);
 
         set_view_materias();
+    }
+
+    public void set_view_materias(){
+        nome_professor.setText(materia.getProfessor());
+        data_hora_local.setText(materia.get_format_local_hora());
+        carga_horaria.setText(materia.get_format_carga());
+        faltas_permitidas.setText(getString(R.string.faltas_permitidas) + " " + Integer.toString(materia.faltas_permitidas()));
+        faltas_obtidas.setText(getString(R.string.faltas) + ": " +Integer.toString(materia.total_faltas()));
 
         ArrayList<String> faltas = materia.getFaltas();
 
@@ -82,15 +94,6 @@ public class View_materia extends AppCompatActivity {
 
             lista.setAdapter(adaptador);
         }
-    }
-
-    public void set_view_materias(){
-        nome_professor.setText(materia.getProfessor());
-        data_hora_local.setText(materia.get_format_local_hora());
-        carga_horaria.setText(materia.get_format_carga());
-        faltas_permitidas.setText(Integer.toString(materia.faltas_permitidas()));
-        faltas_obtidas.setText(Integer.toString(materia.total_faltas()));
-
 
         add_falta = (Button) findViewById(R.id.b_materia_nova_falta);
 
@@ -130,10 +133,12 @@ public class View_materia extends AppCompatActivity {
         prova_data = (EditText) findViewById(R.id.et_edita_falta_data);
         prova_materia = (EditText) findViewById(R.id.ed_edita_falta_nome);
         prova_nota = (EditText) findViewById(R.id.ed_edita_falta_nota);
+        prova_nome = (EditText) findViewById(R.id.ed_edita_falta_titulo);
 
         prova_data.setText(get_data_atual());
         prova_materia.setText("CAGUEI");
         prova_nota.setText("0.0");
+        prova_nome.setText("P1");
 
         add_prova_mesmo = (Button) findViewById(R.id.botao_add_prova_mesmo);
 
@@ -142,10 +147,9 @@ public class View_materia extends AppCompatActivity {
             public void onClick(View v) {
 
                 Prova prova = new Prova(materia.getNome(), prova_materia.getText().toString(),
-                        prova_data.getText().toString(), prova_nota.getText().toString());
+                        prova_data.getText().toString(), prova_nota.getText().toString(), prova_nome.getText().toString());
 
                 atualiza_database_provas(prova);
-
 
             }
         });
