@@ -139,7 +139,7 @@ public class Materia implements Parcelable {
 
     public float porcentagem_faltas(){
 
-        if(faltas.size() == 0){
+        if(faltas == null){
             return 0;
         }
 

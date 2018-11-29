@@ -1,6 +1,7 @@
 package com.example.blgo94.uff_game;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -61,6 +62,13 @@ public class List_adapter_materias extends ArrayAdapter<Materia> {
         textViewMateria.setText(materia.getNome());
         textViewhorario.setText(materia.get_horario_local(dia));
         textViewfaltas.setText(Integer.toString(materia.total_faltas()));
+
+        if(materia.porcentagem_faltas() >= 25){
+            textViewfaltas.setTextColor(Color.rgb(255,0,0));
+        }
+        else if(materia.porcentagem_faltas() >= 15){
+            textViewfaltas.setTextColor(Color.rgb(255,255,0));
+        }
 
         //finally returning the view
         return view;
