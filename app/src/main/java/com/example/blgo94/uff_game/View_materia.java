@@ -118,6 +118,7 @@ public class View_materia extends AppCompatActivity {
         faltas_permitidas.setText(getString(R.string.faltas_permitidas) + " " + Integer.toString(materia.faltas_permitidas()));
         faltas_obtidas.setText(getString(R.string.faltas) + ": " +Integer.toString(materia.total_faltas()));
 
+        /*
         ArrayList<String> faltas = materia.getFaltas();
 
         if(faltas != null) {
@@ -126,6 +127,7 @@ public class View_materia extends AppCompatActivity {
 
             lista.setAdapter(adaptador);
         }
+        */
 
         add_falta = (Button) findViewById(R.id.b_materia_nova_falta);
 

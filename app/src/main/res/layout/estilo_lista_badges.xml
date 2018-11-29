@@ -39,7 +39,7 @@
                 android:textColor="#000"
                 android:textSize="21sp"
                 android:textStyle="bold"
-                tools:text="@string/badge_nome" />
+                />
 
             <TextView
                 android:id="@+id/tv_style_badges_desc"
@@ -52,7 +52,7 @@
                 android:orientation="vertical"
                 android:textColor="#000"
                 android:textSize="15sp"
-                tools:text="@string/badge_desc" />
+                />
 
 
 
