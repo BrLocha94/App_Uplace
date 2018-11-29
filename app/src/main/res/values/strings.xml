@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">UPlace</string>
+    <string name="Dia_Horario_Local">Dia-Horario-Local</string>
     <string name="Dia_horario_local">Dia-Horario-Local</string>
     <string name="nome">Nome</string>
     <string name="faltas">Faltas</string>
