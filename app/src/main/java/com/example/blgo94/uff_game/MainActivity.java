@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Locais de exibição das info
     private TextView nome_usuario;
+    private ImageView desafio_semanal;
     private TextView level_usuario;
     private TextView score_usuario;
 
@@ -292,6 +293,36 @@ public class MainActivity extends AppCompatActivity {
         settingsDialog.show();
     }
 
+    private void pop_up_desafio_semanal(){
+
+        Dialog settingsDialog = new Dialog(this);
+
+        settingsDialog.setContentView(R.layout.mostra_badge);
+        settingsDialog.setTitle("BADGE");
+
+        TextView nome_badge = settingsDialog.findViewById(R.id.nome_badge);
+        nome_badge.setVisibility(View.GONE);
+
+        TextView descricao_badge = settingsDialog.findViewById(R.id.descricao_badge);
+        descricao_badge.setVisibility(View.GONE);
+
+        TextView ponto_badge = settingsDialog.findViewById(R.id.ponto_badge);
+        //String mensagem = badge.getPontuacao() + " " + getString(R.string.pontos);
+        ponto_badge.setVisibility(View.GONE);
+
+        ImageView imagem_badge = settingsDialog.findViewById(R.id.imagem_badge);
+        String IdBadge = "gs://uplace-ff0b3.appspot.com/desafio/image.png";
+        StorageReference Ref_badge_1 = FirebaseStorage.getInstance().getReferenceFromUrl(IdBadge);
+
+        //Bagde
+        Glide.with(this)
+                .load(Ref_badge_1)
+                .apply(new RequestOptions().override(2200,1650))
+                .into(imagem_badge);
+
+        settingsDialog.show();
+    }
+
     private void preenche_array_badges(DataSnapshot dataSnapshot){
         for(DataSnapshot snapshot : dataSnapshot.getChildren()){
             badges.add(snapshot.getValue(String.class));
@@ -502,6 +533,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 lista_eventos.setVisibility(View.VISIBLE);
                 lista_atualizacoes.setVisibility(View.GONE);
+            }
+        });
+
+        desafio_semanal = (ImageView) findViewById(R.id.iv_desafio_semanal);
+
+        desafio_semanal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pop_up_desafio_semanal();
             }
         });
 

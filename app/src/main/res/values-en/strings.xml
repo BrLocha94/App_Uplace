@@ -105,4 +105,5 @@
     <string name="aguarde">Wait for the infos to load</string>
     <string name="deseja_excluir_materia">Remove course?</string>
     <string name="materia_removida">Course removed!</string>
+    <string name="busca">Search</string>
 </resources>
